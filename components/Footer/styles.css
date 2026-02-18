@@ -1,0 +1,68 @@
+.footer{
+    width: 100%;
+    padding: 14px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    box-shadow: 0 0 12.5px var(--mainColor);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 16px;  
+}
+.footerHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.footerSocialMedia{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.cardSocial{
+    background-color: var(--mainColor);
+    padding: 6px;
+    border-radius: 7px;
+}
+.footerContact{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: white;
+}
+.footerContact h5{
+    font-size: 22px;
+    font-weight: 650;
+    transform: color 250ms ease-in-out;
+}
+.footerLink{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+}
+.footerLink:hover{
+    color: var(--mainColor);
+}
+.footerLegal{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.footerLegal img{
+    border-radius: 7px;
+    width: 225px;
+}
+.footerBreakLine{
+    width: 100%;
+    border-bottom: 1px solid rgb(54, 54, 54);
+    height: 2px;
+}
+.autor{
+    font-size: 14px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 550;
+}

@@ -1,0 +1,283 @@
+.bodyModalContact{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 99;
+}
+.containerContact{
+    width: 90%;
+    height: 95%;
+    background-color: var(--bg-main);
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    transform: translateY(40px);
+    opacity: 0;
+    animation: FadeIn 500ms ease-in-out forwards;
+    animation-delay: 50ms;
+}
+.containerContact.scrollDown{
+    opacity: 0;
+}
+@keyframes FadeIn{
+    100%{
+        transform: translateY(0px);
+         opacity: 1;
+    }
+}
+.containerContact::-webkit-scrollbar{
+    display: none;
+}
+.containerContact h4{
+    font-size: 24px;
+    color: white;
+    font-weight: 750;
+}
+.infoContainerContact{
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 6px 0 24px 0;
+    text-wrap: balance;
+}
+.breakLineContact{
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+    border-top: 1.25px dashed grey;
+}
+
+
+.cardContactTelefon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 153, 0, 0.08);
+  border: 1px solid rgba(255, 153, 0, 0.35);
+  border-radius: 7px;
+  color: #ff9f1a;
+  font-weight: 750;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.cardContactTelefon:hover {
+  background: rgba(255, 153, 0, 0.18);
+  transform: translateY(-2px);
+}
+.cardContactWhatsApp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  background: rgba(37, 211, 102, 0.08);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: 7px;
+  color: #25d366;
+  font-weight: 600;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.cardContactWhatsApp:hover {
+  background: rgba(37, 211, 102, 0.18);
+  transform: translateY(-2px);
+}
+.closeModalContact{
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 7px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    transition: background 0.2s;
+}
+
+.containerContact form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.containerContact form h5{
+    color:white;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.formWrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 6px;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.shakeError{
+  animation: shake 0.4s ease-in-out;
+}
+.errorText {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 12px;
+  display: block;
+  font-weight: 600;
+}
+
+.formWrapper input,
+.formWrapper textarea {
+    width: 100%;
+    padding: 12px 14px; 
+    box-sizing: border-box;
+    font-size: 16px;
+    color: var(--text-secondary);
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color, #555);
+    border-radius: 7px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-weight: 500;
+}
+.formWrapper label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    background-color: var(--bg-main);
+    color: var(--text-secondary);
+    padding: 0 6px; 
+    font-size: 16px;
+    font-weight: 500;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    z-index: 10;
+    border-radius: 7px;
+}
+.formWrapper input:focus + label,
+.formWrapper input:not(:placeholder-shown) + label,
+.formWrapper textarea:focus + label,
+.formWrapper textarea:not(:placeholder-shown) + label {
+    top: -10px; 
+    left: 10px;
+    font-size: 14px; 
+    font-weight: 700;
+    color: var(--mainColor);
+    z-index: 11;
+}
+
+.formWrapper input:focus,
+.formWrapper textarea:focus {
+    border-color: var(--mainColor);
+}
+
+.formWrapper input::placeholder,
+.formWrapper textarea::placeholder {
+    color: transparent;
+}
+
+.submitContact{
+    width: max-content;
+    color: white;
+    background: rgba(255, 153, 0, 0.08);
+    border: 1px solid rgba(255, 153, 0, 0.35);
+    color: #ff9f1a;
+    padding: 8px 14px;
+    font-size: 20px;
+    font-weight: 750;
+    border-radius: 7px;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300ms ease;
+}
+.submitContact.buttonLoading{
+    pointer-events: none;
+    opacity: 0.7;
+}
+.submitContact:hover {
+  background: rgba(255, 153, 0, 0.18);
+  transform: translateY(-2px);
+}
+.closeModalContact:hover {
+    background: var(--mainColor, #ff0000);
+}
+.insideButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.loaderFormular {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite;
+    display: inline-block;
+}
+
+.loaderFormular::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    /* Schimbăm culoarea în portocaliul tău pentru a fi vizibil */
+    border: 3px solid #ff9f1a; 
+    animation: prixClipFix 2s linear infinite;
+}
+
+/* Păstrăm animațiile tale (sunt foarte bune!) */
+@keyframes rotate {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes prixClipFix {
+    0%   { clip-path: polygon(50% 50%,0 0,0 0,0 0,0 0,0 0); }
+    25%  { clip-path: polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0); }
+    50%  { clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%); }
+    75%  { clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%); }
+    100% { clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0); }
+}

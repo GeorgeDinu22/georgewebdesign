@@ -1,0 +1,165 @@
+.bodyRecenzii{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-radius: 14px;
+}
+.bodyRecenzii .containerTitle{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+.bodyRecenzii .containerTitle h2{
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    width: 90%;
+}
+.bodyRecenzii .containerTitle h2 strong{
+    color: var(--mainColor);
+    font-weight: 900;
+}
+.bodyRecenzii .containerTitle p{
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 16px;
+    text-wrap: balance;
+    width: 100%;
+}
+.bodyRecenzii .containerTitle p span{
+    color: var(--mainColor);
+    font-weight: 750;
+}
+.containerRecenzii{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin-top: 24px;
+}
+
+
+
+.cardVideo{
+    width: 100%;
+    position: relative;
+    border-radius: 14px;
+    cursor: pointer;
+    height: 600px;
+}
+.buttonSound{
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    z-index: 2;
+    padding: 6px;
+    color: var(--mainColor);
+    padding:8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 7px;
+}
+.cardVideo video{
+    border-radius: 14px;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+.cardVideo .videoOverlay{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    padding: 12px;
+    align-items: start;
+    color: white;
+    background:linear-gradient(35deg,rgb(0, 0, 0) 7.5%, transparent);
+    transition: all 400ms ease-in-out;
+}
+.cardVideo .videoOverlay.videoPlaying{
+   opacity: 0;
+}
+
+
+.coltStanga{
+    position: absolute;
+    bottom: -12px;
+    left:-12px;
+    border-left: 3px solid var(--mainColor);
+    border-bottom: 3px solid var(--mainColor);
+    height: 80px;
+    width: 80px;
+    border-bottom-left-radius: 14px;
+}
+.coltDreapta{
+    content: "";
+    position: absolute;
+    top: -12px;
+    right:-12px;
+    border-right: 3px solid var(--mainColor);
+    border-top: 3px solid var(--mainColor);
+    height: 80px;
+    width: 80px;
+    border-top-right-radius: 14px;
+}
+.cardVideo .videoOverlay .playScreen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition:all 250ms ease-in-out;
+    padding:8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 7px;
+}
+.videoOverlay.videoPlaying .playScreen{
+    opacity: 0;
+}
+.numeRecenzie{
+    font-size: 20px;
+    font-weight: 650;
+    margin-bottom: 8px;
+    transition:all 250ms ease-in-out;
+}
+.videoOverlay.videoPlaying .numeRecenzie{
+    transform: translateY(16px);
+    opacity: 0;
+}
+.videoOverlay.videoPlaying .proiecteRecenzie{
+    transform: translateY(16px);
+    opacity: 0;
+}
+
+.proiecteRecenzie{
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition:all 250ms ease-in-out;
+}
+.proiecteRecenzie .itemProiecteRecenzie{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.proiecteRecenzie .itemProiecteRecenzie .dot{
+    height: 6px;
+    width: 6px;
+    background-color: var(--mainColor);
+    border-radius: 100%;
+}
+.proiecteRecenzie .itemProiecteRecenzie p{
+    font-weight: 550;
+}

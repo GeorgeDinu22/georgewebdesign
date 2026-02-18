@@ -1,0 +1,76 @@
+.bodyCta1{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.bodyCta1 .containerTitle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    z-index: 2;
+    width: 90%;
+}
+.bodyCta1 .containerTitle h2{
+    color: white;
+    font-weight: 750;
+    text-align: left;
+    font-size: 28px;
+    padding-right: 40px; 
+    width: 100%;
+}
+.bodyCta1 .containerTitle h2 strong{
+    position: relative;
+    font-weight: 800;
+}
+.bodyCta1 .containerTitle h2 strong::before{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 3px;
+    border-radius: 14px;
+    background-color: var(--mainColor);
+}
+.bodyCta1 .containerCta1{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+}
+.bodyCta1 .containerCta1 .paragrafCta1{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: white;
+    width: 100%;
+}
+.bodyCta1 .containerCta1 .paragrafCta1 .highlighted{
+    font-size: 20px;
+    font-weight: 650;
+    width: 100%;
+    line-height: 1.25;
+    margin-bottom: 6px;
+}
+.bodyCta1 .containerCta1 .paragrafCta1 .highlighted span{
+    color: var(--mainColor);
+}
+.textWhy span{
+    text-decoration: 2px underline var(--mainColor);
+    font-weight: 520;
+}
+
+
+.IconText{
+    display: inline;
+}
