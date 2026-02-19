@@ -1,35 +1,14 @@
 "use client";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { SiNextdotjs, SiSupabase, SiReact, SiMysql, SiJavascript, SiHtml5, SiCss3} from "react-icons/si";
-import { FaStripe } from "react-icons/fa";
+import { SiNextdotjs, SiSupabase, SiReact, SiMysql, SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
+import { FaStripe, FaPhp } from "react-icons/fa";
 import { ExternalLink, Expand, X } from 'lucide-react';
-import { FaPhp } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import "./styles.css";
 
-export default function Proiecte(){
-
-    const router = useRouter();
-    const [selectedProject, setSelectedProject] = useState(null);
-    const [scrollAllowed, setScrollAllowed] = useState(true);
-
-    const handleProjectClick = (p) => {
-        setSelectedProject(p);
-        setScrollAllowed(false);
-    }
-
-    useEffect(() => {
-        document.body.style.overflow = scrollAllowed ? "auto" : "hidden";
-
-        return () => {
-            document.body.style.overflow = "auto"
-        }
-    },[scrollAllowed]);
-
-    const proiecte = [
+const proiecte = [
         {
             nume:"statemihai.ro",
             imagine:"/proiecte/statemihai.ro_ImageV2.png",
@@ -136,187 +115,201 @@ export default function Proiecte(){
         }
     ]
 
-    return(
+export default function Proiecte() {
+    const router = useRouter();
+    const [selectedProject, setSelectedProject] = useState(null);
+
+    useEffect(() => {
+        if (selectedProject) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+            document.body.style.overflow = "hidden";
+        } else {
+            const timer = setTimeout(() => {
+                document.body.style.overflow = "auto";
+                document.body.style.paddingRight = "0px";
+            }, 100); 
+            return () => clearTimeout(timer);
+        }
+    }, [selectedProject]);
+
+    return (
         <div className="bodyProiecte">
             <div className="fundalGrid mask"></div>
             <div className="containerTitlu">
                 <h2>Proiecte care aduc <strong>Valoare</strong></h2>
                 <p>Fiecare proiect este diferit, așa că necesită un proces amplu de dezvoltare și un set de tehnologii concepute special pentru acea misiune.</p>
-            </div> 
-
+            </div>
+            
             <div className="containerProiecte">
-              {proiecte.map((p, i) => (
-                <motion.div 
-                    key={i} 
-                    className="cardProiect"
-                    layoutId={`card-${p.nume}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: i * 0.1 }}
-                >
-                    
-                    <motion.div 
-                        className="wrapperImagine" 
-                        layoutId={`image-wrapper-${p.nume}`} 
+                {proiecte.map((p, i) => (
+                    <motion.div
+                        key={i}
+                        className="cardProiect"
+                        layoutId={`card-${p.nume}`}
+                        initial={{ opacity: 0, y: 32 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }} 
+                        transition={{ duration: 0.4, delay: i * 0.1 }}
+                        onClick={() => setSelectedProject(p)} 
                     >
-
-                        <div className="containerHover">
-                            <div className="continutHover">
-
-                                <div className="visitSite">
-                                    <ExternalLink onClick={(e) => {
-                                        e.stopPropagation();
-                                        router.push(`${p.url}`);
-                                    }} size={24} strokeWidth={2.75}/>
-                                </div>
-
-                                <div className="detaliiProiect" onClick={() => handleProjectClick(p)}>
-                                    <Expand size={24} strokeWidth={2.5}/>
+                        <motion.div className="wrapperImagine" layoutId={`image-wrapper-${p.nume}`}>
+                            <Image
+                                className="imagineProiect"
+                                src={p.imagine}
+                                width={1000}
+                                height={1050}
+                                alt={p.nume}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
+                            <div className="containerHover">
+                                <div className="continutHover">
+                                    <div className="visitSite">
+                                        <ExternalLink onClick={(e) => {
+                                            e.stopPropagation();
+                                            router.push(`${p.url}`);
+                                        }} size={24} strokeWidth={2.75} />
+                                    </div>
+                                    <div className="detaliiProiect">
+                                        <Expand size={24} strokeWidth={2.5} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <Image
-                            className="imagineProiect"
-                            src={p.imagine}
-                            width={1000}
-                            height={1050}
-                            alt={p.nume}
-                        />
-                    </motion.div>
-
-                    <div className="contentCard">
-                        <motion.p className="numeProiect" layoutId={`title-${p.nume}`}>
-                            {p.nume}
-                        </motion.p>
-                        <p className="dataLanasare">{p.dataLansare}</p>
-
-                        <div className="cardProdusBreakLine"></div>
-
-                        <p className="descriereProiect">{p.descriere}</p>
+                        </motion.div>
                         
-                        <div className="techStack">
-                            {p.tehnologii.map((tech,index) => {
-                                const Icon = tech.icon;
-                                return(
-                                <div key={index} className="techCard">
-                                    <Icon size={20} color={tech.color}/>
-                                    <p>{tech.nume}</p>
-                                </div>
-                                )
-                            })}
+                        <div className="contentCard">
+                            <motion.p className="numeProiect" layoutId={`title-${p.nume}`}>
+                                {p.nume}
+                            </motion.p>
+                            <p className="dataLanasare">{p.dataLansare}</p>
+                            <div className="cardProdusBreakLine"></div>
+                            <motion.p className="descriereProiect">{p.descriere}</motion.p>
+                            
+                            <div className="techStack">
+                                {p.tehnologii.map((tech, index) => { 
+                                    const Icon = tech.icon;
+                                    return (
+                                        <div key={index} className="techCard">
+                                            <Icon size={20} color={tech.color} />
+                                            <p>{tech.nume}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </div>
-
-                </motion.div>
+                    </motion.div>
                 ))}
             </div>
 
-
             <AnimatePresence>
                 {selectedProject && (
-                    <motion.div 
+                    <motion.div
                         className="modalOverlay"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedProject(null)}
                     >
-                        <motion.div 
+                        <motion.div
                             className="modalContent"
                             layoutId={`card-${selectedProject.nume}`} 
                             onClick={(e) => e.stopPropagation()}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }} 
                         >
-                            
-                            <motion.button 
-                                className="closeModalBtn" 
-                                onClick={() => {
-                                    setSelectedProject(null)
-                                    setScrollAllowed(true)
-                                }}
+                            <motion.button
+                                className="closeModalBtn"
+                                onClick={() => setSelectedProject(null)}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 0.2 }}
+                                transition={{ delay: 0.3 }} 
                             >
                                 <X size={28} />
                             </motion.button>
 
-                            <motion.div 
-                                className="modalBody"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.15 }}
-                            >
-
-                         <motion.div 
-                                className="modalImageContainer"
-                                layoutId={`image-wrapper-${selectedProject.nume}`} 
-                            >
-                                <Image 
-                                    src={selectedProject.imagine} 
-                                    alt={selectedProject.nume} 
-                                    width={1050}
-                                    height={1050}
-                                    className="modalImage"
-                                    style={{objectFit: "cover"}}
-                                />
-                        </motion.div>
+                            <motion.div className="modalBody">
+                                <motion.div
+                                    className="modalImageContainer"
+                                    layoutId={`image-wrapper-${selectedProject.nume}`}
+                                >
+                                    <Image
+                                        src={selectedProject.imagine}
+                                        alt={selectedProject.nume}
+                                        width={1000}
+                                        height={1050}
+                                        className="modalImage"
+                                        style={{ objectFit: "cover" }}
+                                        priority 
+                                        sizes="100vw"
+                                    />
+                                </motion.div>
 
                                 <div className="modalHeader">
                                     <motion.h2 layoutId={`title-${selectedProject.nume}`}>
                                         {selectedProject.nume}
                                     </motion.h2>
-                                    <span className="dataLanasare">{selectedProject.dataLansare}</span>
+                                    <motion.span 
+                                        className="dataLanasare"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 0.2 }}
+                                    >
+                                        {selectedProject.dataLansare}
+                                    </motion.span>
                                 </div>
-
+                                
                                 <div className="modalBreakLine"></div>
-                                
-                                <div className="sectionModal">
-                                    <h3>Descriere Proiect</h3>
-                                    <p className="modalDescriere">
-                                        {selectedProject.documentatie || selectedProject.descriere}
-                                    </p>
-                                </div>
 
-                   <div className="modalBreakLine"></div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2, duration: 0.4 }} 
+                                >
+                                    <div className="sectionModal">
+                                        <h3>Descriere Proiect</h3>
+                                        <p className="modalDescriere">
+                                            {selectedProject.documentatie || selectedProject.descriere}
+                                        </p>
+                                    </div>
 
-                    {selectedProject.galerie && (
-                        <>
-                    
-                        <div className="scrollerImages">
-                                {selectedProject.galerie.map((imagine, index) => (
-                                    <div key={index} className="cardImageScroll">
-                                    <Image 
-                                    src={imagine}
-                                    width={800}
-                                    height={800}
-                                    alt="Imagine Proiect"
-                                    />
-                                </div>
-                                ))}
-                            </div>
-                    
-                        <div className="modalBreakLine"></div>
-                    </>
-                    )}
-                                
-                        <div className="sectionModal">
-                            <h3>Tehnologii Folosite</h3>
-                           <div style={{margin:"12px 0 0 4px"}} className="techStack">
-                                        {selectedProject.tehnologii.map((tech,index) => {
-                                            const Icon = tech.icon;
-                                            return(
-                                                <div key={index} className="techCard">
-                                                    <Icon size={20} color={tech.color}/>
-                                                    <p>{tech.nume}</p>
-                                                </div>
-                                            )
-                                        })}
-                            </div>
-                        </div>
+                                    <div className="modalBreakLine"></div>
 
-                                <button className="modalVisitBtn" onClick={() => window.open(selectedProject.url, '_blank')}>
-                                    Acceseaza Website<ExternalLink size={18} style={{marginLeft: '8px'}}/>
-                                </button>
+                                    {selectedProject.galerie && selectedProject.galerie.length > 0 && (
+                                        <>
+                                            <div className="scrollerImages">
+                                                {selectedProject.galerie.map((imagine, index) => (
+                                                    <div key={index} className="cardImageScroll">
+                                                        <Image
+                                                            src={imagine}
+                                                            width={800}
+                                                            height={800}
+                                                            alt={`Imagine ${index}`}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="modalBreakLine"></div>
+                                        </>
+                                    )}
+
+                                    <div className="sectionModal">
+                                        <h3>Tehnologii Folosite</h3>
+                                        <div style={{ margin: "12px 0 0 4px" }} className="techStack">
+                                            {selectedProject.tehnologii.map((tech, index) => {
+                                                const Icon = tech.icon;
+                                                return (
+                                                    <div key={index} className="techCard">
+                                                        <Icon size={20} color={tech.color} />
+                                                        <p>{tech.nume}</p>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    <button className="modalVisitBtn" onClick={() => window.open(selectedProject.url, '_blank')}>
+                                        Acceseaza Website<ExternalLink size={18} style={{ marginLeft: '8px' }} />
+                                    </button>
+                                </motion.div>
                             </motion.div>
                         </motion.div>
                     </motion.div>

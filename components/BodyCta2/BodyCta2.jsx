@@ -1,9 +1,39 @@
-import { ThreeDMarquee } from "@/components/ui/3d-marquee";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import './styles.css';
 import ButtonContact from "../ButtonContact/ButtonContact";
 
+const ThreeDMarquee = dynamic(
+  () => import("@/components/ui/3d-marquee").then(mod => mod.ThreeDMarquee),
+  { ssr: false }
+);
+
 export default function BodyCta2(){
-    const images = [
+
+  const [showMarquee, setShowMarquee] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowMarquee(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+      const images = [
     "/proiecte/statemihai.ro_ImageV2.png",
     "/galerieProiecte/statemihai-1.png",
     "/galerieProiecte/statemihai-1.png",
@@ -46,19 +76,21 @@ export default function BodyCta2(){
     "/galerieProiecte/infinitylounge-4.png"
 ];
 
-    return(
-        <div className="bodyCta2">
-            <div className="containerMarquee">
-                <ThreeDMarquee className="marquee" images={images} />
-            </div>
-            <div className="overlayCta">
-                <h6>Gata să îți duci afacerea la <span>următorul nivel?</span></h6>
-                <p>Construim împreună un website care atrage, convinge și generează rezultate</p>
-                <div className="containerButton">
-                    <ButtonContact textBtn={"Hai să discutăm"}/>
-                </div>
-                
-            </div>
+  return(
+    <div className="bodyCta2" ref={containerRef}>
+      <div className="containerMarquee">
+        {showMarquee && (
+          <ThreeDMarquee className="marquee" images={images} />
+        )}
+      </div>
+
+      <div className="overlayCta">
+        <h3>Gata să îți duci afacerea la <span>următorul nivel?</span></h3>
+        <p>Construim împreună un website care atrage, convinge și generează rezultate</p>
+        <div className="containerButton">
+          <ButtonContact textBtn={"Hai să discutăm"}/>
         </div>
-    )
+      </div>
+    </div>
+  )
 }

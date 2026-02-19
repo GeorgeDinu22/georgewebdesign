@@ -7,25 +7,39 @@ export default function CardRecenzie({recenzie}){
     const [isPlaying,setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const videoRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const toggleVideo = () => {
-        if(videoRef.current){
-            if(isPlaying){
-                videoRef.current.pause();
-                setIsPlaying(false);
-            }
-            else{
-                videoRef.current.play();
-                setIsPlaying(true);
-            }
+    const toggleVideo = async () => {
+    if (!videoRef.current) return;
+
+    try {
+        if (videoRef.current.paused) {
+        setIsLoading(true);
+        await videoRef.current.play();
+        setIsPlaying(true);
+        } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
         }
+    } catch (err) {
+        console.log("Play interrupted:", err);
+    } finally {
+        setIsLoading(false);
     }
+    };
+
 
     return(
         <div
             onClick={toggleVideo}
             className="cardVideo"
-         >
+        >
+
+            {isLoading && (
+            <div className="videoLoader">
+                <div className="spinner"></div>
+            </div>
+            )}
 
         <div onClick={(e) =>{
                         e.stopPropagation()
@@ -62,14 +76,19 @@ export default function CardRecenzie({recenzie}){
                 </div>
             </div>
             <video 
-                ref={videoRef}
-                src={recenzie.src}
-                playsInline
-                preload="metadata"
-                onEnded={() => setIsPlaying(false)}
-                muted={isMuted}
+            ref={videoRef}
+            src={recenzie.src}
+            playsInline
+            preload="metadata"
+            muted={isMuted}
+            onLoadStart={() => setIsLoading(true)}
+            onWaiting={() => setIsLoading(true)}
+            onCanPlay={() => setIsLoading(false)}
+            onPlaying={() => setIsLoading(false)}
+            onEnded={() => setIsPlaying(false)}
+            onPause={() => setIsLoading(false)}
             >
-                Browserul tau nu supporta acest video!
+            Browserul tau nu suportă acest video!
             </video>
         </div>
     )

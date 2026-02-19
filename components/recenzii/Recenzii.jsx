@@ -17,6 +17,13 @@ export default function Recenzii(){
         proiecte:[
             "joydetailing.ro",
         ],
+    },
+        {
+        nume:"Costi Grigore",
+        src:"/joyDetailingRecenzie.mp4",
+        proiecte:[
+            "joydetailing.ro",
+        ],
     }
     ]
 

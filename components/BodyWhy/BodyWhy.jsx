@@ -41,7 +41,7 @@ export default function BodyWhy(){
             </div> 
             <div className="containerWhy">
                 {avantaje.map((avantaj,index) => (
-                    <CardWhy key={index} item={avantaj}/>
+                    <CardWhy key={index} index={index} item={avantaj}/>
                 ))}
             </div>
         </div>
