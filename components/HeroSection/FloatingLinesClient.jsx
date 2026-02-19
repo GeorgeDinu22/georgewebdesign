@@ -26,7 +26,7 @@ export default function FloatingLinesClient() {
                 bendRadius={5}
                 bendStrength={-0.5}
                 interactive={false}
-                parallax={true}
+                parallax={false}
             />
       )}
     </>

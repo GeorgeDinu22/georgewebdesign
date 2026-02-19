@@ -146,11 +146,10 @@ export default function Proiecte() {
                     <motion.div
                         key={i}
                         className="cardProiect"
-                        layoutId={`card-${p.nume}`}
                         initial={{ opacity: 0, y: 32 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }} 
-                        transition={{ duration: 0.4, delay: i * 0.1 }}
+                        transition={{ duration: 0.4}}
                         onClick={() => setSelectedProject(p)} 
                     >
                         <motion.div className="wrapperImagine" layoutId={`image-wrapper-${p.nume}`}>
@@ -167,7 +166,7 @@ export default function Proiecte() {
                                     <div className="visitSite">
                                         <ExternalLink onClick={(e) => {
                                             e.stopPropagation();
-                                            router.push(`${p.url}`);
+                                            window.open(p.url, "_blank");
                                         }} size={24} strokeWidth={2.75} />
                                     </div>
                                     <div className="detaliiProiect">
@@ -178,7 +177,7 @@ export default function Proiecte() {
                         </motion.div>
                         
                         <div className="contentCard">
-                            <motion.p className="numeProiect" layoutId={`title-${p.nume}`}>
+                            <motion.p className="numeProiect">
                                 {p.nume}
                             </motion.p>
                             <p className="dataLanasare">{p.dataLansare}</p>
@@ -212,7 +211,6 @@ export default function Proiecte() {
                     >
                         <motion.div
                             className="modalContent"
-                            layoutId={`card-${selectedProject.nume}`} 
                             onClick={(e) => e.stopPropagation()}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }} 
                         >
@@ -238,13 +236,12 @@ export default function Proiecte() {
                                         height={1050}
                                         className="modalImage"
                                         style={{ objectFit: "cover" }}
-                                        priority 
                                         sizes="100vw"
                                     />
                                 </motion.div>
 
                                 <div className="modalHeader">
-                                    <motion.h2 layoutId={`title-${selectedProject.nume}`}>
+                                    <motion.h2>
                                         {selectedProject.nume}
                                     </motion.h2>
                                     <motion.span 
