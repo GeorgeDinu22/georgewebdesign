@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FloatingLines from '../FloatingLines';
-import './styles.css';
+import dynamic from 'next/dynamic';
+
+// Mutăm importul dinamic AICI
+const FloatingLines = dynamic(() => import('../FloatingLines'), {
+  ssr: false
+});
 
 export default function FloatingLinesClient() {
   const [startEffect, setStartEffect] = useState(false);
@@ -10,25 +14,20 @@ export default function FloatingLinesClient() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setStartEffect(true);
-    }, 500);
-
+    }, 800);
     return () => clearTimeout(timeout);
   }, []);
-
+  
   return (
-    <>
-      {startEffect && (
-              <FloatingLines 
-                enabledWaves={["top","middle","bottom"]}
-                linesGradient={["#FF8A00", "#ffb347"]}
-                lineCount={4}
-                lineDistance={5}
-                bendRadius={5}
-                bendStrength={-0.5}
-                interactive={false}
-                parallax={false}
-            />
-      )}
-    </>
+    <FloatingLines 
+        enabledWaves={["top","middle","bottom"]}
+        linesGradient={["#FF8A00", "#ffb347"]}
+        lineCount={4} 
+        lineDistance={5}
+        bendRadius={5}
+        bendStrength={-0.5}
+        interactive={false}
+        parallax={false}
+    />
   );
 }

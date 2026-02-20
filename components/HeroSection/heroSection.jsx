@@ -1,4 +1,3 @@
-import FloatingLines from '../FloatingLines';
 import './styles.css';
 import ButtonContact from '../ButtonContact/ButtonContact';
 import FloatingLinesClient from './FloatingLinesClient';
