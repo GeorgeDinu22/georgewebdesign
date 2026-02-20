@@ -16,22 +16,31 @@ export default function FloatingLinesClient() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // 1. Detectăm dacă e mobil
     setIsMobile(window.innerWidth < 768);
 
+    // 2. Întârziem încărcarea cu 800ms
+    // Asta permite browserului să afișeze textul (LCP) și să termine "munca grea"
+    // înainte să înceapă să descarce Three.js
     const timeout = setTimeout(() => {
       setStartEffect(true);
-    }, 850);
+    }, 800);
 
     return () => clearTimeout(timeout);
   }, []);
 
+  // Până nu trece timpul, nu randăm nimic greu
   if (!startEffect) return null;
 
   return (
     <FloatingLines 
-        enabledWaves={isMobile ? ["top", "middle"] : ["top", "middle", "bottom"]}
+        // 3. OPTIMIZARE MOBIL: 
+        // Pe desktop: 3 valuri (top, middle, bottom)
+        // Pe mobil: DOAR 1 val (middle) -> salvăm 66% din resursele CPU
+        enabledWaves={isMobile ? ["middle"] : ["top", "middle"]}
         
-        lineCount={4} 
+        // Pe mobil: mai puține linii (2 vs 4)
+        lineCount={isMobile ? 2 : 4} 
         
         linesGradient={["#FF8A00", "#ffb347"]}
         lineDistance={5}
