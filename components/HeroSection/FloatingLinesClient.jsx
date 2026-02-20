@@ -20,7 +20,7 @@ export default function FloatingLinesClient() {
 
     const timeout = setTimeout(() => {
       setStartEffect(true);
-    }, 550);
+    }, 850);
 
     return () => clearTimeout(timeout);
   }, []);
