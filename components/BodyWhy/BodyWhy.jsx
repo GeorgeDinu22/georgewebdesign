@@ -1,5 +1,4 @@
-
-import './styles.css';
+import styles from './styles.module.css';
 import CardWhy from './CardWhy';
 
 export default function BodyWhy(){
@@ -35,11 +34,11 @@ export default function BodyWhy(){
 
     return(
         <>
-        <div className='bodyWhy'>
-            <div className="containerTitle">
+        <div className={styles.bodyWhy}>
+            <div className={styles.containerTitle}>
                 <h2><span>De Ce</span> să lucrăm împreună?</h2>
             </div> 
-            <div className="containerWhy">
+            <div className={styles.containerWhy}>
                 {avantaje.map((avantaj,index) => (
                     <CardWhy key={index} index={index} item={avantaj}/>
                 ))}

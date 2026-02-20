@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import './styles.css';
-import { Instagram , Phone, Mail} from 'lucide-react'
+import styles from './styles.module.css';
+import { Instagram, Phone, Mail } from 'lucide-react';
 
 export default function Footer(){
     return(
         <>
-        <div className="footer">
-            <div className="footerHeader">
-                <Link className="logo" href="/">
+        <footer className={styles.footer}>
+            <div className={styles.footerHeader}>
+                <Link className={styles.logo} href="/">
                     <Image
                         src="/logo.svg"
                         alt="George Web Design"
@@ -18,9 +18,9 @@ export default function Footer(){
                     />
                 </Link>
 
-                <div className="footerSocialMedia">
-                    <Link className="cardSocial"
-                        id="tiktok"
+                <div className={styles.footerSocialMedia}>
+                    <Link className={styles.cardSocial}
+                        id={styles.tiktok}
                         href="https://www.tiktok.com/@state.mihai33?_t=ZN-8yFNoqJ0FHC&_r=1"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -37,8 +37,8 @@ export default function Footer(){
                     </svg>
                     </Link>
 
-                    <Link className="cardSocial"
-                        id="instagram"
+                    <Link className={styles.cardSocial}
+                        id={styles.instagram}
                         href="https://www.instagram.com/state.mihai/"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -48,27 +48,27 @@ export default function Footer(){
                 </div>
             </div>
 
-            <div className="footerContact">
+            <div className={styles.footerContact}>
                 <h5>Legal</h5>
-                <Link className="footerLink linkLegal" href="tel:+40733782872">
+                <Link className={`${styles.footerLink} ${styles.linkLegal}`} href="tel:+40733782872">
                    Politica de Confidentialitate
                 </Link>
             </div>
             
 
-            <div className="footerContact">
+            <div className={styles.footerContact}>
                 <h5>Contact</h5>
-                <Link className="footerLink" href="tel:+40733782872">
+                <Link className={styles.footerLink} href="tel:+40733782872">
                     <Phone size={20} color="#FF8A00" strokeWidth={2}/>
                     0733 782 872
                 </Link>
-                <Link className="footerLink" href="mailto:contact@georgewebdesign.ro">
+                <Link className={styles.footerLink} href="mailto:contact@georgewebdesign.ro">
                     <Mail size={20} color="#FF8A00" strokeWidth={2}/>
                     contact@georgewebdesign.ro
                 </Link>
             </div>
 
-            <div className="footerLegal">
+            <div className={styles.footerLegal}>
                 <Link href="https://anpc.ro/ce-este-sal/">
                     <Image
                         src="/footerImages/anpc.png"
@@ -87,13 +87,12 @@ export default function Footer(){
                 </Link>
             </div>
 
-            <div className="footerBreakLine"></div>
+            <div className={styles.footerBreakLine}></div>
 
-            <div className="autor">
+            <div className={styles.autor}>
                 ©George Web Design | Toate Drepturile Rezervate
             </div>
-        </div>
+        </footer>
         </>
     )
 }
-

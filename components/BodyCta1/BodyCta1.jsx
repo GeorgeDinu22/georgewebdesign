@@ -1,17 +1,17 @@
 import ButtonContact from '../ButtonContact/ButtonContact';
 import { AtSign } from 'lucide-react';
-import './styles.css';
+import styles from './styles.module.css';
 
 export default function BodyCta1(){
     return(
         <>
-        <div className='bodyCta1'>
-            <div className="containerTitle">
-                <h2>Încă mai crezi că poți vinde <br className='breakTextDesktop'/> <strong>fără un site?</strong></h2>
+        <div className={styles.bodyCta1}>
+            <div className={styles.containerTitle}>
+                <h2>Încă mai crezi că poți vinde <br className={styles.breakTextDesktop}/> <strong>fără un site?</strong></h2>
             </div>
-            <div className="containerCta1">
-                <div className="paragrafCta1">
-                    <p className='highlighted'>Realitatea online-ului de azi</p>
+            <div className={styles.containerCta1}>
+                <div className={styles.paragrafCta1}>
+                    <p className={styles.highlighted}>Realitatea online-ului de azi</p>
                     <p>
                         În zilele noastre, totul se mișcă repede.
                         Conținutul este consumat în doar câteva secunde, scroll-ul a ajuns un obicei involuntar,
@@ -20,8 +20,8 @@ export default function BodyCta1(){
                     </p>
                 </div>
 
-                <div className="paragrafCta1">
-                    <p className='highlighted'>
+                <div className={styles.paragrafCta1}>
+                    <p className={styles.highlighted}>
                         De ce social media nu e <span>suficient</span>
                     </p>
 
@@ -33,8 +33,8 @@ export default function BodyCta1(){
                 </div>
 
 
-                <div className="paragrafCta1">
-                    <p className='highlighted'>
+                <div className={styles.paragrafCta1}>
+                    <p className={styles.highlighted}>
                         Despre site-urile făcute în <span>5 minute</span>
                     </p>
 
@@ -47,8 +47,8 @@ export default function BodyCta1(){
                     </p>
                 </div>
 
-                <div className="paragrafCta1">
-                    <p className='highlighted'>Conteaza pentru <span>reputatia ta!</span></p>
+                <div className={styles.paragrafCta1}>
+                    <p className={styles.highlighted}>Conteaza pentru <span>reputatia ta!</span></p>
 
                     <p>
                         Imaginează-ți că ești unul dintre potențialii tăi clienți și încerci să decizi dacă să oferi o șansă unui business.
@@ -57,16 +57,16 @@ export default function BodyCta1(){
 
                         <span></span>Ai avea încredere?
 
-                        Acum gândește din nou, dar de data aceasta ai un website modern,  sectiune interactiva a serviciilor pe care le oferi, plata securixata integrata, formular de contact și adresă de email <AtSign size={20} strokeWidth={2.25} color='#FF8A00' className='IconText'/>domeniul_tău.
+                        Acum gândește din nou, dar de data aceasta ai un website modern,  sectiune interactiva a serviciilor pe care le oferi, plata securixata integrata, formular de contact și adresă de email <AtSign size={20} strokeWidth={2.25} color='#FF8A00' className={styles.IconText}/>domeniul_tău.
                     </p>
                 </div>
 
-                <div className="paragrafCta1">
-                    <p className='highlighted'>
+                <div className={styles.paragrafCta1}>
+                    <p className={styles.highlighted}>
                         Lucrăm <span>împreună</span> ca să fie clar ce faci și de ce contează
                     </p>
 
-                    <p className='textWhy'>
+                    <p className={styles.textWhy}>
                         Structurăm informația într-un website bine organizat și ușor de parcurs,
                         unde utilizatorul intră să te cunoască și în câteva minute, completează formularul,
                         se programează sau deja merge către <span>Finalizare Comandă.</span>

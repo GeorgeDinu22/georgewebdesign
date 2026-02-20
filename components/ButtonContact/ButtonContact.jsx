@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import "./styles.css";
+import styles from "./styles.module.css";
 import GlareHover from '../GlareHover'
 import ModalContact from '../ModalContact/ModalContact';
 
@@ -15,7 +15,7 @@ export default function ButtonContact({textBtn}){
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
         />
-    <div onClick={() => setShowModalContact(true)} className="buttonContact">
+    <div onClick={() => setShowModalContact(true)} className={styles.buttonContact}>
         <GlareHover
         glareColor="#ffffff"
         glareOpacity={1}
@@ -26,7 +26,7 @@ export default function ButtonContact({textBtn}){
         width="200"
         height="200"
         background="#FF8A00"
-        className="glareButton"
+        className={styles.glareButton}
     >
         {textBtn}
         </GlareHover>

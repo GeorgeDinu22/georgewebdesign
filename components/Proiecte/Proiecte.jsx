@@ -6,7 +6,7 @@ import { FaStripe, FaPhp } from "react-icons/fa";
 import { ExternalLink, Expand, X } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import "./styles.css";
+import styles from "./styles.module.css";
 
 const proiecte = [
         {
@@ -134,35 +134,35 @@ export default function Proiecte() {
     }, [selectedProject]);
 
     return (
-        <div className="bodyProiecte">
-            <div className="fundalGrid mask"></div>
-            <div className="containerTitlu">
+        <div className={styles.bodyProiecte}>
+            <div className={`${styles.fundalGrid} ${styles.mask}`}></div>
+            <div className={styles.containerTitlu}>
                 <h2>Proiecte care aduc <strong>Valoare</strong></h2>
                 <p>Fiecare proiect este diferit, așa că necesită un proces amplu de dezvoltare și un set de tehnologii concepute special pentru acea misiune.</p>
             </div>
             
-            <div className="containerProiecte">
+            <div className={styles.containerProiecte}>
                 {proiecte.map((p, i) => (
                     <motion.div
                         key={i}
-                        className="cardProiect"
+                        className={styles.cardProiect}
                         initial={{ opacity: 0, y: 32 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }} 
                         transition={{ duration: 0.4}}
                     >
-                        <motion.div className="wrapperImagine" layoutId={`image-wrapper-${p.nume}`}>
+                        <motion.div className={styles.wrapperImagine} layoutId={`image-wrapper-${p.nume}`}>
                             <Image
-                                className="imagineProiect"
+                                className={styles.imagineProiect}
                                 src={p.imagine}
                                 width={1000}
                                 height={1050}
                                 alt={p.nume}
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
-                            <div className="containerHover">
-                                <div className="continutHover">
-                                    <div className="visitSite">
+                            <div className={styles.containerHover}>
+                                <div className={styles.continutHover}>
+                                    <div className={styles.visitSite}>
                                         <ExternalLink onClick={(e) => {
                                             e.stopPropagation();
                                             window.open(p.url, "_blank");
@@ -170,26 +170,26 @@ export default function Proiecte() {
                                     </div>
                                     <div
                                      onClick={() => setSelectedProject(p)} 
-                                     className="detaliiProiect">
+                                     className={styles.detaliiProiect}>
                                         <Expand size={24} strokeWidth={2.5} />
                                     </div>
                                 </div>
                             </div>
                         </motion.div>
                         
-                        <div className="contentCard">
-                            <motion.p className="numeProiect">
+                        <div className={styles.contentCard}>
+                            <motion.p className={styles.numeProiect}>
                                 {p.nume}
                             </motion.p>
-                            <p className="dataLanasare">{p.dataLansare}</p>
-                            <div className="cardProdusBreakLine"></div>
-                            <motion.p className="descriereProiect">{p.descriere}</motion.p>
+                            <p className={styles.dataLanasare}>{p.dataLansare}</p>
+                            <div className={styles.cardProdusBreakLine}></div>
+                            <motion.p className={styles.descriereProiect}>{p.descriere}</motion.p>
                             
-                            <div className="techStack">
+                            <div className={styles.techStack}>
                                 {p.tehnologii.map((tech, index) => { 
                                     const Icon = tech.icon;
                                     return (
-                                        <div key={index} className="techCard">
+                                        <div key={index} className={styles.techCard}>
                                             <Icon size={20} color={tech.color} />
                                             <p>{tech.nume}</p>
                                         </div>
@@ -204,19 +204,19 @@ export default function Proiecte() {
             <AnimatePresence>
                 {selectedProject && (
                     <motion.div
-                        className="modalOverlay"
+                        className={styles.modalOverlay}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedProject(null)}
                     >
                         <motion.div
-                            className="modalContent"
+                            className={styles.modalContent}
                             onClick={(e) => e.stopPropagation()}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }} 
                         >
                             <motion.button
-                                className="closeModalBtn"
+                                className={styles.closeModalBtn}
                                 onClick={() => setSelectedProject(null)}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -225,9 +225,9 @@ export default function Proiecte() {
                                 <X size={28} />
                             </motion.button>
 
-                            <motion.div className="modalBody">
+                            <motion.div className={styles.modalBody}>
                                 <motion.div
-                                    className="modalImageContainer"
+                                    className={styles.modalImageContainer}
                                     layoutId={`image-wrapper-${selectedProject.nume}`}
                                 >
                                     <Image
@@ -235,18 +235,18 @@ export default function Proiecte() {
                                         alt={selectedProject.nume}
                                         width={1000}
                                         height={1050}
-                                        className="modalImage"
+                                        className={styles.modalImage}
                                         style={{ objectFit: "cover" }}
                                         sizes="100vw"
                                     />
                                 </motion.div>
 
-                                <div className="modalHeader">
+                                <div className={styles.modalHeader}>
                                     <motion.h2>
                                         {selectedProject.nume}
                                     </motion.h2>
                                     <motion.span 
-                                        className="dataLanasare"
+                                        className={styles.dataLanasare}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: 0.2 }}
@@ -255,27 +255,27 @@ export default function Proiecte() {
                                     </motion.span>
                                 </div>
                                 
-                                <div className="modalBreakLine"></div>
+                                <div className={styles.modalBreakLine}></div>
 
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.4 }} 
                                 >
-                                    <div className="sectionModal">
+                                    <div className={styles.sectionModal}>
                                         <h3>Descriere Proiect</h3>
-                                        <p className="modalDescriere">
+                                        <p className={styles.modalDescriere}>
                                             {selectedProject.documentatie || selectedProject.descriere}
                                         </p>
                                     </div>
 
-                                    <div className="modalBreakLine"></div>
+                                    <div className={styles.modalBreakLine}></div>
 
                                     {selectedProject.galerie && selectedProject.galerie.length > 0 && (
                                         <>
-                                            <div className="scrollerImages">
+                                            <div className={styles.scrollerImages}>
                                                 {selectedProject.galerie.map((imagine, index) => (
-                                                    <div key={index} className="cardImageScroll">
+                                                    <div key={index} className={styles.cardImageScroll}>
                                                         <Image
                                                             src={imagine}
                                                             width={800}
@@ -285,17 +285,17 @@ export default function Proiecte() {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <div className="modalBreakLine"></div>
+                                            <div className={styles.modalBreakLine}></div>
                                         </>
                                     )}
 
-                                    <div className="sectionModal">
+                                    <div className={styles.sectionModal}>
                                         <h3>Tehnologii Folosite</h3>
-                                        <div style={{ margin: "12px 0 0 4px" }} className="techStack">
+                                        <div style={{ margin: "12px 0 0 4px" }} className={styles.techStack}>
                                             {selectedProject.tehnologii.map((tech, index) => {
                                                 const Icon = tech.icon;
                                                 return (
-                                                    <div key={index} className="techCard">
+                                                    <div key={index} className={styles.techCard}>
                                                         <Icon size={20} color={tech.color} />
                                                         <p>{tech.nume}</p>
                                                     </div>
@@ -304,7 +304,7 @@ export default function Proiecte() {
                                         </div>
                                     </div>
 
-                                    <button className="modalVisitBtn" onClick={() => window.open(selectedProject.url, '_blank')}>
+                                    <button className={styles.modalVisitBtn} onClick={() => window.open(selectedProject.url, '_blank')}>
                                         Acceseaza Website<ExternalLink size={18} style={{ marginLeft: '8px' }} />
                                     </button>
                                 </motion.div>

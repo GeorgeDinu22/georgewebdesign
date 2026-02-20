@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import './styles.css';
+import styles from './styles.module.css';
 import ButtonContact from "../ButtonContact/ButtonContact";
 
 const ThreeDMarquee = dynamic(
@@ -23,7 +23,10 @@ export default function BodyCta2(){
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { 
+        rootMargin: "300px",
+        threshold: 0.2 
+      }
     );
 
     if (containerRef.current) {
@@ -35,7 +38,6 @@ export default function BodyCta2(){
 
       const images = [
     "/proiecte/statemihai.ro_ImageV2.png",
-    "/galerieProiecte/statemihai-1.png",
     "/galerieProiecte/statemihai-1.png",
     "/galerieProiecte/statemihai-2.png",
 
@@ -77,17 +79,17 @@ export default function BodyCta2(){
 ];
 
   return(
-    <div className="bodyCta2" ref={containerRef}>
-      <div className="containerMarquee">
+    <div className={styles.bodyCta2} ref={containerRef}>
+      <div className={styles.containerMarquee}>
         {showMarquee && (
-          <ThreeDMarquee className="marquee" images={images} />
+          <ThreeDMarquee className={styles.marquee} images={images} />
         )}
       </div>
 
-      <div className="overlayCta">
+      <div className={styles.overlayCta}>
         <h3>Gata să îți duci afacerea la <span>următorul nivel?</span></h3>
         <p>Construim împreună un website care atrage, convinge și generează rezultate</p>
-        <div className="containerButton">
+        <div className={styles.containerButton}>
           <ButtonContact textBtn={"Hai să discutăm"}/>
         </div>
       </div>

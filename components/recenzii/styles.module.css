@@ -47,6 +47,7 @@
     gap: 60px;
     margin-top: 24px;
     max-width: 1250px;
+    width: 90%;
 }
 
 
@@ -132,7 +133,7 @@
 }
 .numeRecenzie{
     font-size: 20px;
-    font-weight: 650;
+    font-weight: 700;
     margin-bottom: 8px;
     transition:all 250ms ease-in-out;
 }

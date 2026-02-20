@@ -1,6 +1,7 @@
 "use client";
 import { Play, Volume2, VolumeOff } from 'lucide-react';
 import { useRef, useState } from 'react';
+import styles from './styles.module.css';
 
 export default function CardRecenzie({recenzie}){
 
@@ -32,12 +33,12 @@ export default function CardRecenzie({recenzie}){
     return(
         <div
             onClick={toggleVideo}
-            className="cardVideo"
+            className={styles.cardVideo}
         >
 
             {isLoading && (
-            <div className="videoLoader">
-                <div className="spinner"></div>
+            <div className={styles.videoLoader}>
+                <div className={styles.spinner}></div>
             </div>
             )}
 
@@ -45,7 +46,7 @@ export default function CardRecenzie({recenzie}){
                         e.stopPropagation()
                         setIsMuted(prev => !prev)
                     }
-            }className="buttonSound">
+            }className={styles.buttonSound}>
             {isMuted ? (
                 <VolumeOff size={24}/>
             )
@@ -55,21 +56,21 @@ export default function CardRecenzie({recenzie}){
         }
         </div>
 
-        <div className="coltStanga"></div>
-        <div className="coltDreapta"></div>
+        <div className={styles.coltStanga}></div>
+        <div className={styles.coltDreapta}></div>
 
-            <div className={`videoOverlay ${isPlaying ? "videoPlaying" : ""}`}>
-                <div className="playScreen">
+            <div className={`${styles.videoOverlay} ${isPlaying ? styles.videoPlaying : ""}`}>
+                <div className={styles.playScreen}>
                     <Play size={60} stroke='#FF8A00'/>
                  </div>
 
-                <p className='numeRecenzie'>
+                <p className={styles.numeRecenzie}>
                     {recenzie.nume}
                 </p>
-                <div className="proiecteRecenzie">
+                <div className={styles.proiecteRecenzie}>
                     {recenzie.proiecte.map((rec,index) => (
-                        <div key={index} className="itemProiecteRecenzie">
-                            <div className="dot"></div>
+                        <div key={index} className={styles.itemProiecteRecenzie}>
+                            <div className={styles.dot}></div>
                             <p>{rec}</p>
                         </div>
                     ))}               
@@ -79,7 +80,7 @@ export default function CardRecenzie({recenzie}){
             ref={videoRef}
             src={recenzie.src}
             playsInline
-            preload="none"
+            preload="metadata"
             muted={isMuted}
             onLoadStart={() => setIsLoading(true)}
             onWaiting={() => setIsLoading(true)}

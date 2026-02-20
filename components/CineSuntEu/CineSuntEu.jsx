@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import './styles.css';
+import styles from './styles.module.css';
+
 const HartaClient = dynamic(() => import('./HartaEu'), {
   ssr: false,
   loading: () => (
-      <div className="containerHarta" style={{ background: '#000000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className={styles.containerHarta} style={{ background: '#000000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <p style={{color: '#696969'}}>Se încarcă harta...</p>
       </div>
   )
@@ -16,14 +17,14 @@ export default function CineSuntEu(){
 
 
     return(
-        <div className="bodyEu">
+        <div className={styles.bodyEu}>
 
-        <div className="leftPart">
-            <div className="containerTitle">
+        <div className={styles.leftPart}>
+            <div className={styles.containerTitle}>
                 <h2>Despre mine</h2>
             </div>
 
-            <div className="containerEU">
+            <div className={styles.containerEU}>
 
                 <p>
                     Mă numesc <strong>Dinu George</strong> și mă ocup cu realizarea 
@@ -45,8 +46,8 @@ export default function CineSuntEu(){
             </div>
         </div>  
 
-    <div className="rightPart">
-        <div className="wrapperImageEu">
+    <div className={styles.rightPart}>
+        <div className={styles.wrapperImageEu}>
             <Image
             src="/aboutMeV2.jpeg"
             width={700}

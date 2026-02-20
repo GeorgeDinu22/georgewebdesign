@@ -1,4 +1,4 @@
-import './styles.css';
+import styles from './styles.module.css';
 import CardRecenzie from './CardRecenzie';
 
 export default function Recenzii(){
@@ -22,8 +22,8 @@ export default function Recenzii(){
 
     return(
         <>
-        <div className="bodyRecenzii">
-            <div className="containerTitle">
+        <div className={styles.bodyRecenzii}>
+            <div className={styles.containerTitle}>
                <h2>Părerea Clienților <strong>Contează</strong></h2>
                 <p>
                 Am lucrat cu oameni din diferite domenii, fiecare cu provocări diferite,
@@ -31,7 +31,7 @@ export default function Recenzii(){
                 </p>
 
             </div>
-            <div className="containerRecenzii">
+            <div className={styles.containerRecenzii}>
                 {recenzii.map((recenzie, index) => (
                     <CardRecenzie 
                         key={index} 
