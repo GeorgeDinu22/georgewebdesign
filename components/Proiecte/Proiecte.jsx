@@ -150,7 +150,6 @@ export default function Proiecte() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }} 
                         transition={{ duration: 0.4}}
-                        onClick={() => setSelectedProject(p)} 
                     >
                         <motion.div className="wrapperImagine" layoutId={`image-wrapper-${p.nume}`}>
                             <Image
@@ -169,7 +168,9 @@ export default function Proiecte() {
                                             window.open(p.url, "_blank");
                                         }} size={24} strokeWidth={2.75} />
                                     </div>
-                                    <div className="detaliiProiect">
+                                    <div
+                                     onClick={() => setSelectedProject(p)} 
+                                     className="detaliiProiect">
                                         <Expand size={24} strokeWidth={2.5} />
                                     </div>
                                 </div>
