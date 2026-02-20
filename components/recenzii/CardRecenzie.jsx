@@ -79,7 +79,7 @@ export default function CardRecenzie({recenzie}){
             ref={videoRef}
             src={recenzie.src}
             playsInline
-            preload="metadata"
+            preload="none"
             muted={isMuted}
             onLoadStart={() => setIsLoading(true)}
             onWaiting={() => setIsLoading(true)}

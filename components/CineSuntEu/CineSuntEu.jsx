@@ -1,31 +1,19 @@
+"use client";
+
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import './styles.css';
-import {
-  Map,
-  MapMarker,
-  MarkerContent,
-  MarkerLabel,
-  MarkerPopup,
-} from "@/components/ui/map";
-import { MapPin } from 'lucide-react';
+const HartaClient = dynamic(() => import('./HartaEu'), {
+  ssr: false,
+  loading: () => (
+      <div className="containerHarta" style={{ background: '#000000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <p style={{color: '#696969'}}>Se încarcă harta...</p>
+      </div>
+  )
+});
 
 export default function CineSuntEu(){
 
-    const places = [
-  {
-    id: 1,
-    name: "The Metropolitan Museum of Art",
-    label: "Museum",
-    category: "Museum",
-    rating: 4.8,
-    reviews: 12453,
-    hours: "10:00 AM - 5:00 PM",
-    image:
-      "/proiecte/infinitylounge.ro_ImageV2.png",
-    lng: 26.1056,
-    lat: 44.4303,
-  }
-];
 
     return(
         <div className="bodyEu">
@@ -68,30 +56,7 @@ export default function CineSuntEu(){
         </div>
         </div>
 
-        <div className="containerHarta">
-            <div className="mapLegend">
-                <div className="hallowDot"></div>
-                <p>Disponibil</p>
-            </div>
-            <Map center={[26.1025, 44.4268]}
-                dragPan={false}
-                scrollZoom={false}
-                doubleClickZoom={false}
-                touchZoomRotate={false}
-                keyboard={false}
-                zoom={11.35}
-                attributionControl={false}
-            >
-                {places.map((place) => (
-                <MapMarker key={place.id} longitude={place.lng} latitude={place.lat}>
-                    <MarkerContent>
-                        <MapPin size={40} fill='black' strokeWidth={2} color='#FF8A00'/>
-                    <MarkerLabel position="bottom">{place.label}</MarkerLabel>
-                    </MarkerContent>
-                </MapMarker>
-                ))}
-            </Map>
-        </div>
+        <HartaClient/>
     </div>
     )
 }
