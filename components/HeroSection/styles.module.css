@@ -14,12 +14,30 @@
     left: 0;
     width: 100%;
     height: 100%;
-    filter: brightness(0.5);
+    filter: brightness(0.55);
+}
+.heroSection .aurora img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    object-fit: cover;
 }
 .heroSection .aurora video{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    opacity: 0;
+    animation: fadeInVideo 1s ease-in forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeInVideo {
+    to {
+        opacity: 1;
+    }
 }
 .heroSection .contentHero{
     display: flex;

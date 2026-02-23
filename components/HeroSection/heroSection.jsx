@@ -1,12 +1,21 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
+import Image from 'next/image';
 
 export default function HeroSection(){
     return(
         <div className={styles.heroSection}>
 
             <div className={styles.aurora}>
-                <video src={"/heroVideo.mp4"} poster="/heroVideo.jpg" preload="auto" playsInline muted autoPlay loop>Browserul tau nu suporta video!</video>
+                <Image
+                    src="/heroVideoV2.jpg" 
+                    alt="Background Hero"
+                    width={1000}
+                    height={1000}
+                    priority 
+                    quality={100}
+                />
+                <video src={"/heroVideo.mp4"} preload="metadata" playsInline muted autoPlay loop>Browserul tau nu suporta video!</video>
             </div>
                
             <div className={styles.contentHero}>
