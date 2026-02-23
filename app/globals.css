@@ -202,13 +202,13 @@ header{
   padding: 4px 6px;
   width: 96%; 
   border-radius: 7px; 
-  position: fixed;
+  position: fixed; 
   top: 8px;
   left: 50%;
   transform: translate(-50%, 0%); 
   z-index: 99;   
   color: white; 
-  height: 60px; 
+  height: 60px;    
   transition: all 0.4s ease-in-out; 
 } 
 header.headerRadius{ 

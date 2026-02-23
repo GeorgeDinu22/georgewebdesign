@@ -1,23 +1,12 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
-import FloatingLinesClient from './FloatingLinesClient';
 
 export default function HeroSection(){
     return(
         <div className={styles.heroSection}>
-            {/*
-           <div className={styles.aurora}>
-                <FloatingLinesClient/>
-            </div>
-            */}
-            {/*
-             <div className={styles.aurora}>
-                <video src={"/video.mov"} playsInline muted autoPlay loop>Browserul tau nu suporta video!</video>
-            </div>
-              */}
 
-               <div className={styles.aurora}>
-                <FloatingLinesClient/>
+            <div className={styles.aurora}>
+                <video src={"/heroVideo.mp4"} poster="/heroVideo.jpg" preload="auto" playsInline muted autoPlay loop>Browserul tau nu suporta video!</video>
             </div>
                
             <div className={styles.contentHero}>

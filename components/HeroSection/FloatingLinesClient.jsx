@@ -38,9 +38,9 @@ if (!startEffect) {
 
   return (
     <FloatingLines 
-        enabledWaves={isMobile ? ["top", "middle"] : ["top", "middle"]}
+        enabledWaves={isMobile ? ["top", "middle", "bottom"] : ["top", "middle"]}
         
-        lineCount={isMobile ? 4 : 5} 
+        lineCount={isMobile ? 5 : 5} 
         
         linesGradient={["#FF8A00", "#ffb347"]}
         lineDistance={5}
