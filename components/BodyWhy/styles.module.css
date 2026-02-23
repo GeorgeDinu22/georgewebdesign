@@ -101,6 +101,8 @@
 
 @media(min-width:850px){
     .bodyWhy{
+        margin-bottom: 60px;
+        margin: 60px auto;
     }
     .containerWhy{
         display: grid;

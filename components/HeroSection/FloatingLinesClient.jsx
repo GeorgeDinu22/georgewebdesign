@@ -3,12 +3,9 @@
 import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 
-// AICI este cheia performanței:
-// 1. dynamic() -> rupe codul în chunk separat
-// 2. ssr: false -> nu rulează pe server
 const FloatingLines = dynamic(() => import('../FloatingLines'), {
   ssr: false,
-  loading: () => <div className="w-full h-full opacity-0" /> // Placeholder invizibil
+  loading: () => <div className="w-full h-full opacity-0" /> 
 });
 
 export default function FloatingLinesClient() {
@@ -16,31 +13,22 @@ export default function FloatingLinesClient() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // 1. Detectăm dacă e mobil
     setIsMobile(window.innerWidth < 768);
 
-    // 2. Întârziem încărcarea cu 800ms
-    // Asta permite browserului să afișeze textul (LCP) și să termine "munca grea"
-    // înainte să înceapă să descarce Three.js
     const timeout = setTimeout(() => {
       setStartEffect(true);
-    }, 800);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);
 
-  // Până nu trece timpul, nu randăm nimic greu
   if (!startEffect) return null;
 
   return (
     <FloatingLines 
-        // 3. OPTIMIZARE MOBIL: 
-        // Pe desktop: 3 valuri (top, middle, bottom)
-        // Pe mobil: DOAR 1 val (middle) -> salvăm 66% din resursele CPU
-        enabledWaves={isMobile ? ["middle"] : ["top", "middle"]}
+        enabledWaves={isMobile ? ["top", "middle"] : ["top", "middle"]}
         
-        // Pe mobil: mai puține linii (2 vs 4)
-        lineCount={isMobile ? 2 : 4} 
+        lineCount={isMobile ? 4 : 5} 
         
         linesGradient={["#FF8A00", "#ffb347"]}
         lineDistance={5}

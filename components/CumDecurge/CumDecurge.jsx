@@ -1,5 +1,7 @@
+"use client";
 import CardParcurs from './CardParcurs';
 import styles from './styles.module.css';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CumDecurge(){
 
@@ -31,10 +33,28 @@ const pasi = [
     }
 ];
 
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+        if (entry.isIntersecting) {
+            setIsVisible(true);
+        }
+        },
+        { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+    }, []);
+
     return(
         <>
         <div className={styles.bodyCumDecurge}>
-            <div className={styles.containerTitle}>
+            <div ref={ref} className={`${styles.containerTitle} ${isVisible ? styles.show : ""}`}>
                 <h2>Cum Decurge <span>Colaborarea?</span></h2>
                 <p>
                     Îți prezint pas cu pas procesul meu de lucru, astfel încât să știi exact la ce să te aștepți. Transparența și comunicarea sunt esențiale pentru rezultate excelente.

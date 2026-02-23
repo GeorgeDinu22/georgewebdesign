@@ -134,11 +134,11 @@ export default function Proiecte() {
     }, [selectedProject]);
 
     return (
-        <div className={styles.bodyProiecte}>
+        <div id="proiecte" className={styles.bodyProiecte}>
             <div className={`${styles.fundalGrid} ${styles.mask}`}></div>
             <div className={styles.containerTitlu}>
                 <h2>Proiecte care aduc <strong>Valoare</strong></h2>
-                <p>Fiecare proiect este diferit, așa că necesită un proces amplu de dezvoltare și un set de tehnologii concepute special pentru acea misiune.</p>
+                <p>Fiecare proiect este diferit, iar soluțiile trebuie să fie la fel. De la strategie și structură până la design și performanță, fiecare detaliu este optimizat pentru rezultate reale.</p>
             </div>
             
             <div className={styles.containerProiecte}>
@@ -148,8 +148,8 @@ export default function Proiecte() {
                         className={styles.cardProiect}
                         initial={{ opacity: 0, y: 32 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }} 
-                        transition={{ duration: 0.4}}
+                        viewport={{ once: true, amount: 0.4 }} 
+                        transition={{ duration: 0.5}}
                     >
                         <motion.div className={styles.wrapperImagine} layoutId={`image-wrapper-${p.nume}`}>
                             <Image
@@ -242,14 +242,18 @@ export default function Proiecte() {
                                 </motion.div>
 
                                 <div className={styles.modalHeader}>
-                                    <motion.h2>
+                                    <motion.h2
+                                        initial={{ opacity: 0.25, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.35 , duration: 0.4 }}
+                                        >
                                         {selectedProject.nume}
                                     </motion.h2>
                                     <motion.span 
                                         className={styles.dataLanasare}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.2 }}
+                                        initial={{ opacity: 0.25, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.35 , duration: 0.4 }}
                                     >
                                         {selectedProject.dataLansare}
                                     </motion.span>
@@ -258,7 +262,7 @@ export default function Proiecte() {
                                 <div className={styles.modalBreakLine}></div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 40 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.4 }} 
                                 >

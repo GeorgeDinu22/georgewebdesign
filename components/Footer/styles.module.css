@@ -17,11 +17,17 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    display: none;
 }
 .cardSocial{
     background-color: var(--mainColor);
     padding: 6px;
     border-radius: 7px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .footerContact{
     display: flex;
@@ -30,7 +36,7 @@
     color: white;
 }
 .footerContact h5{
-    font-size: 22px;
+    font-size: clamp(22px,2.5vw,26px);
     font-weight: 650;
     transform: color 250ms ease-in-out;
 }
@@ -39,6 +45,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    font-size: clamp(16px,1.75vw,20px);
     margin-left: 6px;
 }
 .footerLink:hover{
@@ -59,10 +66,53 @@
     height: 2px;
 }
 .autor{
-    font-size: 14px;
+    font-size: clamp(14px,1.5vw,18px);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 550;
+}
+
+@media(min-width:950px){
+    .footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        row-gap: 0px;
+        align-items: center;
+        padding-left: 24px;
+    }
+    .footerLogo{
+        width: 175px;
+    }
+    .cardSocial{
+        height: 44px;
+        width: 44px;
+    }
+    .footerHeader{
+        grid-column: 1/5;
+        margin-bottom: 20px;
+    }
+    .footerLegalLinks{
+        grid-column: 2/3;
+        grid-row: 2;
+    }
+    .footerContact:nth-of-type(3){
+        grid-column: 1/2;
+    }
+    .footerLegal{
+        grid-column: 3/5;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .footerLegal img{
+        width: 250px;
+    }
+    .footerBreakLine{
+        grid-column: 1/5;
+        margin: 24px 0;
+    }
+    .autor{
+        grid-column: 1/5;
+    }
 }

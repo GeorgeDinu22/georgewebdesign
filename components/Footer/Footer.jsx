@@ -6,10 +6,11 @@ import { Instagram, Phone, Mail } from 'lucide-react';
 export default function Footer(){
     return(
         <>
-        <footer className={styles.footer}>
+        <footer id="contact" className={styles.footer}>
             <div className={styles.footerHeader}>
                 <Link className={styles.logo} href="/">
                     <Image
+                    className={styles.footerLogo}
                         src="/logo.svg"
                         alt="George Web Design"
                         width={150}
@@ -26,10 +27,9 @@ export default function Footer(){
                         rel="noopener noreferrer"
                     >
                     <svg 
+                    className={styles.socialIcons}
                     viewBox="0 0 32 32" 
                     xmlns="http://www.w3.org/2000/svg" 
-                    width="24" 
-                    height="24" 
                     fill="#000000"
                     >
                     <title>tiktok</title>
@@ -43,12 +43,12 @@ export default function Footer(){
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <Instagram strokeWidth={3}/>
+                        <Instagram className={styles.socialIcons} strokeWidth={3}/>
                     </Link>
                 </div>
             </div>
 
-            <div className={styles.footerContact}>
+            <div className={`${styles.footerContact} ${styles.footerLegalLinks}`}>
                 <h5>Legal</h5>
                 <Link className={`${styles.footerLink} ${styles.linkLegal}`} href="tel:+40733782872">
                    Politica de Confidentialitate

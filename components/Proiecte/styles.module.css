@@ -442,8 +442,3 @@
     transform: translateY(-2px);
     filter: brightness(1.1);
 }
-
-/* Media queries pentru mobil */
-@media (max-width: 768px) {
-   
-}

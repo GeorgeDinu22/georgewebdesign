@@ -16,12 +16,19 @@
     margin-bottom: 24px;
     z-index: 2;
     width: 90%;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.bodyCta1 .containerTitle.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .bodyCta1 .containerTitle h2{
     color: white;
     font-weight: 750;
     text-align: left;
-    font-size: 28px;
+    font-size: clamp(28px,3vw,36px);
     padding-right: 40px; 
     width: 100%;
 }
@@ -54,6 +61,14 @@
     gap: 6px;
     color: white;
     width: 100%;
+    opacity: 0;
+    transition: all 0.8s ease;
+    transform: translateY(4px);
+}
+
+.bodyCta1 .containerCta1 .paragrafCta1.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .bodyCta1 .containerCta1 .paragrafCta1 .highlighted{
     font-size: 20px;
@@ -69,8 +84,82 @@
     text-decoration: 2px underline var(--mainColor);
     font-weight: 520;
 }
+.focus{
+    font-weight: 650;
+}
+.colorText{
+    background-color: var(--mainColor);
+    padding: 2px 4px;
+    border-radius: 3.5px;
+    font-weight: 650;
+}
+
+.textWhy2 span{
+  font-weight: 650;
+}
 
 
 .IconText{
     display: inline;
+}
+
+@media (min-width: 1024px){
+
+  .bodyCta1{
+    margin: 120px 0;
+  }
+
+  .breakTextDesktop{
+    display: none;
+  }
+
+  .bodyCta1 .containerTitle{
+    max-width: 1100px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .bodyCta1 .containerTitle h2{
+    line-height: 1.15;
+    text-align: center;
+    padding-right: 0;
+  }
+
+  .bodyCta1 .containerTitle h2 strong::before{
+    height: 4px;
+    bottom: -6px;
+  }
+
+  .bodyCta1 .containerCta1{
+    max-width: 1100px;
+    gap: 32px;
+  }
+
+  .bodyCta1 .containerCta1 .paragrafCta1{
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,138,0,0.15);
+    border-radius: 18px;
+    padding: 32px 36px;
+    transition: all 0.35s ease;
+  }
+
+  .bodyCta1 .containerCta1 .paragrafCta1:hover{
+    border-color: rgba(255,138,0,0.4);
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-4px);
+  }
+
+  .bodyCta1 .containerCta1 .paragrafCta1 .highlighted{
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .bodyCta1 .containerCta1 .paragrafCta1 p{
+    font-size: 18px;
+    line-height: 1.8;
+    opacity: 0.85;
+    width: 75%;
+  }
+
 }

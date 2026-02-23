@@ -18,12 +18,20 @@
     justify-content: center;
     flex-direction: column;
     gap: 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.bodyRecenzii .containerTitle.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .bodyRecenzii .containerTitle h2{
     color: white;
     font-size: clamp(28px,2.5vw,36px); 
     text-align: center;
     width: 90%;
+    font-weight: 750;
 }
 .bodyRecenzii .containerTitle h2 strong{
     color: var(--mainColor);
@@ -57,24 +65,21 @@
     position: relative;
     border-radius: 14px;
     cursor: pointer;
-    height: 600px;
+    height: 650px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
 }
-.buttonSound{
-    position: absolute;
-    bottom: 7px;
-    right: 7px;
-    z-index: 2;
-    padding: 6px;
-    color: var(--mainColor);
-    padding:8px;
-    background-color: rgba(0, 0, 0, 0.75);
-    border-radius: 7px;
-    z-index: 10;
+.cardVideo.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .cardVideo video{
-    border-radius: 14px;
     width: 100%;
-    height: 600px;
+    height: 650px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-radius: 14px;
     object-fit: cover;
 }
 .cardVideo .videoOverlay{
@@ -87,6 +92,7 @@
     justify-content: end;
     flex-direction: column;
     padding: 12px;
+    padding-bottom: 88px;
     align-items: start;
     color: white;
     background:linear-gradient(35deg,rgb(0, 0, 0) 7.5%, transparent);
@@ -118,23 +124,10 @@
     width: 80px;
     border-top-right-radius: 14px;
 }
-.cardVideo .videoOverlay .playScreen{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    transition:all 250ms ease-in-out;
-    padding:8px;
-    background-color: rgba(0, 0, 0, 0.75);
-    border-radius: 7px;
-}
-.videoOverlay.videoPlaying .playScreen{
-    opacity: 0;
-}
 .numeRecenzie{
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
     transition:all 250ms ease-in-out;
 }
 .videoOverlay.videoPlaying .numeRecenzie{
@@ -147,7 +140,7 @@
 }
 
 .proiecteRecenzie{
-    padding-left: 8px;
+    padding-left: 6px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -165,7 +158,7 @@
     border-radius: 100%;
 }
 .proiecteRecenzie .itemProiecteRecenzie p{
-    font-weight: 550;
+    font-weight: 500;
 }
 
 
@@ -193,6 +186,92 @@
   to { transform: rotate(360deg); }
 }
 
+.progresContainer {
+    background: rgba(15, 15, 15, 0.95); 
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-top: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px 14px 14px 14px; 
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 12px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.playScreen, .buttonSound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--mainColor, #FF8A00);
+    transition: all 0.2s ease;
+}
+
+.playScreen:hover, .buttonSound:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progressBarInput {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #FF8A00, #FF8A00);
+    background-repeat: no-repeat;
+}
+
+.progressBarInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 14px;
+    border-radius: 50%;
+    transition: transform 0.1s;
+}
+
+.progressBarInput:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+.progressBarInput::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.cardVideo .playScreen{
+    position: relative;
+    transition:all 250ms ease-in-out;
+    padding:8px;
+    border-radius: 7px;
+}
+.videoOverlay .playScreen{
+    opacity: 0;
+}
+
+.buttonSound{
+    position: relative;
+    z-index: 2;
+    padding: 6px;
+    color: white;
+    padding:8px;
+    border-radius: 7px;
+    z-index: 10;
+}
 @media(min-width:850px){
     .containerRecenzii{
         display: grid;
@@ -200,8 +279,9 @@
         grid-template-columns: 1fr 1fr;
         align-items: start;
     }
-    .bodyRecenzii .containerTitlu p{
-        width: 80%;
+    .bodyRecenzii .containerTitle p{
+        width: 90%;
+        max-width: 750px; 
         margin-bottom: 20px;
     }
 }

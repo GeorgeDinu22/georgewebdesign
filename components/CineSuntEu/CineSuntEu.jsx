@@ -17,7 +17,7 @@ export default function CineSuntEu(){
 
 
     return(
-        <div className={styles.bodyEu}>
+        <div id='despreMine' className={styles.bodyEu}>
 
         <div className={styles.leftPart}>
             <div className={styles.containerTitle}>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { TrendingUp } from 'lucide-react';
 import { useState , useEffect, useRef} from "react";
+import ButtonContact from "../ButtonContact/ButtonContact";
 
 export default function Header(){
 
@@ -66,9 +67,9 @@ export default function Header(){
             </Link>
             <div className="orizontalNavigation">
                 <Link  className="linkHeaderHor" href="/">Acasă</Link>
+                <Link  className="linkHeaderHor" href="#proiecte">Proiecte</Link>
                 <Link  className="linkHeaderHor" href="#despreMine">Despre Mine</Link>
-                <Link  className="linkHeaderHor" href="#rezultate">Rezultate</Link>
-                <Link  className="linkHeaderHor" href="#pachete">Pachete</Link>
+                <Link  className="linkHeaderHor" href="#recenzii">Recenzii</Link>
                 <Link  className="linkHeaderHor" href="#contact">Contact</Link>
             </div>
             <div onClick={() => HandleBoxCLick()} className="box">
@@ -78,18 +79,12 @@ export default function Header(){
             </div>
             <div className={`dropDown ${droped ? "droped" : ""}`}>
                 <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="/">Acasă</Link>
-                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#despreMine">Despre Mine</Link>
-                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#rezultate">Rezultate</Link>
-                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#pachete">Pachete</Link>
+                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#proiecte">Proiecte</Link>
+                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#despreMine">Despre Min</Link>
+                <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#recenzii">Recenzii</Link>
                 <Link onClick={() => HandleBoxCLick()} className="linkHeader" href="#contact">Contact</Link>
-            </div>
-            <div className="headerCta">
-              <Link  href="#pachete">
-              Începe Acum
-              </Link>
-              <TrendingUp strokeWidth={3} size={24}/>
             </div>
         </header>
         </>
     )
-}
+} 

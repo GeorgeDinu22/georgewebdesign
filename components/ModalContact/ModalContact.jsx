@@ -9,11 +9,54 @@ import { z } from "zod";
 import { useState, useEffect } from "react";
 
 const contactSchema = z.object({
-  numeContact: z.string().min(3, "Numele este prea scurt (minim 3 caractere)"),
-  afacereContact: z.string().optional(),
-  emailContact: z.string().email("Adresa de email nu este validă"),
-  telefonContact: z.string().regex(/^[0-9]{10,12}$/, "Numărul de telefon este invalid"),
-  detaliiContact: z.string().optional()
+
+  numeContact: z
+    .string({
+      required_error: "Numele este obligatoriu",
+    })
+    .trim()
+    .min(3, "Numele trebuie să aibă minim 3 caractere")
+    .max(60, "Numele este prea lung")
+    .regex(/^[a-zA-ZăâîșțĂÂÎȘȚ\s-]+$/, "Numele conține caractere invalide"),
+
+  afacereContact: z
+    .string()
+    .trim()
+    .max(100, "Numele afacerii este prea lung")
+    .optional()
+    .or(z.literal("")),
+
+  emailContact: z
+    .string({
+      required_error: "Emailul este obligatoriu",
+    })
+    .trim()
+    .toLowerCase()
+    .email("Adresa de email nu este validă")
+    .max(120, "Email prea lung"),
+
+  telefonContact: z
+    .string({
+      required_error: "Telefonul este obligatoriu",
+    })
+    .trim()
+    .transform((val) => val.replace(/\s+/g, "")),
+
+  detaliiContact: z
+    .string()
+    .trim()
+    .max(1000, "Mesajul este prea lung")
+    .optional()
+    .or(z.literal("")),
+
+  acordDate: z
+    .boolean({
+      required_error: "Trebuie să accepți politica de confidențialitate",
+    })
+    .refine((val) => val === true, {
+      message: "Trebuie să accepți politica de confidențialitate",
+    }),
+
 });
 
 export default function ModalContact({ show, animation, onClose }) {
@@ -21,49 +64,102 @@ export default function ModalContact({ show, animation, onClose }) {
   const [inputErrors, setInputErrors] = useState({});
   const [statusTrimitereMail, setStatusTrimitereMail] = useState("none");
   const [containerAnimation, setContainerAnimation] = useState(false);
+  const [isVisible, setIsVisible] = useState(show);
+  
+  const [sendError, setSendError] = useState("");
+
   const [formData, setFormData] = useState({
     numeContact: "",
     afacereContact: "",
     emailContact: "",
     telefonContact: "",
     detaliiContact: "",
+    acordDate: false, 
   });
 
   useEffect(() => {
-    if (show) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    if (!isVisible) return;
+
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (show) {
+      setIsVisible(true);
+    } else {
+      setContainerAnimation(true); 
+      setTimeout(() => {
+        setIsVisible(false);
+        setContainerAnimation(false);
+      }, 400); 
+    }
   }, [show]);
 
-  if (!show) {
-    return null;
-  }
+  if (!isVisible) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (statusTrimitereMail === "loading") return;
+
     setInputErrors({});
+    setSendError(null);
 
-    const data = Object.fromEntries(new FormData(e.target));
+    const result = contactSchema.safeParse(formData);
 
-    const result = contactSchema.safeParse(data);
     if (!result.success) {
-      setTimeout(() => {
-        setInputErrors(result.error.flatten().fieldErrors);
-      }, 10);
+      setInputErrors(result.error.flatten().fieldErrors);
       return;
     }
 
     setStatusTrimitereMail("loading");
 
-    setTimeout(() => {
+    try {
+      // Trimitem formData curat
+      const res = await fetch("/api/send-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const responseData = await res.json();
+      // console.log("RESPONSE ESTE: ", responseData);
+
+      if (!res.ok) {
+        setSendError(responseData.message || "Eroare de server!");
+        setStatusTrimitereMail("none");
+        return;
+      }
+
+      // succes
       setStatusTrimitereMail("trimis");
-    }, 1000);
+
+      // reset formular
+      setFormData({
+        numeContact: "",
+        afacereContact: "",
+        emailContact: "",
+        telefonContact: "",
+        detaliiContact: "",
+        acordDate: false,
+      });
+
+
+    } catch (error) {
+      console.error(error);
+      setStatusTrimitereMail("none");
+      setSendError("Eroare de conexiune. Încearcă din nou.");
+    }
   };
 
   return createPortal(
@@ -79,9 +175,12 @@ export default function ModalContact({ show, animation, onClose }) {
         <X size={28} />
       </div>
 
-      <div className={`${styles.containerContact} ${containerAnimation ? styles.scrollDown : ""}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div
+      className={`${styles.containerContact} ${
+        containerAnimation ? styles.scrollDown : ""
+      }`}
+      onClick={(e) => e.stopPropagation()}
+    >
     <div className={styles.leftPart}>
         <h4>Hai să discutăm!</h4>
         <div className={styles.infoContainerContact}>
@@ -155,7 +254,7 @@ export default function ModalContact({ show, animation, onClose }) {
 
           <div className={`${styles.formWrapper} ${inputErrors.telefonContact ? styles.shakeError : ""}`}>
             <input
-              type="text"
+              type="phone"
               name="telefonContact"
               id="telefonContact"
               placeholder=" "
@@ -177,6 +276,37 @@ export default function ModalContact({ show, animation, onClose }) {
             />
             <label htmlFor="detaliiContact">Cateva detalii despre proiectul tau</label>
           </div>
+
+          <div className={`${styles.privacyConsent} ${inputErrors.acordDate ? styles.shakeError : ""}`}>
+            <label className={styles.checkboxWrapper}>
+              <input
+                type="checkbox"
+                name="acordDate"
+                checked={formData.acordDate}
+                onChange={(e) => setFormData({ ...formData, acordDate: e.target.checked })}
+              />
+              <span className={styles.customCheckbox}>
+                {formData.acordDate && (
+                  <Check size={18} strokeWidth={4} className={styles.checkIcon} />
+                )}
+              </span>
+              <span className={styles.textAcord}>
+                Sunt de acord cu{" "}
+                <Link href="/politica-confidentialitate" target="_blank">
+                  Politica de Confidențialitate
+                </Link>
+              </span>
+            </label>
+            {inputErrors.acordDate && (
+              <span className={styles.errorText}>{inputErrors.acordDate[0]}</span>
+            )}
+          </div>
+
+          {sendError && (
+            <div className={styles.eroareTrimitere}>
+              {sendError}
+            </div>
+          )}
 
           <button
             type="submit"

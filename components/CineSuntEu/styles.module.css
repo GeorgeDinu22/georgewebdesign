@@ -56,7 +56,7 @@
 }
 .wrapperImageEu img{
     width: 100%;
-    max-height: 500px;
+    height: auto;
     object-fit: cover;
     border-radius: 14px;
 }
@@ -116,13 +116,13 @@
     .bodyEu{
        display: grid;
        grid-template-columns: 1.25fr 1fr;
+       grid-template-rows: auto 1fr;
        width: 100%;
-       margin-left: auto;
-       margin-right: auto;
        align-items: start;
        gap: 40px;
        row-gap: 24px;
        width: 90%;
+       margin: 60px auto;
     }
     .containerTitle{
         width: 100%;

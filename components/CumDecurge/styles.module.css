@@ -1,40 +1,49 @@
-.bodyCumDecurge{
+.bodyCumDecurge {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    border-radius: 14px;
+    border-radius: 18px;
     position: relative;
-        background:
-        repeating-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.03),
-            rgba(255,140,0,0.03) 1px,
-            transparent 1px,
-            transparent 40px
-        ),
-        linear-gradient(to bottom, rgb(14, 14, 14), #2b1200);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 140, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 40px
+    ), linear-gradient(to bottom, rgb(14, 14, 14) 10%, #351600);
     padding: 32px 0;
     margin-top: 60px;
 }
-.bodyCumDecurge .containerTitle{
+
+.bodyCumDecurge .containerTitle {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
 }
-.bodyCumDecurge .containerTitle h2{
+.bodyCumDecurge .containerTitle.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bodyCumDecurge .containerTitle h2 {
     color: white;
-    font-size: 26px;
+    font-size: clamp(26px,2.5vw,34px); 
     font-weight: 750;
 }
-.bodyCumDecurge .containerTitle h2 span{
+
+.bodyCumDecurge .containerTitle h2 span {
     position: relative;
 }
-.bodyCumDecurge .containerTitle h2 span::before{
+
+.bodyCumDecurge .containerTitle h2 span::before {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -42,73 +51,163 @@
     transform: translateX(-50%);
     width: 120%;
     height: 2.75px;
-    background: linear-gradient(
-        to right,
-        transparent,
-        var(--mainColor),
-        transparent
-    );
+    background: linear-gradient(to right, transparent, var(--mainColor), transparent);
 }
 
 .bodyCumDecurge .containerTitle p{
-    color:var(--text-secondary);
+    color: var(--text-secondary);
     text-align: center;
+    font-size: clamp(16px,2vw,20px);
     text-wrap: balance;
 }
 
-.contentParcurs{
+.contentParcurs {
     position: relative;
     width: 94%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     margin-top: 32px;
 }
-.lineParcurs{
+
+.lineParcurs {
     width: 4px;
-    height: calc(100% + 24px);
+    height: 100%;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
     left: 23px;
     background-color: var(--mainColor);
     z-index: 0;
 }
-.cardParcurs{
-    display:grid;
+
+.cardParcurs {
+    display: grid;
     grid-template-columns: 56px 1fr;
     color: white;
     gap: 12px;
     row-gap: 0px;
     align-items: center;
     z-index: 1;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
 }
-.cardParcurs .number{
+.cardParcurs.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardParcurs .number {
     grid-column: 1/2;
     border: 2px solid var(--mainColor);
     padding: 8px;
     width: 48px;
     height: 48px;
     display: flex;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 900;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
     background-color: black;
     position: relative;
-    box-shadow: 0 0 20px rgba(255,140,0,0.4); 
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
 }
-.cardParcurs .titleCardParcurs{
+
+.cardParcurs .titleCardParcurs {
     grid-column: 2/3;
     font-weight: 700;
-    font-size: 18px;
-    margin-top: -8px;
+    font-size: clamp(18px, 2vw, 24px);
+    margin-top: 0;
 }
-.cardParcurs p{
+
+.cardParcurs p {
     grid-column: 2/3;
     grid-row: 2;
-    width: 90%;
+    width: 95%;
+    font-size: clamp(16px, 2vw, 20px);
     text-wrap: balance;
+    color: #ddd;
+}
+
+@media(min-width: 850px) {
+    .contentParcurs {
+        display: block;
+        width: 100%;
+        max-width: 1200px;
+        padding-bottom: 60px;
+        gap: 120px;
+    }
+
+    .lineParcurs {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 100%;
+    }
+    .bodyCumDecurge .containerTitle p{
+        width: 90%;
+    }
+
+    .cardParcurs {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        position: relative;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+    }r
+
+    .cardParcurs .titleCardParcurs,
+    .cardParcurs p {
+        grid-column: unset;
+        grid-row: unset;
+        width: 100%;
+    }
+
+    .cardParcurs .number {
+        width: 64px;
+        height: 64px;
+        font-size: 36px;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        z-index: 10;
+    }
+
+    .cardParcurs:nth-child(odd) {
+        margin-left: 50%;
+        padding-left: 60px;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .cardParcurs:nth-child(odd) .number {
+        left: -32px;
+    }
+
+    .cardParcurs:nth-child(even) {
+        margin-left: 0;
+        padding-right: 60px;
+        text-align: right;
+        align-items: flex-end;
+    }
+
+    .cardParcurs:nth-child(even) .number {
+        right: -32px;
+    }
+
+    .cardParcurs:nth-child(even) {
+        margin-top: 60px;
+    }
+
+    .cardParcurs:nth-child(odd) {
+        margin-top: -60px;
+    }
+
+    .cardParcurs:first-child {
+        margin-top: 0;
+    }
 }

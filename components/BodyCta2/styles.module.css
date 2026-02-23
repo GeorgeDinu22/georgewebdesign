@@ -11,6 +11,7 @@
     overflow: hidden;
     margin-bottom: 32px;
     max-width: 1250px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .bodyCta2 .containerMarquee{
     width: 100%;
@@ -19,6 +20,7 @@
 .marquee{
     width: 100%;
     height: 100%;
+    border-radius: 14px;
 }
 .bodyCta2 .overlayCta{
     position: absolute;
@@ -70,6 +72,10 @@
     text-wrap: balance;
 }
 @media(min-width:700px){
+    .bodyCta2{
+        height: 525px;
+        margin: 40px auto;
+    }
   .responsiveBreakText{ 
     display: none;
   }
