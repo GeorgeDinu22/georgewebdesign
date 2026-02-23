@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef } from 'react';
 import {
   Scene,
@@ -17,7 +15,6 @@ import './FloatingLines.css';
 
 const vertexShader = `
 precision highp float;
-
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
@@ -69,22 +66,17 @@ mat2 rotate(float r) {
 
 vec3 background_color(vec2 uv) {
   vec3 col = vec3(0.0);
-
   float y = sin(uv.x - 0.2) * 0.3 - 0.1;
   float m = uv.y - y;
-
   col += mix(BLUE, BLACK, smoothstep(0.0, 1.0, abs(m)));
   col += mix(PINK, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
   return col * 0.5;
 }
 
 vec3 getLineColor(float t, vec3 baseColor) {
-  if (lineGradientCount <= 0) {
-    return baseColor;
-  }
+  if (lineGradientCount <= 0) return baseColor;
 
   vec3 gradientColor;
-  
   if (lineGradientCount == 1) {
     gradientColor = lineGradient[0];
   } else {
@@ -93,19 +85,13 @@ vec3 getLineColor(float t, vec3 baseColor) {
     int idx = int(floor(scaled));
     float f = fract(scaled);
     int idx2 = min(idx + 1, lineGradientCount - 1);
-
-    vec3 c1 = lineGradient[idx];
-    vec3 c2 = lineGradient[idx2];
-    
-    gradientColor = mix(c1, c2, f);
+    gradientColor = mix(lineGradient[idx], lineGradient[idx2], f);
   }
-  
   return gradientColor * 0.5;
 }
 
-  float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
+float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
   float time = iTime * animationSpeed;
-
   float x_offset   = offset;
   float x_movement = time * 0.1;
   float amp        = sin(offset + time * 0.2) * 0.3;
@@ -113,7 +99,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
 
   if (shouldBend) {
     vec2 d = screenUv - mouseUv;
-    float influence = exp(-dot(d, d) * bendRadius); // radial falloff around cursor
+    float influence = exp(-dot(d, d) * bendRadius);
     float bendOffset = (mouseUv.y - screenUv.y) * influence * bendStrength * bendInfluence;
     y += bendOffset;
   }
@@ -131,7 +117,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   }
 
   vec3 col = vec3(0.0);
-
   vec3 b = lineGradientCount > 0 ? vec3(0.0) : background_color(baseUv);
 
   vec2 mouseUv = vec2(0.0);
@@ -145,15 +130,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       float fi = float(i);
       float t = fi / max(float(bottomLineCount - 1), 1.0);
       vec3 lineCol = getLineColor(t, b);
-      
       float angle = bottomWavePosition.z * log(length(baseUv) + 1.0);
       vec2 ruv = baseUv * rotate(angle);
       col += lineCol * wave(
         ruv + vec2(bottomLineDistance * fi + bottomWavePosition.x, bottomWavePosition.y),
-        1.5 + 0.2 * fi,
-        baseUv,
-        mouseUv,
-        interactive
+        1.5 + 0.2 * fi, baseUv, mouseUv, interactive
       ) * 0.2;
     }
   }
@@ -163,15 +144,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       float fi = float(i);
       float t = fi / max(float(middleLineCount - 1), 1.0);
       vec3 lineCol = getLineColor(t, b);
-      
       float angle = middleWavePosition.z * log(length(baseUv) + 1.0);
       vec2 ruv = baseUv * rotate(angle);
       col += lineCol * wave(
         ruv + vec2(middleLineDistance * fi + middleWavePosition.x, middleWavePosition.y),
-        2.0 + 0.15 * fi,
-        baseUv,
-        mouseUv,
-        interactive
+        2.0 + 0.15 * fi, baseUv, mouseUv, interactive
       );
     }
   }
@@ -181,16 +158,12 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       float fi = float(i);
       float t = fi / max(float(topLineCount - 1), 1.0);
       vec3 lineCol = getLineColor(t, b);
-      
       float angle = topWavePosition.z * log(length(baseUv) + 1.0);
       vec2 ruv = baseUv * rotate(angle);
       ruv.x *= -1.0;
       col += lineCol * wave(
         ruv + vec2(topLineDistance * fi + topWavePosition.x, topWavePosition.y),
-        1.0 + 0.2 * fi,
-        baseUv,
-        mouseUv,
-        interactive
+        1.0 + 0.2 * fi, baseUv, mouseUv, interactive
       ) * 0.1;
     }
   }
@@ -209,15 +182,8 @@ const MAX_GRADIENT_STOPS = 8;
 
 function hexToVec3(hex) {
   let value = hex.trim();
-
-  if (value.startsWith('#')) {
-    value = value.slice(1);
-  }
-
-  let r = 255;
-  let g = 255;
-  let b = 255;
-
+  if (value.startsWith('#')) value = value.slice(1);
+  let r = 255, g = 255, b = 255;
   if (value.length === 3) {
     r = parseInt(value[0] + value[0], 16);
     g = parseInt(value[1] + value[1], 16);
@@ -227,7 +193,6 @@ function hexToVec3(hex) {
     g = parseInt(value.slice(2, 4), 16);
     b = parseInt(value.slice(4, 6), 16);
   }
-
   return new Vector3(r / 255, g / 255, b / 255);
 }
 
@@ -255,6 +220,11 @@ export default function FloatingLines({
   const currentInfluenceRef = useRef(0);
   const targetParallaxRef = useRef(new Vector2(0, 0));
   const currentParallaxRef = useRef(new Vector2(0, 0));
+  
+  // Ref pentru a urmari vizibilitatea si a opri render loop-ul
+  const isVisibleRef = useRef(true);
+  // Ref pentru cache la dimensiunile containerului (evitam getBoundingClientRect in mouseMove)
+  const rectRef = useRef({ width: 1, height: 1, left: 0, top: 0 });
 
   const getLineCount = waveType => {
     if (typeof lineCount === 'number') return lineCount;
@@ -281,12 +251,19 @@ export default function FloatingLines({
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // --- SETUP SCENE ---
     const scene = new Scene();
-
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: false });
+    // Setam powerPreference high-performance doar daca e nevoie, altfel default
+    const renderer = new WebGLRenderer({ 
+      antialias: false, // Antialias false e mult mai rapid pe ecrane high DPI si shader-ul tau oricum e smooth
+      alpha: false,
+      powerPreference: "default"
+    });
+    
+    // Performanta: PixelRatio 1 este cheia pentru viteza
     renderer.setPixelRatio(1);
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
@@ -296,57 +273,33 @@ export default function FloatingLines({
       iTime: { value: 0 },
       iResolution: { value: new Vector3(1, 1, 1) },
       animationSpeed: { value: animationSpeed },
-
       enableTop: { value: enabledWaves.includes('top') },
       enableMiddle: { value: enabledWaves.includes('middle') },
       enableBottom: { value: enabledWaves.includes('bottom') },
-
       topLineCount: { value: topLineCount },
       middleLineCount: { value: middleLineCount },
       bottomLineCount: { value: bottomLineCount },
-
       topLineDistance: { value: topLineDistance },
       middleLineDistance: { value: middleLineDistance },
       bottomLineDistance: { value: bottomLineDistance },
-
-      topWavePosition: {
-        value: new Vector3(topWavePosition?.x ?? 10.0, topWavePosition?.y ?? 0.5, topWavePosition?.rotate ?? -0.4)
-      },
-      middleWavePosition: {
-        value: new Vector3(
-          middleWavePosition?.x ?? 5.0,
-          middleWavePosition?.y ?? 0.0,
-          middleWavePosition?.rotate ?? 0.2
-        )
-      },
-      bottomWavePosition: {
-        value: new Vector3(
-          bottomWavePosition?.x ?? 2.0,
-          bottomWavePosition?.y ?? -0.7,
-          bottomWavePosition?.rotate ?? 0.4
-        )
-      },
-
+      topWavePosition: { value: new Vector3(topWavePosition?.x ?? 10.0, topWavePosition?.y ?? 0.5, topWavePosition?.rotate ?? -0.4) },
+      middleWavePosition: { value: new Vector3(middleWavePosition?.x ?? 5.0, middleWavePosition?.y ?? 0.0, middleWavePosition?.rotate ?? 0.2) },
+      bottomWavePosition: { value: new Vector3(bottomWavePosition?.x ?? 2.0, bottomWavePosition?.y ?? -0.7, bottomWavePosition?.rotate ?? 0.4) },
       iMouse: { value: new Vector2(-1000, -1000) },
       interactive: { value: interactive },
       bendRadius: { value: bendRadius },
       bendStrength: { value: bendStrength },
       bendInfluence: { value: 0 },
-
       parallax: { value: parallax },
       parallaxStrength: { value: parallaxStrength },
       parallaxOffset: { value: new Vector2(0, 0) },
-
-      lineGradient: {
-        value: Array.from({ length: MAX_GRADIENT_STOPS }, () => new Vector3(1, 1, 1))
-      },
+      lineGradient: { value: Array.from({ length: MAX_GRADIENT_STOPS }, () => new Vector3(1, 1, 1)) },
       lineGradientCount: { value: 0 }
     };
 
     if (linesGradient && linesGradient.length > 0) {
       const stops = linesGradient.slice(0, MAX_GRADIENT_STOPS);
       uniforms.lineGradientCount.value = stops.length;
-
       stops.forEach((hex, i) => {
         const color = hexToVec3(hex);
         uniforms.lineGradient.value[i].set(color.x, color.y, color.z);
@@ -356,7 +309,9 @@ export default function FloatingLines({
     const material = new ShaderMaterial({
       uniforms,
       vertexShader,
-      fragmentShader
+      fragmentShader,
+      depthWrite: false, // Optimizare
+      depthTest: false   // Optimizare
     });
 
     const geometry = new PlaneGeometry(2, 2);
@@ -365,40 +320,59 @@ export default function FloatingLines({
 
     const clock = new Clock();
 
+    // --- RESIZE HANDLER ---
     const setSize = () => {
+      if (!containerRef.current) return;
       const el = containerRef.current;
       const width = el.clientWidth || 1;
       const height = el.clientHeight || 1;
 
       renderer.setSize(width, height, false);
-
-      const canvasWidth = renderer.domElement.width;
-      const canvasHeight = renderer.domElement.height;
-      uniforms.iResolution.value.set(canvasWidth, canvasHeight, 1);
+      uniforms.iResolution.value.set(renderer.domElement.width, renderer.domElement.height, 1);
+      
+      // Cache rect dimensions pentru a nu le calcula in mouse move
+      const rect = el.getBoundingClientRect();
+      rectRef.current = {
+        width: rect.width,
+        height: rect.height,
+        left: rect.left,
+        top: rect.top
+      };
     };
 
     setSize();
 
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(setSize) : null;
-
-    if (ro && containerRef.current) {
-      ro.observe(containerRef.current);
+    const resizeObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(setSize) : null;
+    if (resizeObserver && containerRef.current) {
+      resizeObserver.observe(containerRef.current);
     }
+    
+    // Update rect on scroll too, because offsets change
+    const updateRectOnScroll = () => {
+       if (containerRef.current) {
+           const rect = containerRef.current.getBoundingClientRect();
+           rectRef.current.left = rect.left;
+           rectRef.current.top = rect.top;
+       }
+    };
+    window.addEventListener('scroll', updateRectOnScroll, { passive: true });
 
+
+    // --- INTERACTION HANDLERS ---
     const handlePointerMove = event => {
-      const rect = renderer.domElement.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const dpr = renderer.getPixelRatio();
+      // Optimizare: Folosim valorile din cache, nu getBoundingClientRect()
+      const x = event.clientX - rectRef.current.left;
+      const y = event.clientY - rectRef.current.top;
+      const dpr = 1; // Am forțat setPixelRatio(1) mai sus
 
-      targetMouseRef.current.set(x * dpr, (rect.height - y) * dpr);
+      targetMouseRef.current.set(x * dpr, (rectRef.current.height - y) * dpr);
       targetInfluenceRef.current = 1.0;
 
       if (parallax) {
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const offsetX = (x - centerX) / rect.width;
-        const offsetY = -(y - centerY) / rect.height;
+        const centerX = rectRef.current.width / 2;
+        const centerY = rectRef.current.height / 2;
+        const offsetX = (x - centerX) / rectRef.current.width;
+        const offsetY = -(y - centerY) / rectRef.current.height;
         targetParallaxRef.current.set(offsetX * parallaxStrength, offsetY * parallaxStrength);
       }
     };
@@ -412,8 +386,23 @@ export default function FloatingLines({
       renderer.domElement.addEventListener('pointerleave', handlePointerLeave);
     }
 
+    // --- INTERSECTION OBSERVER (Vizibilitate) ---
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    intersectionObserver.observe(containerRef.current);
+
+    // --- RENDER LOOP ---
     let raf = 0;
     const renderLoop = () => {
+      raf = requestAnimationFrame(renderLoop);
+
+      // CRITIC: Nu randa daca nu e vizibil!
+      if (!isVisibleRef.current) return;
+
       uniforms.iTime.value = clock.getElapsedTime();
 
       if (interactive) {
@@ -430,25 +419,32 @@ export default function FloatingLines({
       }
 
       renderer.render(scene, camera);
-      raf = requestAnimationFrame(renderLoop);
     };
     renderLoop();
 
+    // --- CLEANUP ---
     return () => {
       cancelAnimationFrame(raf);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (ro && containerRef.current) {
-        ro.disconnect();
-      }
+      window.removeEventListener('scroll', updateRectOnScroll);
+      
+      if (resizeObserver) resizeObserver.disconnect();
+      if (intersectionObserver) intersectionObserver.disconnect();
 
       if (interactive) {
-        renderer.domElement.removeEventListener('pointermove', handlePointerMove);
-        renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
+        // Verificam daca elementul inca exista inainte de removeEventListener
+        if(renderer.domElement) {
+             renderer.domElement.removeEventListener('pointermove', handlePointerMove);
+             renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
+        }
       }
 
       geometry.dispose();
       material.dispose();
       renderer.dispose();
+      
+      // Stergem manual contextul pentru a ajuta Garbage Collector
+      renderer.forceContextLoss();
+
       if (renderer.domElement.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }

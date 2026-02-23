@@ -12,17 +12,29 @@ export default function FloatingLinesClient() {
   const [startEffect, setStartEffect] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+// În FloatingLinesClient.js
+useEffect(() => {
+  setIsMobile(window.innerWidth < 768);
 
-    const timeout = setTimeout(() => {
-      setStartEffect(true);
-    }, 1000);
+  const startWhenReady = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => setStartEffect(true));
+    } else {
+      setTimeout(() => setStartEffect(true), 2000);
+    }
+  };
 
-    return () => clearTimeout(timeout);
-  }, []);
+  if (document.readyState === 'complete') {
+    startWhenReady();
+  } else {
+    window.addEventListener('load', startWhenReady);
+    return () => window.removeEventListener('load', startWhenReady);
+  }
+}, []);
 
-  if (!startEffect) return null;
+if (!startEffect) {
+  return <div className="floating-lines-container" style={{ opacity: 0 }} />;
+}
 
   return (
     <FloatingLines 
