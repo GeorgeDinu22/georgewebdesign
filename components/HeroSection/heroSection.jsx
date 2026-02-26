@@ -1,6 +1,6 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
-import InteractiveCodeWindow from './CodeTab';
+import CodeTabCLient from './CodeTabClient';
 
 export default function HeroSection(){
     return(
@@ -20,7 +20,7 @@ export default function HeroSection(){
                 <ButtonContact noRef={true} textBtn={"Vreau Website"}/>
             </div>
 
-            <InteractiveCodeWindow/>
+            <CodeTabCLient/>
         </div>
     );
 }

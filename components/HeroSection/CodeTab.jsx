@@ -151,45 +151,33 @@ const FILES = {
     )
   }
 };
-// Funcție helper pentru a transforma JSX-ul complex într-un array liniar de caractere
+
 const parseContent = (content) => {
   const tokens = [];
   
   React.Children.forEach(content.props.children, (line, lineIndex) => {
-    // 1. Adăugăm token pentru linie nouă
     tokens.push({ type: 'newline', id: `line-${lineIndex}` });
-
     React.Children.forEach(line.props.children, (child, childIndex) => {
-      // Ignorăm null/false
       if (!child && child !== 0) return;
-
-      // 2. CAZUL 1: String simplu (poate fi spațiu ' ' sau text)
       if (typeof child === 'string') {
         child.split('').forEach((char, i) => {
           tokens.push({ 
             type: 'char', 
-            // Folosim Non-Breaking Space pentru siguranță, deși white-space: pre din CSS ar trebui să ajute
             value: char === ' ' ? '\u00A0' : char, 
             className: null, 
             id: `l${lineIndex}-c${childIndex}-${i}` 
           });
         });
-      } 
-      // 3. CAZUL 2: Numărul liniei (bloc indivizibil)
-      else if (child.props && child.props.className === styles.ln) {
+      } else if (child.props && child.props.className === styles.ln) {
         tokens.push({ 
             type: 'block', 
             value: child.props.children, 
             className: styles.ln, 
             id: `ln-${lineIndex}` 
         });
-      } 
-      // 4. CAZUL 3: Elemente cu clase (ex: kw, fn, str)
-      else {
+      } else {
         const text = child.props.children;
         const className = child.props.className;
-        
-        // Dacă e un string în interiorul tag-ului
         if (typeof text === 'string') {
           text.split('').forEach((char, i) => {
             tokens.push({ 
@@ -199,9 +187,7 @@ const parseContent = (content) => {
                 id: `l${lineIndex}-s${childIndex}-${i}` 
             });
           });
-        }
-        // Dacă elementul conține alte elemente (ex: <span ...>{'{'}</span>)
-        else if (text) {
+        } else if (text) {
              tokens.push({ 
                 type: 'char', 
                 value: text, 
@@ -212,85 +198,99 @@ const parseContent = (content) => {
       }
     });
   });
-
   return tokens;
 };
 
 const TypewriterCode = ({ content, isAppLoad }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [canStartTyping, setCanStartTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const editorRef = useRef(null);
 
-  // 1. Parsăm conținutul o singură dată când se schimbă tab-ul
   const parsedTokens = useMemo(() => parseContent(content), [content]);
 
-  // 2. Controlul Delay-ului inițial
+  // 1. Inițializare (cu animație activă pe toate device-urile)
   useEffect(() => {
-    setCurrentIndex(0);
-    setCanStartTyping(false);
-    setIsTyping(true); // Ascundem scrollbar-ul preventiv
+      setCurrentIndex(0);
+      setIsTyping(true); // Ascundem scrollbar cât timp scriem
 
-    const delay = isAppLoad ? 1750 : 0;
-    const startTimeout = setTimeout(() => {
-      setCanStartTyping(true);
-    }, delay);
-
-    return () => clearTimeout(startTimeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // Delay inițial doar la prima încărcare a aplicației
+      if (isAppLoad) {
+          const delay = 1750;
+          const timer = setTimeout(() => {
+             // Animația va începe după ce acest timer expiră,
+             // gestionat de următorul useEffect
+          }, delay);
+          return () => clearTimeout(timer);
+      }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
-  // 3. Logica de Tastare (Character by Character)
+  // 2. Logica de Tastare Optimizată cu requestAnimationFrame
   useEffect(() => {
-    if (!canStartTyping) return;
-
-    let timeoutId;
-
-    if (currentIndex < parsedTokens.length) {
-      setIsTyping(true);
-      
-      // VITEZA DE TASTARE:
-      // Pentru letter-by-letter, vrem ceva rapid (10-30ms) dar variabil
-      // Caracterele speciale sau spațiile pot fi mai rapide
-      const currentToken = parsedTokens[currentIndex];
-      let speed = Math.floor(Math.random() * 20) + 15; 
-      
-      // Dacă e linie nouă sau bloc (număr linie), trecem instant sau foarte repede
-      if (currentToken.type === 'newline' || currentToken.type === 'block') {
-          speed = 0; 
-      }
-
-      timeoutId = setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, speed);
-
-    } else {
-      setIsTyping(false); // Afișăm scrollbar-ul la final
+    if (currentIndex >= parsedTokens.length) {
+        setIsTyping(false); // Afișăm scrollbar la final
+        return;
     }
 
-    return () => clearTimeout(timeoutId);
-  }, [currentIndex, parsedTokens, canStartTyping]);
+    let animationFrameId;
+    let lastTime = performance.now();
+    
+    // Viteză: 15-35ms pe desktop, un pic mai rapid pe mobil pentru UX
+    const minSpeed = window.innerWidth < 768 ? 10 : 15;
+    let interval = Math.floor(Math.random() * 20) + minSpeed;
 
-  // 4. Auto-Scroll
+    const animate = (time) => {
+        if (time - lastTime >= interval) {
+            setCurrentIndex((prev) => {
+                // Sărim peste newline/block instant pentru performanță
+                let nextIndex = prev + 1;
+                while (
+                    nextIndex < parsedTokens.length && 
+                    (parsedTokens[nextIndex].type === 'newline' || parsedTokens[nextIndex].type === 'block')
+                ) {
+                    nextIndex++;
+                }
+                return nextIndex;
+            });
+            lastTime = time;
+            interval = Math.floor(Math.random() * 20) + minSpeed;
+        }
+        animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // Delay-ul inițial de 1750ms se aplică doar dacă suntem la început și e prima încărcare
+    const startDelay = (isAppLoad && currentIndex === 0) ? 1750 : 0;
+    
+    const delayTimer = setTimeout(() => {
+        animationFrameId = requestAnimationFrame(animate);
+    }, startDelay);
+
+    return () => {
+        cancelAnimationFrame(animationFrameId);
+        clearTimeout(delayTimer);
+    };
+  }, [currentIndex, parsedTokens, isAppLoad]);
+
+  // 3. Auto-Scroll (Activ pe toate device-urile)
   useEffect(() => {
-    if (editorRef.current) {
+    if (isTyping && editorRef.current) {
         editorRef.current.scrollTo({
             top: editorRef.current.scrollHeight,
-            behavior: 'smooth'
+            behavior: 'smooth' 
         });
     }
-  }, [currentIndex]);
+  }, [currentIndex, isTyping]);
 
-  // 5. Randarea: Reconstruim liniile din token-urile vizibile
-  const renderVisibleContent = () => {
-    const visibleTokens = parsedTokens.slice(0, currentIndex);
+  // 4. Randare Memoizată
+  const visibleTokens = useMemo(() => parsedTokens.slice(0, currentIndex), [parsedTokens, currentIndex]);
+
+  const renderContent = () => {
     const lines = [];
     let currentLineChildren = [];
     
     visibleTokens.forEach((token, idx) => {
         if (token.type === 'newline') {
-            // Dacă am adunat ceva în linia anterioară, o salvăm
-            if (idx > 0) { // Ignorăm primul newline de start
+            if (idx > 0) {
                  lines.push(
                     <div key={`line-${lines.length}`} className={styles.line}>
                         {currentLineChildren}
@@ -298,33 +298,23 @@ const TypewriterCode = ({ content, isAppLoad }) => {
                  );
             }
             currentLineChildren = [];
-        } else if (token.type === 'block') {
-            // Numărul liniei
-            currentLineChildren.push(
-                <span key={token.id} className={token.className}>{token.value}</span>
-            );
         } else {
-            // Caracter individual
-            currentLineChildren.push(
+             currentLineChildren.push(
                 <span key={token.id} className={token.className}>{token.value}</span>
             );
         }
     });
 
-    // Adăugăm ultima linie curentă (care este în curs de scriere)
     if (currentLineChildren.length > 0 || lines.length < parsedTokens.filter(t => t.type === 'newline').length) {
-         // Adăugăm cursorul la finalul liniei curente
-         if (isTyping && canStartTyping) {
+         if (isTyping) {
              currentLineChildren.push(<span key="cursor" className={styles.cursor} />);
          }
-         
          lines.push(
             <div key={`line-last`} className={styles.line}>
                 {currentLineChildren}
             </div>
          );
     }
-
     return lines;
   };
 
@@ -333,7 +323,7 @@ const TypewriterCode = ({ content, isAppLoad }) => {
         className={`${styles.editor} ${isTyping ? styles.hiddingScroll : ''}`} 
         ref={editorRef}
     >
-      {renderVisibleContent()}
+      {renderContent()}
     </div>
   );
 };

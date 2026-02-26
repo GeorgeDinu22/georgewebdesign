@@ -42,20 +42,6 @@
     opacity: 0.8;
     z-index: 2;
 }
-@keyframes fluidMove {
-    0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-    }
-    33% {
-        transform: translate(2%, 5%) scale(1.05) rotate(2deg);
-    }
-    66% {
-        transform: translate(-2%, 3%) scale(0.98) rotate(-1deg);
-    }
-    100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-    }
-}
 .heroSection .contentHero{
     display: flex;
     flex-direction: column;
@@ -74,7 +60,7 @@
     text-wrap: balance;
     opacity: 0;
     transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 500ms forwards;
+    animation: Appear 550ms ease-in-out 100ms forwards;
 }
 @keyframes Appear{
     100%{
@@ -114,7 +100,7 @@
     width: 90%;
     opacity: 0;
 
-    animation: Appear 550ms ease-in-out 800ms forwards;
+    animation: Appear 550ms ease-in-out 400ms forwards;
 }
 
 
@@ -142,7 +128,7 @@ position: relative;
 backdrop-filter: blur(12px);
     opacity: 0;
     transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 1500ms forwards;
+    animation: Appear 550ms ease-in-out 800ms forwards;
 }
 @keyframes Appear{
     100%{
