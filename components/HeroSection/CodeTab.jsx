@@ -350,7 +350,7 @@ export default function InteractiveCodeWindow() {
   const fileKeys = Object.keys(FILES);
 
   return (
-    <div className={styles.codeWindow} aria-hidden="true">
+    <div className={styles.codeWindow}>
       <div className={styles.windowHeader}>
         <div className={styles.dots}>
           <span className={styles.dotRed}></span>

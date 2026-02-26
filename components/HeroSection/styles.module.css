@@ -100,7 +100,7 @@
     font-size: clamp(18px,2vw,24px);
     width: 90%;
     opacity: 0;
-    animation: Appear 550ms ease-in-out 300ms forwards;
+    animation: Appear 550ms ease-in-out 400ms forwards;
 }
 
 
