@@ -2,14 +2,14 @@
 .buttonContact{
     font-weight: 750;
     color: white;
-    font-size: clamp(20px,2.5vw,26px);
+    font-size: clamp(22px,2.5vw,26px);
     transition: all 0ms ease;
     cursor: pointer;
     position: relative;
     opacity: 0;
-    transform: translateY(24px);
-    transition: all 0.8s ease;
-    animation: Appear 550ms ease-in-out 1050ms forwards;
+    transform: translateY(24px) scale(0.75);
+    animation: Appear 550ms ease-in-out 1250ms forwards;
+    z-index: 2;
 }
 .buttonContact.show{
     opacity: 1;
@@ -18,10 +18,10 @@
 @keyframes Appear{
     100%{
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
-.buttonContact:hover{
+.glareButton:hover{
   transform: translateY(-4px) scale(1.025);
 }
 .glareButton{
@@ -29,12 +29,11 @@
   border: none;
   box-shadow: none;
   border-radius: 14px;
+  transition: all 0.5s ease;
 }
 
 @media(min-width:1100px){
   .glareButton{
     padding: 10px 20px;
   }
-}
-@media(min-width:1300px){
 }

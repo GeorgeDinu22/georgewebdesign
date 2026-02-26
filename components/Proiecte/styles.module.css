@@ -242,7 +242,8 @@
         width: 90%;
     }
     .bodyProiecte .containerTitlu p{
-        width: 80%;
+        width: 90%;
+        max-width: 850px; 
         margin-bottom: 20px;
     }
     .containerProiecte .cardProiect{

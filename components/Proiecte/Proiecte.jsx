@@ -136,10 +136,25 @@ export default function Proiecte() {
     return (
         <div id="proiecte" className={styles.bodyProiecte}>
             <div className={`${styles.fundalGrid} ${styles.mask}`}></div>
-            <div className={styles.containerTitlu}>
-                <h2>Proiecte care aduc <strong>Valoare</strong></h2>
-                <p>Fiecare proiect este diferit, iar soluțiile trebuie să fie la fel. De la strategie și structură până la design și performanță, fiecare detaliu este optimizat pentru rezultate reale.</p>
-            </div>
+    <div className={styles.containerTitlu}>
+            <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+                Proiecte care aduc <strong>Valoare</strong>
+            </motion.h2>
+            
+            <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+                Fiecare proiect este diferit, iar soluțiile trebuie să fie la fel. De la strategie și structură până la design și performanță, fiecare detaliu este optimizat pentru rezultate reale.
+            </motion.p>
+    </div>
             
             <div className={styles.containerProiecte}>
                 {proiecte.map((p, i) => (
@@ -309,7 +324,7 @@ export default function Proiecte() {
                                     </div>
 
                                     <button className={styles.modalVisitBtn} onClick={() => window.open(selectedProject.url, '_blank')}>
-                                        Acceseaza Website<ExternalLink size={18} style={{ marginLeft: '8px' }} />
+                                        Vezi Site-ul Live<ExternalLink size={18} style={{ marginLeft: '8px' }} />
                                     </button>
                                 </motion.div>
                             </motion.div>

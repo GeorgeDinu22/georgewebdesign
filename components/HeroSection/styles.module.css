@@ -1,42 +1,59 @@
 .heroSection{
     width: 100%;
-    height: 100vh;
+    height: max-content;
+    padding: 32px 0;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 32px;
+    gap: 24px;
+    overflow: hidden;
 }
-.heroSection .aurora{
+.gradientContainer {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    filter: brightness(0.55);
-}
-.heroSection .aurora img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    object-fit: cover;
-}
-.heroSection .aurora video{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    opacity: 0;
-    animation: fadeInVideo 1s ease-in forwards;
-    animation-delay: 1s;
+    bottom: 0%;
+    left: 0%;
+    width: 120%;
+    height: 80%;
+    background: 
+        radial-gradient(circle at 50% 100%, #ffcc66 0%, transparent 40%),
+        radial-gradient(circle at 20% 90%, #ff5e00 0%, transparent 50%),
+        radial-gradient(circle at 80% 95%, #ff8c00 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, #9e3d00 0%, transparent 60%);
+    filter: blur(60px) contrast(1.2);
+    opacity: 0.9;
+    z-index: 1;
 }
 
-@keyframes fadeInVideo {
-    to {
-        opacity: 1;
+.glowOverlay {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 40%;
+   
+    background: linear-gradient(to top, 
+        #08040a 0%,         
+        rgba(255, 94, 0, 0.4) 40%, 
+        transparent 100%
+    );
+    filter: blur(30px);
+    opacity: 0.8;
+    z-index: 2;
+}
+@keyframes fluidMove {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    33% {
+        transform: translate(2%, 5%) scale(1.05) rotate(2deg);
+    }
+    66% {
+        transform: translate(-2%, 3%) scale(0.98) rotate(-1deg);
+    }
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
     }
 }
 .heroSection .contentHero{
@@ -46,14 +63,15 @@
     align-items: center;
     gap: 24px;
     z-index: 2;
-    overflow: hidden;
+    margin-top: 72px;
 }
 .heroSection .contentHero .titleHero{
     color: white;
     font-weight: 750;
     text-align: center;
     font-size: clamp(34px,3.5vw,48px); 
-    width: 85%;
+    width: 90%;
+    text-wrap: balance;
     opacity: 0;
     transform: translateY(24px);
     animation: Appear 550ms ease-in-out 500ms forwards;
@@ -61,7 +79,7 @@
 @keyframes Appear{
     100%{
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate(0, 0) scale(1);
     }
 }
 .heroSection .contentHero .titleHero span{
@@ -78,8 +96,8 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 105%;
-    height: 3.25px;
+    width: 120%;
+    height: 4.25px;
     background: linear-gradient(
         to right,
         transparent,
@@ -95,67 +113,241 @@
     font-size: clamp(18px,2vw,24px);
     width: 90%;
     opacity: 0;
-    transform: translateY(8px);
+
     animation: Appear 550ms ease-in-out 800ms forwards;
 }
 
 
 @media(min-width:850px){
     .heroSection .contentHero .titleHero{
-        width: 70%;
+        width: 80%;
     }
     .heroSection .contentHero .descriereHero{
-        width: 90%;
+        width: 65%;
     }
 }
 
-.container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+.codeWindow{
+position: relative;
+  width: 96%;
+  border-radius: 7px;
   overflow: hidden;
-  z-index: -1;
-  background: #000; /* Fundalul tau negru */
+  z-index: 2;
+  margin-top: 24px;
+  background: rgb(30, 30, 30);
+  box-shadow:
+0 50px 120px rgba(0,0,0,0.7),
+0 0 60px rgba(255,138,0,0.12);
+backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: Appear 550ms ease-in-out 1500ms forwards;
+}
+@keyframes Appear{
+    100%{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.svg {
-  width: 200%; /* Mai lat pentru a permite miscarea de translatie */
-  height: 100%;
-  opacity: 0.8;
+.codeWindow:hover{
+  transform: translateY(-8px) scale(1.002);
+  box-shadow:
+    0 70px 150px rgba(0,0,0,0.75),
+    0 0 80px rgba(255,138,0,0.18);
+}
+
+.windowHeader{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(42,42,42,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 12px;
+}
+
+.dots{ display:flex; gap: 8px; }
+.dotRed,.dotYellow,.dotGreen{ width: 11px; height: 11px; border-radius: 50%; }
+.dotRed{ background:#ff5f56; }
+.dotYellow{ background:#ffbd2e; }
+.dotGreen{ background:#27c93f; }
+
+.tabs{
+  display:flex;
+  gap: 8px;
+  align-items:center;
+  flex: 1;
+  margin-left: 10px;
+}
+
+.tab, .tabActive{
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.15);
+}
+
+.tabActive{
+  color: white;
+  border-color: rgba(255,138,0,0.25);
+  background: rgba(255,138,0,0.08);
+}
+
+
+.windowBody{
+  display:flex;
+  min-height: 240px;
+}
+
+.sidebar{
+  width: max-content;
+  padding: 8px;
+  background: rgba(17,17,17,0.65);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.sidebarItem{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.sidebarItem, .sidebarItemActive{
+  font-size: 10px;
+  padding: 6px 4px;
+  border-radius: 7px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.sidebarItemActive{
+  color: white;
+  background: rgba(255,138,0,0.08);
+  border: 1px solid rgba(255,138,0,0.18);
+}
+
+/* styles.module.css */
+
+.editor {
+  flex: 1;
+  padding: 14px 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Fira Code", monospace;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88);
+  
+  overflow: auto; 
+  max-height: 380px; 
+  white-space: pre;
+  scroll-behavior: smooth;
+  transition: all 0.3s ease;
+}
+
+/* Ascunde scrollbar-ul vizual în timpul scrierii */
+.hiddingScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hiddingScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scrollbar normal */
+.editor::-webkit-scrollbar {
+  width: 6px; 
+  height: 6px;
+}
+.editor::-webkit-scrollbar-track {
+    background: transparent;       
+}
+.editor::-webkit-scrollbar-thumb {
+    background: rgba(255, 140, 0, 0.3); 
+    border-radius: 3px;
+    cursor: pointer;
+}
+.editor::-webkit-scrollbar-thumb:hover {
+    background: var(--mainColor);  
 }
 
 .line {
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  will-change: transform;
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  gap: 0px; /* Gap 0 pentru că acum spațiile sunt caractere reale */
+  width: max-content;
+  /* AM SCOS ANIMAȚIA CSS AICI - controlăm literele din JS */
 }
 
-/* Animatii diferite pentru fiecare linie pentru a crea efectul de profunzime */
-.line1 {
-  animation: moveLines 15s linear infinite;
+/* Cursorul */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  background: var(--mainColor, #ff8c00);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  vertical-align: middle;
 }
 
-.line2 {
-  animation: moveLines 20s linear infinite reverse;
-  opacity: 0.5;
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.line3 {
-  animation: moveLines 25s ease-in-out infinite;
-  opacity: 0.3;
+/* Stiluri pentru restul elementelor (ln, kw, etc) rămân la fel */
+.ln {
+  width: 35px; 
+  text-align: right; 
+  color: rgba(255, 255, 255, 0.28);
+  user-select: none;
+  padding-right: 12px; 
+  flex-shrink: 0;
 }
+.kw{ color:#569cd6; }
+.fn{ color:#dcdcaa; }
+.tag{ color:#4ec9b0; }
+.prop{ color:#9cdcfe; }
+.str{ color:#ce9178; }
+.punc{ color: rgba(255,255,255,0.7); }
 
-@keyframes moveLines {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(-25%, 20px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+
+@media(min-width:1050px){
+    .heroSection{
+        flex-direction: row;
+        height: 100vh;
+        justify-content: space-evenly;
+    }
+    .codeWindow{
+        max-width: 750px;
+    }
+    .windowBody{
+        min-height: 350px;
+    }
+    .sidebar{
+    padding: 8px 12px;
+    }
+    .sidebarItem, .sidebarItemActive{
+        font-size: 14px;
+    }
+    .heroSection .contentHero{
+        margin-left: 40px;
+        max-width: 550px;
+        align-items: start;
+    }
+    .heroSection .contentHero .titleHero{
+        text-align: left;
+        line-height: 1.25;
+        width: 100%;
+        transform: translateX(-40px);
+    }
+    .heroSection .contentHero .descriereHero{
+        text-align: left;
+        width: 100%;
+        transform: translateX(-40px);
+    }
+    .gradientContainer {
+    height: 60%;
+}
 }

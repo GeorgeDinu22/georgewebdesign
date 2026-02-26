@@ -28,9 +28,10 @@
 }
 .bodyRecenzii .containerTitle h2{
     color: white;
-    font-size: clamp(28px,2.5vw,36px); 
+    font-size: clamp(26px,2.5vw,36px); 
     text-align: center;
-    width: 90%;
+    text-wrap: balance;
+    width: 97.5%;
     font-weight: 750;
 }
 .bodyRecenzii .containerTitle h2 strong{
@@ -42,7 +43,7 @@
     text-align: center;
     font-size: clamp(16px,2vw,20px);
     text-wrap: balance;
-    width: 100%;
+    width:90%;
 }
 .bodyRecenzii .containerTitle p span{
     color: var(--mainColor);

@@ -48,8 +48,8 @@
     font-size: clamp(16px,1.75vw,20px);
     margin-left: 6px;
 }
-.footerLink:hover{
-    color: var(--mainColor);
+.linkLegal{
+    text-decoration: 1.5px solid underline var(--mainColor); 
 }
 .footerLegal{
     display: flex;

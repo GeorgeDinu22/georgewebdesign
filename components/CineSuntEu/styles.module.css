@@ -27,6 +27,13 @@
 }
 .containerTitle{
     width: 90%;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.containerTitle.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .containerTitle h2{
     color: white;
@@ -41,18 +48,53 @@
     color: white;
     width: 90%;
     gap: 12px;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.containerEU.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .containerEU p{
     font-size: 18px;
     width: 100%; 
-
+}
+.containerEU.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .containerEU p strong{
     color: var(--mainColor);
 }
+.animateOnScroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animateOnScroll.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.containerEU p {
+    font-size: 18px;
+    width: 100%;
+}
+
+.wrapperImageEu {
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
 .wrapperImageEu{
     width: 90%;
     margin-top: 12px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.wrapperImageEu.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .wrapperImageEu img{
     width: 100%;
@@ -67,6 +109,14 @@
     border-radius: 14px;
     position: relative;
     pointer-events: none;
+    opacity: 0;
+    transition: all 0.8s ease;
+    transform: translateY(24px);
+}
+
+.containerHarta.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .mapLegend{
     position: absolute;
