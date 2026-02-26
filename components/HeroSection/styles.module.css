@@ -2,6 +2,7 @@
     width: 100%;
     height: max-content;
     padding: 32px 0;
+    height: 100vh;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -60,7 +61,7 @@
     text-wrap: balance;
     opacity: 0;
     transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 100ms forwards;
+    animation: Appear 550ms ease-in-out 0ms forwards;
 }
 @keyframes Appear{
     100%{
@@ -99,8 +100,7 @@
     font-size: clamp(18px,2vw,24px);
     width: 90%;
     opacity: 0;
-
-    animation: Appear 550ms ease-in-out 400ms forwards;
+    animation: Appear 550ms ease-in-out 300ms forwards;
 }
 
 
@@ -128,7 +128,7 @@ position: relative;
 backdrop-filter: blur(12px);
     opacity: 0;
     transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 800ms forwards;
+    animation: Appear 550ms ease-in-out 700ms forwards;
 }
 @keyframes Appear{
     100%{

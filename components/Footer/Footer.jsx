@@ -69,7 +69,7 @@ export default function Footer(){
             </div>
 
             <div className={styles.footerLegal}>
-                <Link href="https://anpc.ro/ce-este-sal/">
+                <Link aria-label="Ce este SAL" href="https://anpc.ro/ce-este-sal/">
                     <Image
                         src="/footerImages/anpc.png"
                         alt=""
@@ -77,7 +77,7 @@ export default function Footer(){
                         height={250}
                     />
                     </Link>
-                    <Link href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO">
+                    <Link aria-label="Soluționarea Alternativă a Litigiilor" href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO">
                     <Image
                         src="/footerImages/solutionareaLitigiilor.png"
                         alt=""

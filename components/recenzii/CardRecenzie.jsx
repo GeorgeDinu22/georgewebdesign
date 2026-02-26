@@ -147,6 +147,7 @@ export default function CardRecenzie({ recenzie }) {
                     step="0.1" 
                     value={currentTime}
                     onChange={handleSeek}
+                    aria-label={`Progres video recenzie ${recenzie.nume}`}
                     className={styles.progressBarInput}
                     style={{
                         backgroundSize: `${progressPercent}% 100%`
