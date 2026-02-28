@@ -1,5 +1,7 @@
+"use client";
 import styles from './styles.module.css';
 import CardWhy from './CardWhy';
+import { useEffect, useRef, useState } from 'react';
 
 export default function BodyWhy(){
     
@@ -31,11 +33,28 @@ export default function BodyWhy(){
   }
 ];
 
+        const [isVisible, setIsVisible] = useState(false);
+        const ref = useRef(null);
+    
+        useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+            }
+            },
+            { threshold: 0.5 }
+        );
+    
+        if (ref.current) observer.observe(ref.current);
+    
+        return () => observer.disconnect();
+        }, []);
 
     return(
         <>
         <div className={styles.bodyWhy}>
-            <div className={styles.containerTitle}>
+            <div ref={ref} className={`${styles.containerTitle} ${isVisible ? styles.show : ""}`}>
                 <h2><span>De Ce</span> să lucrăm împreună?</h2>
             </div> 
             <div className={styles.containerWhy}>

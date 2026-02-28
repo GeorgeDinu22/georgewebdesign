@@ -93,6 +93,9 @@
     border-radius: 3.5px;
     font-weight: 650;
 }
+.descriereCta{
+  text-wrap: balance;
+}
 
 .textWhy2 span{
   font-weight: 650;
@@ -106,11 +109,7 @@
 @media (min-width: 1024px){
 
   .bodyCta1{
-    margin: 120px 0;
-  }
-
-  .breakTextDesktop{
-    display: none;
+    margin: 32px 0;
   }
 
   .bodyCta1 .containerTitle{

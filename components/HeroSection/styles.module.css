@@ -2,7 +2,7 @@
     width: 100%;
     height: max-content;
     padding: 32px 0;
-    height: 100vh;
+    height: 105vh;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -60,8 +60,8 @@
     width: 90%;
     text-wrap: balance;
     opacity: 0;
-    transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 0ms forwards;
+    transform: translateY(-24px);
+    animation: Appear 550ms ease-in-out 100ms forwards;
 }
 @keyframes Appear{
     100%{
@@ -100,6 +100,7 @@
     font-size: clamp(18px,2vw,24px);
     width: 90%;
     opacity: 0;
+    transform: translateY(8px);
     animation: Appear 550ms ease-in-out 400ms forwards;
 }
 
@@ -186,7 +187,7 @@ backdrop-filter: blur(12px);
 
 .windowBody{
   display:flex;
-  min-height: 240px;
+  min-height: 250px;
 }
 
 .sidebar{
@@ -214,16 +215,14 @@ backdrop-filter: blur(12px);
   border: 1px solid rgba(255,138,0,0.18);
 }
 
-/* styles.module.css */
 
 .editor {
   flex: 1;
-  padding: 14px 2px;
+  padding: 14px 6px 12px 0px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Fira Code", monospace;
   font-size: 13.5px;
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.88);
-  
   overflow: auto; 
   max-height: 380px; 
   white-space: pre;
@@ -261,9 +260,8 @@ backdrop-filter: blur(12px);
   display: flex;
   align-items: baseline;
   white-space: nowrap;
-  gap: 0px; /* Gap 0 pentru că acum spațiile sunt caractere reale */
+  gap: 0px; 
   width: max-content;
-  /* AM SCOS ANIMAȚIA CSS AICI - controlăm literele din JS */
 }
 
 /* Cursorul */

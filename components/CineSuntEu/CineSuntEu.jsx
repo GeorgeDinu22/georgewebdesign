@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import styles from './styles.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 const HartaClient = dynamic(() => import('./HartaEu'), {
   ssr: false,
@@ -19,7 +19,6 @@ export default function CineSuntEu(){
 
 
 useEffect(() => {
-        // Selectăm toate elementele care trebuie animate
         const elements = document.querySelectorAll(`.${styles.animateOnScroll}`);
 
         const observer = new IntersectionObserver(

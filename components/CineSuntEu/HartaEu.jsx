@@ -28,7 +28,7 @@ export default function HartaClient() {
                 setIsVisible(true);
             }
             },
-            { threshold: 0.5 }
+            { threshold: 0.35 }
         );
     
         if (ref.current) observer.observe(ref.current);

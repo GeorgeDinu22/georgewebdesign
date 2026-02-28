@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from './styles.module.css';
-import { Instagram, Phone, Mail } from 'lucide-react';
+import { Instagram, Phone, Mail, Link as LinkIcon } from 'lucide-react';
 
 export default function Footer(){
     return(
@@ -50,7 +50,8 @@ export default function Footer(){
 
             <div className={`${styles.footerContact} ${styles.footerLegalLinks}`}>
                 <h5>Legal</h5>
-                <Link className={`${styles.footerLink} ${styles.linkLegal}`} href="tel:+40733782872">
+                <Link className={`${styles.footerLink} ${styles.linkLegal}`} target="_blank" href="/politica-de-confidentialitate">
+                   <LinkIcon size={20} strokeWidth={2.5} color="#FF8A00"/>
                    Politica de Confidentialitate
                 </Link>
             </div>

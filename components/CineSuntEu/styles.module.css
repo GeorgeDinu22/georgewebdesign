@@ -10,13 +10,13 @@
     max-width: 1250px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 40px;
 }
 .leftPart{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
 }
 .rightPart{
     width: 100%;
@@ -50,6 +50,8 @@
     gap: 12px;
     transform: translateY(24px);
     transition: all 0.8s ease;
+    margin-bottom: 12px;
+    margin-top: -6px;
 }
 .containerEU.show {
   opacity: 1;
@@ -57,6 +59,7 @@
 }
 .containerEU p{
     font-size: 18px;
+    text-wrap: balance;
     width: 100%; 
 }
 .containerEU.show {
@@ -77,10 +80,6 @@
     transform: translateY(0);
 }
 
-.containerEU p {
-    font-size: 18px;
-    width: 100%;
-}
 
 .wrapperImageEu {
     transition: opacity 1.2s ease, transform 1.2s ease;
@@ -170,12 +169,15 @@
        width: 100%;
        align-items: start;
        gap: 40px;
-       row-gap: 24px;
+       row-gap: 32px;
        width: 90%;
        margin: 60px auto;
     }
     .containerTitle{
         width: 100%;
+    }
+    .leftPart{
+        gap: 0px;
     }
     .containerTitle h2{
         text-align: left;

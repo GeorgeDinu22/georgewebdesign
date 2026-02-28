@@ -215,7 +215,7 @@ const TypewriterCode = ({ content, isAppLoad }) => {
 
       // Delay inițial doar la prima încărcare a aplicației
       if (isAppLoad) {
-          const delay = 1750;
+          const delay = 200;
           const timer = setTimeout(() => {
              // Animația va începe după ce acest timer expiră,
              // gestionat de următorul useEffect

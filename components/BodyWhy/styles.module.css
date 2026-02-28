@@ -19,6 +19,13 @@
     margin-bottom: 24px;
     z-index: 2;
     width: 100%;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.8s ease;
+}
+.bodyWhy .containerTitle.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 .bodyWhy .containerTitle h2{
     color: white;
@@ -55,7 +62,21 @@
     row-gap: 0;
     align-items: center;
     background-color: rgb(18, 18, 18);
-    transition: all 250ms ease-in-out;
+    transition: all 550ms ease-in-out;
+    opacity: 0;
+}
+.cardWhy:last-of-type{
+    height: 200px;
+}
+.cardWhy:nth-of-type(even){
+    transform: translateX(-24px);
+}
+.cardWhy:nth-of-type(odd){
+    transform: translateX(24px);
+}
+.cardWhy.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 .cardWhy:hover{
     transform: scale(1.005);
@@ -117,6 +138,11 @@
     .cardWhy{
         width: 100%;
         height: 200px;
+        transform: translateX(0, -24px) !important;
+    }
+    .cardWhy.show {
+        opacity: 1;
+        transform: translateY(0);
     }
     .bodyWhy .containerTitle h2{
         margin-bottom: 12px;

@@ -6,8 +6,12 @@ import { useState, useEffect, useRef } from "react";
 export default function Header() {
     const [droped, SetDroped] = useState(false);
     const [radius, setRadius] = useState(false);
-    const headerRef = useRef(null);
+    
+    // 1. Definim stări pentru clasele CSS în loc să le manipulăm manual
+    const [isVisible, setIsVisible] = useState(false); // Pentru animația de start
+    const [isHidden, setIsHidden] = useState(false);   // Pentru scroll
 
+    const headerRef = useRef(null);
     const [activeLink, setActiveLink] = useState("/"); 
     const [lineStyle, setLineStyle] = useState({ left: 0, width: 0 }); 
     const navRef = useRef({}); 
@@ -31,6 +35,7 @@ export default function Header() {
         }
     }
 
+    // 2. Logică Scroll actualizată cu State
     useEffect(() => {
         let Scroll_Initial = window.scrollY;
 
@@ -38,10 +43,10 @@ export default function Header() {
             let current_Scroll = window.scrollY;
 
             if (current_Scroll > Scroll_Initial + 4 && current_Scroll > 20) {
-                headerRef.current?.classList.add("headerHidden");
+                setIsHidden(true); // Folosim state
                 SetDroped(false);
             } else if (current_Scroll < Scroll_Initial - 4 || current_Scroll <= 20) {
-                headerRef.current?.classList.remove("headerHidden");
+                setIsHidden(false); // Folosim state
                 setRadius(false);
             }
             Scroll_Initial = current_Scroll;
@@ -51,6 +56,7 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // ... useEffect pentru lineStyle rămâne la fel ...
     useEffect(() => {
         const updateLinePosition = () => {
             const currentElement = navRef.current[activeLink];
@@ -61,20 +67,33 @@ export default function Header() {
                 });
             }
         };
-
         const timeout = setTimeout(updateLinePosition, 50);
-        
         window.addEventListener('resize', updateLinePosition);
-        
         return () => {
             clearTimeout(timeout);
             window.removeEventListener('resize', updateLinePosition);
         };
     }, [activeLink]); 
 
+    // 3. Logică Vizibilitate Inițială cu State
+    useEffect(() => {
+        setTimeout(() => {
+            setIsVisible(true);
+        }, 1000);
+    }, []);
+
+    // 4. Construim className-ul dinamic bazat pe toate state-urile
+    const getHeaderClasses = () => {
+        let classes = [];
+        if (isVisible) classes.push("headerVisible");
+        if (isHidden) classes.push("headerHidden");
+        if (radius) classes.push("headerRadius");
+        return classes.join(" ");
+    };
+
     return (
         <>
-            <header className={`${radius ? "headerRadius" : ""}`} ref={headerRef}>
+            <header className={getHeaderClasses()} ref={headerRef}>
                 <Link className="logo" href="/" onClick={() => setActiveLink("/")}>
                     <Image
                         src="/logo.svg"

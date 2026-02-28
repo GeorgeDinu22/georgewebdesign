@@ -8,112 +8,127 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./styles.module.css";
 
-const proiecte = [
+        const proiecte = [
         {
-            nume:"statemihai.ro",
-            imagine:"/proiecte/statemihai.ro_ImageV2.png",
-            url:"https://www.statemihai.ro",
-            dataLansare:"04-02-2026",
-            descriere: "Aplicație online pentru antrenament personalizat, cu plăți integrate și management complet al utilizatorilor",
-            documentatie:
-                "Aplicație online completă pentru antrenament personalizat, concepută pentru antrenori și clienți care doresc o experiență digitală modernă, eficientă și scalabilă.\n\n" +
-                "Platforma permite crearea și gestionarea programelor de antrenament personalizate, adaptate obiectivelor, nivelului de experiență și progresului fiecărui utilizator.\n\n" +
-                "Sistemul include management avansat al utilizatorilor, cu roluri diferite (antrenor / client), autentificare securizată și profiluri personalizate.\n" +
-                "Antrenorii pot urmări evoluția clienților, pot actualiza planurile de antrenament în timp real și pot oferi feedback direct din platformă.\n\n" +
-                "Plățile sunt complet integrate prin Stripe, oferind abonamente recurente, plăți sigure și gestionarea automată a facturării.\n" +
-                "Utilizatorii au acces rapid la istoricul plăților și la statusul abonamentului, iar antrenorii pot administra cu ușurință pachetele disponibile.\n\n" +
-                "Platforma este construită cu focus pe performanță, scalabilitate și experiență premium, folosind tehnologii moderne precum Next.js, React și Supabase.\n" +
-                "Interfața este optimizată pentru desktop și mobile, oferind o experiență fluidă și intuitivă pe orice dispozitiv.",
-            tehnologii:[
-                { nume:"Next JS", icon:SiNextdotjs, color: "#ffffff" },
-                { nume:"Supabase", icon:SiSupabase, color: "#3ECF8E" },
-                { nume:"React", icon:SiReact, color: "#61DAFB" },
-                { nume:"Stripe", icon:FaStripe, color: "#635BFF" }
+            nume: "statemihai.ro",
+            imagine: "/proiecte/statemihai.ro_ImageV2.png",
+            url: "https://www.statemihai.ro",
+            dataLansare: "04-02-2026",
+            descriere:
+            "Platformă eCommerce pentru coaching fitness remote, cu plăți integrate, emailuri tranzacționale automate și panou complet de administrare.",
+            documentatie: `Platformă digitală de tip eCommerce dedicată coaching-ului fitness remote.
+
+        Include sistem de plăți integrate prin Stripe, gestionarea abonamentelor recurente și automatizare completă a emailurilor tranzacționale (confirmare plată, retry payment, notificări expirare abonament).
+
+        Dispune de panou de administrare pentru gestionarea comenzilor, produselor și statisticilor.`,
+            tehnologii: [
+            { nume: "Next JS", icon: SiNextdotjs, color: "#ffffff" },
+            { nume: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+            { nume: "React", icon: SiReact, color: "#61DAFB" },
+            { nume: "Stripe", icon: FaStripe, color: "#635BFF" },
             ],
-            galerie:[
-                "/galerieProiecte/statemihai-1.png",
-                 "/galerieProiecte/statemihai-1.png",
-                "/galerieProiecte/statemihai-2.png"
-            ]
+            galerie: [
+            "/galerieProiecte/statemihai-1.png",
+            "/galerieProiecte/statemihai-1.png",
+            "/galerieProiecte/statemihai-2.png",
+            ],
         },
+
         {
-            nume:"mihaistate-abonare.ro",
-            imagine:"/proiecte/mihaistate-abonare.ro_Image.png",
-            url:"https://www.mihaistate-abonare.ro",
-            dataLansare:"06-11-2025",
-            descriere: "Aplicație online pentru antrenament personalizat, cu plăți integrate și management complet al utilizatorilor",
-            documentatie:"",
-            tehnologii:[
-                { nume:"PHP", icon:FaPhp, color: "#777BB4" },
-                { nume:"MY SQL", icon:SiMysql, color: "#4479A1" },
-                { nume:"HTML", icon:SiHtml5, color: "#E34F26" },
-                { nume:"CSS", icon:SiCss3, color: "#1572B6" },
-                { nume:"Java Script", icon:SiJavascript, color: "#F7DF1E" }
+            nume: "mihaistate-abonare.ro",
+            imagine: "/proiecte/mihaistate-abonare.ro_Image.png",
+            url: "https://www.mihaistate-abonare.ro",
+            dataLansare: "06-11-2025",
+            descriere:
+            "Landing page pentru newsletter cu sistem de abonare și panou de administrare pentru gestionarea campaniilor.",
+            documentatie: `Platformă de newsletter construită în jurul unui landing page optimizat pentru conversie.
+
+        Include sistem de colectare și segmentare a abonaților, precum și panou de administrare cu statistici despre livrabilitate, rata de deschidere (open rate) și gestionarea listelor de email.
+
+        Permite administrarea campaniilor și analiza performanței acestora într-un mod simplu și eficient.`,
+            tehnologii: [
+            { nume: "PHP", icon: FaPhp, color: "#777BB4" },
+            { nume: "MY SQL", icon: SiMysql, color: "#4479A1" },
+            { nume: "HTML", icon: SiHtml5, color: "#E34F26" },
+            { nume: "CSS", icon: SiCss3, color: "#1572B6" },
+            { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
-            galerie:[
-                "/galerieProiecte/mihaistate-abonare-3.png",
-                 "/galerieProiecte/mihaistate-abonare-2.png"
-            ]
+            galerie: [
+            "/galerieProiecte/mihaistate-abonare-1.png",
+            "/galerieProiecte/mihaistate-abonare-2.png",
+            ],
         },
+
         {
-            nume:"mombubyinfinity.ro",
-            imagine:"/proiecte/mombu.png",
-            url:"https://www.mombubyinfinity.ro",
-            dataLansare:"08-10-2025",
-            descriere: "Aplicație online pentru antrenament personalizat, cu plăți integrate și management complet al utilizatorilor",
-            documentatie:"",
-            tehnologii:[
-                { nume:"PHP", icon:FaPhp, color: "#777BB4" },
-                { nume:"MY SQL", icon:SiMysql, color: "#4479A1" },
-                { nume:"HTML", icon:SiHtml5, color: "#E34F26" },
-                { nume:"CSS", icon:SiCss3, color: "#1572B6" },
-                { nume:"Java Script", icon:SiJavascript, color: "#F7DF1E" }
+            nume: "mombubyinfinity.ro",
+            imagine: "/proiecte/mombu.png",
+            url: "https://www.mombubyinfinity.ro",
+            dataLansare: "08-10-2025",
+            descriere:
+            "Site de prezentare pentru restaurant, cu panou de administrare pentru meniu și anunțuri.",
+            documentatie: `Website de prezentare modern pentru restaurant, conceput pentru a evidenția meniul, atmosfera locației și informațiile esențiale pentru clienți.
+
+            Include un panou de administrare care permite actualizarea meniurilor, prețurilor și anunțurilor speciale printr-o interfață intuitivă și ușor de gestionat.`,
+            tehnologii: [
+            { nume: "PHP", icon: FaPhp, color: "#777BB4" },
+            { nume: "MY SQL", icon: SiMysql, color: "#4479A1" },
+            { nume: "HTML", icon: SiHtml5, color: "#E34F26" },
+            { nume: "CSS", icon: SiCss3, color: "#1572B6" },
+            { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
-            galerie:[
-                "/galerieProiecte/mombu-3.png",
-                "/galerieProiecte/mombu-2.png",
-                "/galerieProiecte/mombu-4.png"
-            ]
+            galerie: [
+            "/galerieProiecte/mombu-3.png",
+            "/galerieProiecte/mombu-2.png",
+            "/galerieProiecte/mombu-4.png",
+            ],
         },
+
         {
-            nume:"joydetailing.ro",
-            imagine:"/proiecte/joydetailing.ro_ImageV2.png",
-            url:"https://www.joydetailing.ro",
-            dataLansare:"25-08-2025",
-            descriere: "Aplicație online pentru antrenament personalizat, cu plăți integrate și management complet al utilizatorilor",
-            documentatie:"",
-            tehnologii:[
-                { nume:"PHP", icon:FaPhp, color: "#777BB4" },
-                { nume:"MY SQL", icon:SiMysql, color: "#4479A1" },
-                { nume:"HTML", icon:SiHtml5, color: "#E34F26" },
-                { nume:"CSS", icon:SiCss3, color: "#1572B6" },
-                { nume:"Java Script", icon:SiJavascript, color: "#F7DF1E" }
+            nume: "joydetailing.ro",
+            imagine: "/proiecte/joydetailing.ro_ImageV2.png",
+            url: "https://www.joydetailing.ro",
+            dataLansare: "25-08-2025",
+            descriere:
+            "Website de prezentare pentru servicii de detailing auto, cu newsletter integrat și panou de administrare.",
+            documentatie: `Site de prezentare pentru servicii profesionale de detailing auto, structurat pentru claritate și conversie.
+
+        Include sistem de abonare la newsletter și panou de administrare pentru gestionarea conținutului și a bazei de abonați.`,
+            tehnologii: [
+            { nume: "PHP", icon: FaPhp, color: "#777BB4" },
+            { nume: "MY SQL", icon: SiMysql, color: "#4479A1" },
+            { nume: "HTML", icon: SiHtml5, color: "#E34F26" },
+            { nume: "CSS", icon: SiCss3, color: "#1572B6" },
+            { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
-            galerie:[
-                "/galerieProiecte/joy-1.png",
-                "/galerieProiecte/joy-2.png",
-                "/galerieProiecte/joy-3.png"
-            ]
+            galerie: [
+            "/galerieProiecte/joy-1.png",
+            "/galerieProiecte/joy-2.png",
+            "/galerieProiecte/joy-3.png",
+            ],
         },
+
         {
-            nume:"infinitylounge.ro",
-            imagine:"/proiecte/infinitylounge.ro_ImageV2.png",
-            url:"https://infinity-lounge.ro",
-            dataLansare:"10-03-2025",
-            descriere: "Aplicație online pentru antrenament personalizat, cu plăți integrate și management complet al utilizatorilor",
-            documentatie:"",
-            tehnologii:[
-                { nume:"HTML", icon:SiHtml5, color: "#E34F26" },
-                { nume:"CSS", icon:SiCss3, color: "#1572B6" },
-                { nume:"Java Script", icon:SiJavascript, color: "#F7DF1E" }
+            nume: "infinitylounge.ro",
+            imagine: "/proiecte/infinitylounge.ro_ImageV2.png",
+            url: "https://infinity-lounge.ro",
+            dataLansare: "10-03-2025",
+            descriere:
+            "Site de prezentare pentru lounge, cu meniu inclus și prezentare detaliată a locației.",
+            documentatie: `Website de prezentare pentru lounge, construit pentru a transmite atmosfera și identitatea locației.
+
+        Include meniu digital integrat, prezentarea spațiului și informații esențiale pentru clienți.`,
+            tehnologii: [
+            { nume: "HTML", icon: SiHtml5, color: "#E34F26" },
+            { nume: "CSS", icon: SiCss3, color: "#1572B6" },
+            { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
-            galerie:[
-                "/galerieProiecte/infinitylounge-1.png",
-                "/galerieProiecte/infinitylounge-3.png",
-                "/galerieProiecte/infinitylounge-4.png",
-            ]
-        }
-    ]
+            galerie: [
+            "/galerieProiecte/infinitylounge-1.png",
+            "/galerieProiecte/infinitylounge-3.png",
+            "/galerieProiecte/infinitylounge-4.png",
+            ],
+        },
+        ];
 
 export default function Proiecte() {
     const router = useRouter();
@@ -258,17 +273,17 @@ export default function Proiecte() {
 
                                 <div className={styles.modalHeader}>
                                     <motion.h2
-                                        initial={{ opacity: 0.25, y: 8 }}
+                                        initial={{ opacity: 0, y: 8 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.35 , duration: 0.4 }}
+                                        transition={{ delay: 0.4 , duration: 0.4 }}
                                         >
                                         {selectedProject.nume}
                                     </motion.h2>
                                     <motion.span 
                                         className={styles.dataLanasare}
-                                        initial={{ opacity: 0.25, y: 8 }}
+                                        initial={{ opacity: 0, y: 8 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.35 , duration: 0.4 }}
+                                        transition={{ delay: 0.4 , duration: 0.4 }}
                                     >
                                         {selectedProject.dataLansare}
                                     </motion.span>
@@ -279,7 +294,7 @@ export default function Proiecte() {
                                 <motion.div
                                     initial={{ opacity: 0, y: 40 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2, duration: 0.4 }} 
+                                    transition={{ delay: 0.4, duration: 0.4 }} 
                                 >
                                     <div className={styles.sectionModal}>
                                         <h3>Descriere Proiect</h3>

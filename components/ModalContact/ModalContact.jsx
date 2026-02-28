@@ -292,7 +292,7 @@ export default function ModalContact({ show, animation, onClose }) {
               </span>
               <span className={styles.textAcord}>
                 Sunt de acord cu{" "}
-                <Link href="/politica-confidentialitate" target="_blank">
+                <Link href="politica-de-confidentialitate" target="_blank">
                   Politica de Confidențialitate
                 </Link>
               </span>

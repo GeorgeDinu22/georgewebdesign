@@ -14,18 +14,22 @@ export default function BodyCta2(){
 
   const [showMarquee, setShowMarquee] = useState(false);
   const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setShowMarquee(true);
+          setTimeout(() => {
+              setIsVisible(true);
+          }, 600);
           observer.disconnect();
         }
       },
       { 
-        rootMargin: "300px",
-        threshold: 0.2 
+        rootMargin: "200px",
+        threshold: 0.2
       }
     );
 
@@ -79,7 +83,7 @@ export default function BodyCta2(){
 ];
 
   return(
-    <div className={styles.bodyCta2} ref={containerRef}>
+    <div ref={containerRef} className={`${styles.bodyCta2} ${isVisible ? styles.show : ""}`}>
       <div className={styles.containerMarquee}>
         {showMarquee && (
           <ThreeDMarquee className={styles.marquee} images={images} />

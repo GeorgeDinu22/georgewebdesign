@@ -206,26 +206,26 @@ header{
   top: 8px;
   left: 50%;
   opacity: 0; 
-  transform: translate(-50%, -32px); 
-  z-index: 99;   
-  color: white;  
+  transform: translate(-50%,-32px); 
+  z-index: 99;    
+  color: white;     
   height: 60px;     
-  transition: all 0.4s ease-in-out;   
-  animation: HeaderSlideIn 600ms ease-in-out 1200ms forwards;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
 } 
-@keyframes HeaderSlideIn{  
-  100%{
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+header.headerVisible {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
+
+header.headerHidden {
+  opacity: 0;
+  transform: translate(-50%, -100px);
+  pointer-events: none;
+}
+
 header.headerRadius{ 
   border-bottom-left-radius: 0;  
   border-bottom-right-radius: 0;  
-} 
-header.headerHidden{
-    opacity: 0;
-    transform: translate(-50%, -100%);
 }
 
 .logo{
