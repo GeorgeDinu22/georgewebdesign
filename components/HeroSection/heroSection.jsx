@@ -1,6 +1,8 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
+import dynamic from 'next/dynamic';
 
+const CodeTabCLient = dynamic(() => import('./CodeTabClient'));
 
 export default function HeroSection(){
     return(
@@ -20,7 +22,7 @@ export default function HeroSection(){
                 <ButtonContact noRef={true} textBtn={"Vreau Website"}/>
             </div>
 
-            
+            <CodeTabCLient/>
         </div>
     );
 }
