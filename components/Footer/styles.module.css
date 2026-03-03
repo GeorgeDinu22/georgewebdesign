@@ -58,6 +58,7 @@
 .footerLegal img{
     border-radius: 7px;
     width: 225px;
+    background-color: white;
 }
 .footerBreakLine{
     width: 100%;

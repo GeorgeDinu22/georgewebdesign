@@ -56,7 +56,7 @@ export default function Recenzii(){
                <h2>Părerea Clienților <strong>Contează</strong></h2>
                 <p>
                 Am lucrat cu oameni din domenii diferite, fiecare cu provocări specifice și nevoi complexe,
-                dar cu un scop comun: creșterea vizibilității lor în <span>online</span>.
+                dar cu un scop comun: creșterea vizibilității lor în <span>online.</span>
                 </p>
             </div>
             <div className={styles.containerRecenzii}>

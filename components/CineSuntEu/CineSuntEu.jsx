@@ -76,7 +76,7 @@ useEffect(() => {
     <div className={styles.rightPart}>
         <div className={`${styles.wrapperImageEu} ${styles.animateOnScroll}`}>
             <Image
-            src="/aboutMeV2.jpeg"
+            src="/CineSuntEuV3.jpeg"
             width={700}
             height={700}
             alt=''

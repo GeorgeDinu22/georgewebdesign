@@ -72,7 +72,7 @@ export default function Footer(){
             <div className={styles.footerLegal}>
                 <Link aria-label="Ce este SAL" href="https://anpc.ro/ce-este-sal/">
                     <Image
-                        src="/footerImages/anpc.png"
+                        src="/footerImages/anpcV2.png"
                         alt=""
                         width={250}
                         height={250}
