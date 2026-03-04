@@ -1,22 +1,22 @@
 import NavBar from '../components/Navbar/Navbar';
 import HeroSection from '../components/HeroSection/heroSection';
-import Proiecte from '../components/Proiecte/Proiecte'; 
-import dynamic from 'next/dynamic';
-
-const CineSuntEu = dynamic(() => import('../components/CineSuntEu/CineSuntEu'));
-const Recenzii = dynamic(() => import('../components/recenzii/Recenzii'));
-const BodyCta1 = dynamic(() => import('../components/BodyCta1/BodyCta1'));
-const CumDecurge = dynamic(() => import('../components/CumDecurge/CumDecurge'));
-const BodyWhy = dynamic(() => import('../components/BodyWhy/BodyWhy'));
-const BodyCta2 = dynamic(() => import('../components/BodyCta2/BodyCta2'));
-const Footer = dynamic(() => import('../components/Footer/Footer'));
+import ScrollInit from '../components/ObserverAnimations';
+import ProiecteWrapper from "../components/Proiecte/ProiecteWrapper";
+import CineSuntEu from '../components/CineSuntEu/CineSuntEu';
+import Recenzii from '../components/recenzii/Recenzii';
+import BodyCta1 from '../components/BodyCta1/BodyCta1';
+import CumDecurge from '../components/CumDecurge/CumDecurge';
+import BodyWhy from '../components/BodyWhy/BodyWhy';
+import BodyCta2 from '../components/BodyCta2/BodyCta2';
+import Footer from '../components/Footer/Footer';
 
 export default function Page(){
   return(
     <>
+        <ScrollInit/>
         <NavBar/>
         <HeroSection/>
-        <Proiecte/>
+        <ProiecteWrapper/>
         <CineSuntEu/>
         <Recenzii/>
         <BodyCta1/>

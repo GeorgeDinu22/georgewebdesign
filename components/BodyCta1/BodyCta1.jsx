@@ -1,54 +1,16 @@
-"use client";
-import ButtonContact from '../ButtonContact/ButtonContact';
 import { AtSign } from 'lucide-react';
 import styles from './styles.module.css';
-import { useEffect, useRef, useState } from 'react';
 
 export default function BodyCta1() {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.5 }
-        );
-
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, []);
-    useEffect(() => {
-        const elements = document.querySelectorAll(`.${styles.animateOnScroll}`);
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Aplicăm delay pentru efectul de cascadă (stagger)
-                        entry.target.style.transitionDelay = `${index * 150}ms`;
-                        entry.target.classList.add(styles.show);
-                    }
-                });
-            },
-            { threshold: 0.2 } // Redus pragul pentru o declanșare mai fluidă pe mobil
-        );
-
-        elements.forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
-    }, []);
 
     return (
         <div className={styles.bodyCta1}>
-            <div ref={ref} className={`${styles.containerTitle} ${isVisible ? styles.show : ""}`}>
+            <div  className={`${styles.containerTitle} animate`}>
                 <h2>Încă mai crezi că poți vinde  <strong>fără un site?</strong></h2>
             </div>
 
             <div className={styles.containerCta1}>
-                <div className={`${styles.paragrafCta1} ${styles.animateOnScroll}`}>
+                <div className={`${styles.paragrafCta1} animate`}>
                     <p className={styles.highlighted}>Realitatea online-ului de azi</p>
                     <p className={styles.descriereCta}>
                         În zilele noastre, totul se mișcă repede.
@@ -58,7 +20,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} ${styles.animateOnScroll}`}>
+                <div className={`${styles.paragrafCta1} animate`}>
                     <p className={styles.highlighted}>
                         De ce social media nu e <span>suficient</span>
                     </p>
@@ -72,7 +34,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} ${styles.animateOnScroll}`}>
+                <div className={`${styles.paragrafCta1} animate`}>
                     <p className={styles.highlighted}>
                         Despre site-urile făcute în <span>5 minute</span>
                     </p>
@@ -85,7 +47,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} ${styles.animateOnScroll}`}>
+                <div className={`${styles.paragrafCta1} animate`}>
                     <p className={styles.highlighted}>Conteaza pentru <span>reputatia ta!</span></p>
                     <p className={styles.descriereCta}>
                         Imaginează-ți că ești unul dintre potențialii tăi clienți și încerci să decizi dacă să oferi o șansă unui business.
@@ -96,7 +58,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} ${styles.animateOnScroll}`}>
+                <div className={`${styles.paragrafCta1} animate`}>
                     <p className={styles.highlighted}>
                         Lucrăm <span>împreună</span> ca să fie clar ce faci și de ce contează
                     </p>

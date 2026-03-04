@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from './styles.module.css';
 import { Instagram, Phone, Mail, Link as LinkIcon } from 'lucide-react';
 
 export default function Footer(){
     return(
         <>
-        <footer id="contact" className={styles.footer}>
-            <div className={styles.footerHeader}>
-                <Link className={styles.logo} href="/">
+        <footer id="contact" className="footer">
+            <div className="footerHeader">
+                <Link className="logo" href="/">
                     <Image
-                    className={styles.footerLogo}
+                    className="footerLogo"
                         src="/logo.svg"
                         alt="George Web Design"
                         width={150}
@@ -19,15 +18,15 @@ export default function Footer(){
                     />
                 </Link>
 
-                <div className={styles.footerSocialMedia}>
-                    <Link className={styles.cardSocial}
-                        id={styles.tiktok}
+                <div className="footerSocialMedia">
+                    <Link className="cardSocial"
+                        id="tiktok"
                         href="https://www.tiktok.com/@state.mihai33?_t=ZN-8yFNoqJ0FHC&_r=1"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                     <svg 
-                    className={styles.socialIcons}
+                    className="socialIcons"
                     viewBox="0 0 32 32" 
                     xmlns="http://www.w3.org/2000/svg" 
                     fill="#000000"
@@ -37,39 +36,39 @@ export default function Footer(){
                     </svg>
                     </Link>
 
-                    <Link className={styles.cardSocial}
-                        id={styles.instagram}
+                    <Link className="cardSocial"
+                        id="instagram"
                         href="https://www.instagram.com/state.mihai/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <Instagram className={styles.socialIcons} strokeWidth={3}/>
+                        <Instagram className="socialIcons" strokeWidth={3}/>
                     </Link>
                 </div>
             </div>
 
-            <div className={`${styles.footerContact} ${styles.footerLegalLinks}`}>
+            <div className="footerContact footerLegalLinks">
                 <h5>Legal</h5>
-                <Link className={`${styles.footerLink} ${styles.linkLegal}`} target="_blank" href="/politica-de-confidentialitate">
+                <Link className="footerLink linkLegal" target="_blank" href="/politica-de-confidentialitate">
                    <LinkIcon size={20} strokeWidth={2.5} color="#FF8A00"/>
                    Politica de Confidentialitate
                 </Link>
             </div>
             
 
-            <div className={styles.footerContact}>
+            <div className="footerContact">
                 <h5>Contact</h5>
-                <Link className={styles.footerLink} href="tel:+40733782872">
+                <Link className="footerLink" href="tel:+40733782872">
                     <Phone size={20} color="#FF8A00" strokeWidth={2}/>
                     0733 782 872
                 </Link>
-                <Link className={styles.footerLink} href="mailto:office@georgeweb-design.ro">
+                <Link className="footerLink" href="mailto:office@georgeweb-design.ro">
                     <Mail size={20} color="#FF8A00" strokeWidth={2}/>
                     office@georgeweb-design.ro
                 </Link>
             </div>
 
-            <div className={styles.footerLegal}>
+            <div className="footerLegal">
                 <Link aria-label="Ce este SAL" href="https://anpc.ro/ce-este-sal/">
                     <Image
                         src="/footerImages/anpcV2.png"
@@ -88,9 +87,9 @@ export default function Footer(){
                 </Link>
             </div>
 
-            <div className={styles.footerBreakLine}></div>
+            <div className="footerBreakLine"></div>
 
-            <div className={styles.autor}>
+            <div className="autor">
                 ©George Web Design | Toate Drepturile Rezervate
             </div>
         </footer>

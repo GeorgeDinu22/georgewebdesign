@@ -339,7 +339,7 @@ export default function Proiecte() {
                                     </div>
 
                                     <button className={styles.modalVisitBtn} onClick={() => window.open(selectedProject.url, '_blank')}>
-                                        Vezi Site-ul Live<ExternalLink size={18} style={{ marginLeft: '8px' }} />
+                                        Vezi Site-ul Live<ExternalLink size={20} strokeWidth={2.75} style={{ marginLeft: '8px' }} />
                                     </button>
                                 </motion.div>
                             </motion.div>

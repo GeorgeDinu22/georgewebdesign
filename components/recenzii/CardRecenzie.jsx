@@ -2,7 +2,6 @@
 
 import { Play, Pause, Volume2, VolumeOff } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import Hls from "hls.js";
 import styles from "./styles.module.css";
 
 export default function CardRecenzie({ recenzie }) {
@@ -21,29 +20,35 @@ useEffect(() => {
   if (!video) return;
 
   const videoSrc = recenzie.src;
-
   let hls;
 
-  if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = videoSrc;
-  } else if (Hls.isSupported()) {
-    hls = new Hls({
-      enableWorker: true,
-      lowLatencyMode: true,
-    });
+  async function initHls() {
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = videoSrc;
+      return;
+    }
 
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
+    const Hls = (await import("hls.js")).default;
 
-    hls.on(Hls.Events.MANIFEST_PARSED, function () {
-      hls.currentLevel = hls.levels.length - 1; 
-    });
+    if (Hls.isSupported()) {
+      hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+      });
+
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        hls.currentLevel = hls.levels.length - 1;
+      });
+    }
   }
 
+  initHls();
+
   return () => {
-    if (hls) {
-      hls.destroy();
-    }
+    if (hls) hls.destroy();
   };
 }, [recenzie.src]);
 

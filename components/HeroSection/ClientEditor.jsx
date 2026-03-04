@@ -1,372 +1,285 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import styles from './styles.module.css';
-import { ChevronDown } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import styles from "./styles.module.css";
 
-const FILES = {
-  'afacerea.jsx': {
-    name: 'afacerea.jsx',
-    type: 'component',
-    content: (
-      <>
-        <div className={styles.line}>
-          <span className={styles.ln}>1</span>
-          <span className={styles.kw}>export</span>{' '}
-          <span className={styles.kw}>default</span>{' '}
-          <span className={styles.kw}>function</span>{' '}
-          <span className={styles.fn}>AfacereaTa</span>
-          <span className={styles.punc}>()</span>{' '}
-          <span className={styles.punc}>{'{'}</span>
-        </div>
+/* TOKENS */
 
-        <div className={styles.line}>
-          <span className={styles.ln}>2</span>
-          <span className={styles.punc}>{'  //'}</span>{' '}
-          <span className={styles.str}>
-            Prima impresie decide dacă vinzi sau pierzi
-          </span>
-        </div>
+const TOKENS = {
 
-        <div className={styles.line}>
-          <span className={styles.ln}>3</span>
-          <span className={styles.kw}>  return</span>{' '}
-          <span className={styles.punc}>(</span>
-        </div>
+  "afacerea.jsx": [
+    { t: "ln", v: "1" },
+    { t: "kw", v: "export" },
+    { t: "space" },
+    { t: "kw", v: "default" },
+    { t: "space" },
+    { t: "kw", v: "function" },
+    { t: "space" },
+    { t: "fn", v: "AfacereaTa" },
+    { t: "p", v: "()" },
+    { t: "space" },
+    { t: "p", v: "{" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>4</span>
-          <span className={styles.punc}>    {'<'}</span>
-          <span className={styles.tag}>Hero</span>{' '}
-          <span className={styles.prop}>mesaj</span>
-          <span className={styles.punc}>=</span>
-          <span className={styles.str}>
-            "Website-uri care transformă trafic în clienți"
-          </span>
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>5</span>
-          <span className={styles.punc}>      </span>
-          <span className={styles.prop}>oferta</span>
-          <span className={styles.punc}>=</span>
-          <span className={styles.str}>
-            "Design strategic + performanță  reală = vânzări constante"
-          </span>{' '}
-          <span className={styles.punc}>{'/>'}</span>
-        </div>
+    { t: "ln", v: "2" },
+    { t: "p", v: "//" },
+    { t: "space" },
+    { t: "str", v: "Prima impresie decide dacă vinzi sau pierzi" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>6</span>
-          <span className={styles.punc}>  );</span>
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>7</span>
-          <span className={styles.punc}>{'}'}</span>
-        </div>
-      </>
-    )
-  },
+    { t: "ln", v: "3" },
+    { t: "kw", v: "return" },
+    { t: "space" },
+    { t: "p", v: "(" },
 
-  'strategie.js': {
-    name: 'strategie.js',
-    type: 'logic',
-    content: (
-      <>
-        <div className={styles.line}>
-          <span className={styles.ln}>1</span>
-          <span className={styles.kw}>const</span>{' '}
-          <span className={styles.fn}>cresteVanzari</span>{' '}
-          <span className={styles.punc}>=</span>{' '}
-          <span className={styles.punc}>(</span>
-          <span className={styles.prop}>client</span>
-          <span className={styles.punc}>)</span>{' '}
-          <span className={styles.kw}>{'=>'}</span>{' '}
-          <span className={styles.punc}>{'{'}</span>
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>2</span>
-          <span className={styles.kw}>  if</span>{' '}
-          <span className={styles.punc}>(</span>
-          <span className={styles.prop}>client</span>.esteIncantat
-          <span className={styles.punc}>)</span>{' '}
-          <span className={styles.punc}>{'{'}</span>
-        </div>
+    { t: "ln", v: "4" },
+    { t: "p", v: "<" },
+    { t: "tag", v: "Hero" },
+    { t: "space" },
+    { t: "prop", v: "mesaj" },
+    { t: "p", v: "=" },
+    { t: "str", v: '"Website-uri care transformă trafic în clienți"' },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>3</span>
-          <span className={styles.kw}>    return</span>{' '}
-          <span className={styles.prop}>profit</span>{' '}
-          <span className={styles.punc}>*</span>{' '}
-          <span className={styles.str}>10</span>;
-          <span className={styles.punc}>
-            {'  // recomandări + loialitate + creștere organică'}
-          </span>
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>4</span>
-          <span className={styles.punc}>  {'}'}</span>
-        </div>
-      </>
-    )
-  },
+    { t: "ln", v: "5" },
+    { t: "prop", v: "oferta" },
+    { t: "p", v: "=" },
+    { t: "str", v: '"Design strategic + performanță  reală = vânzări constante"' },
+    { t: "p", v: "/>" },
 
-  'brand.css': {
-    name: 'brand.css',
-    type: 'style',
-    content: (
-      <>
-        <div className={styles.line}>
-          <span className={styles.ln}>1</span>
-          <span className={styles.tag}>.identitate-vizuala</span>{' '}
-          <span className={styles.punc}>{'{'}</span>
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>2</span>
-          <span className={styles.prop}>  incredere</span>:{' '}
-          <span className={styles.str}>construită prin rezultate</span>;
-        </div>
+    { t: "ln", v: "6" },
+    { t: "p", v: ");" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>3</span>
-          <span className={styles.prop}>  calitate</span>:{' '}
-          <span className={styles.str}>atenție obsesivă la detalii</span>;
-        </div>
+    { t: "newline" },
 
-        <div className={styles.line}>
-          <span className={styles.ln}>4</span>
-          <span className={styles.prop}>  impact</span>:{' '}
-          <span className={styles.str}>memorabil din prima secundă</span>;
-        </div>
+    { t: "ln", v: "7" },
+    { t: "p", v: "}" },
+  ],
 
-        <div className={styles.line}>
-          <span className={styles.ln}>5</span>
-          <span className={styles.punc}>{'}'}</span>
-        </div>
-      </>
-    )
-  }
+
+  "strategie.js": [
+    { t: "ln", v: "1" },
+    { t: "kw", v: "const" },
+    { t: "space" },
+    { t: "fn", v: "cresteVanzari" },
+    { t: "space" },
+    { t: "p", v: "=" },
+    { t: "space" },
+    { t: "p", v: "(" },
+    { t: "prop", v: "client" },
+    { t: "p", v: ")" },
+    { t: "space" },
+    { t: "kw", v: "=>" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "2" },
+    { t: "kw", v: "if" },
+    { t: "space" },
+    { t: "p", v: "(" },
+    { t: "prop", v: "client" },
+    { t: "p", v: ".esteIncantat)" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "3" },
+    { t: "kw", v: "return" },
+    { t: "space" },
+    { t: "prop", v: "profit" },
+    { t: "space" },
+    { t: "p", v: "*" },
+    { t: "space" },
+    { t: "str", v: "10" },
+    { t: "p", v: ";" },
+
+    { t: "space" },
+    { t: "p", v: "// recomandări + loialitate + creștere organică" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "4" },
+    { t: "p", v: "}" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "5" },
+    { t: "p", v: "}" },
+  ],
+
+
+  "brand.css": [
+    { t: "ln", v: "1" },
+    { t: "tag", v: ".identitate-vizuala" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "2" },
+    { t: "prop", v: "incredere" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "construită prin rezultate" },
+    { t: "p", v: ";" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "3" },
+    { t: "prop", v: "calitate" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "atenție obsesivă la detalii" },
+    { t: "p", v: ";" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "4" },
+    { t: "prop", v: "impact" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "memorabil din prima secundă" },
+    { t: "p", v: ";" },
+
+    { t: "newline" },
+
+    { t: "ln", v: "5" },
+    { t: "p", v: "}" },
+  ],
+
 };
 
-const parseContent = (content) => {
-  const tokens = [];
-  
-  React.Children.forEach(content.props.children, (line, lineIndex) => {
-    tokens.push({ type: 'newline', id: `line-${lineIndex}` });
-    React.Children.forEach(line.props.children, (child, childIndex) => {
-      if (!child && child !== 0) return;
-      if (typeof child === 'string') {
-        child.split('').forEach((char, i) => {
-          tokens.push({ 
-            type: 'char', 
-            value: char === ' ' ? '\u00A0' : char, 
-            className: null, 
-            id: `l${lineIndex}-c${childIndex}-${i}` 
-          });
-        });
-      } else if (child.props && child.props.className === styles.ln) {
-        tokens.push({ 
-            type: 'block', 
-            value: child.props.children, 
-            className: styles.ln, 
-            id: `ln-${lineIndex}` 
-        });
-      } else {
-        const text = child.props.children;
-        const className = child.props.className;
-        if (typeof text === 'string') {
-          text.split('').forEach((char, i) => {
-            tokens.push({ 
-                type: 'char', 
-                value: char === ' ' ? '\u00A0' : char, 
-                className: className, 
-                id: `l${lineIndex}-s${childIndex}-${i}` 
-            });
-          });
-        } else if (text) {
-             tokens.push({ 
-                type: 'char', 
-                value: text, 
-                className: className, 
-                id: `l${lineIndex}-s${childIndex}-obj` 
-            });
-        }
-      }
-    });
-  });
-  return tokens;
-};
 
-const TypewriterCode = ({ content, isAppLoad }) => {
+/* TYPEWRITER */
+
+const TypewriterCode = ({ fileKey }) => {
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
   const editorRef = useRef(null);
 
-  const parsedTokens = useMemo(() => parseContent(content), [content]);
+  const parsedTokens = TOKENS[fileKey] || [];
 
   useEffect(() => {
-      setCurrentIndex(0);
-      setIsTyping(true);
+    setCurrentIndex(0);
+  }, [fileKey]);
 
-      if (isAppLoad) {
-          const delay = 200;
-          const timer = setTimeout(() => {
-          }, delay);
-          return () => clearTimeout(timer);
-      }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [content]);
+useEffect(() => {
 
-  useEffect(() => {
-    if (currentIndex >= parsedTokens.length) {
-        setIsTyping(false); 
-        return;
+  if (currentIndex >= parsedTokens.length) return;
+
+  let raf;
+  let lastTime = performance.now();
+
+  const animate = (time) => {
+
+    const speed = 55; // viteza typing
+
+    if (time - lastTime >= speed) {
+
+      setCurrentIndex((prev) => prev + 1);
+
+      lastTime = time;
     }
 
-    let animationFrameId;
-    let lastTime = performance.now();
-    
-    const minSpeed = window.innerWidth < 768 ? 10 : 15;
-    let interval = Math.floor(Math.random() * 20) + minSpeed;
+    raf = requestAnimationFrame(animate);
+  };
 
-    const animate = (time) => {
-        if (time - lastTime >= interval) {
-            setCurrentIndex((prev) => {
-                let nextIndex = prev + 1;
-                while (
-                    nextIndex < parsedTokens.length && 
-                    (parsedTokens[nextIndex].type === 'newline' || parsedTokens[nextIndex].type === 'block')
-                ) {
-                    nextIndex++;
-                }
-                return nextIndex;
-            });
-            lastTime = time;
-            interval = Math.floor(Math.random() * 20) + minSpeed;
-        }
-        animationFrameId = requestAnimationFrame(animate);
-    };
+  raf = requestAnimationFrame(animate);
 
-    const startDelay = (isAppLoad && currentIndex === 0) ? 1750 : 0;
-    
-    const delayTimer = setTimeout(() => {
-        animationFrameId = requestAnimationFrame(animate);
-    }, startDelay);
+  return () => cancelAnimationFrame(raf);
 
-    return () => {
-        cancelAnimationFrame(animationFrameId);
-        clearTimeout(delayTimer);
-    };
-  }, [currentIndex, parsedTokens, isAppLoad]);
+}, [currentIndex, parsedTokens]);
 
   useEffect(() => {
-    if (isTyping && editorRef.current) {
-        editorRef.current.scrollTo({
-            top: editorRef.current.scrollHeight,
-            behavior: 'smooth' 
-        });
-    }
-  }, [currentIndex, isTyping]);
 
-  const visibleTokens = useMemo(() => parsedTokens.slice(0, currentIndex), [parsedTokens, currentIndex]);
+    if (editorRef.current) {
+      editorRef.current.scrollTop = editorRef.current.scrollHeight;
+    }
+
+  }, [currentIndex]);
+
+  const visibleTokens = parsedTokens.slice(0, currentIndex);
 
   const renderContent = () => {
+
     const lines = [];
-    let currentLineChildren = [];
-    
-    visibleTokens.forEach((token, idx) => {
-        if (token.type === 'newline') {
-            if (idx > 0) {
-                 lines.push(
-                    <div key={`line-${lines.length}`} className={styles.line}>
-                        {currentLineChildren}
-                    </div>
-                 );
-            }
-            currentLineChildren = [];
-        } else {
-             currentLineChildren.push(
-                <span key={token.id} className={token.className}>{token.value}</span>
-            );
-        }
+    let currentLine = [];
+
+    visibleTokens.forEach((token, i) => {
+
+      if (token.t === "newline") {
+
+        lines.push(
+          <div key={i} className={styles.line}>
+            {currentLine}
+          </div>
+        );
+
+        currentLine = [];
+        return;
+
+      }
+
+      if (token.t === "space") {
+
+        currentLine.push(<span key={i}>{"\u00A0"}</span>);
+        return;
+
+      }
+
+      const classMap = {
+        ln: styles.ln,
+        kw: styles.kw,
+        fn: styles.fn,
+        tag: styles.tag,
+        prop: styles.prop,
+        str: styles.str,
+        p: styles.punc,
+      };
+
+      currentLine.push(
+        <span key={i} className={classMap[token.t]}>
+          {token.v}
+        </span>
+      );
+
     });
 
-    if (currentLineChildren.length > 0 || lines.length < parsedTokens.filter(t => t.type === 'newline').length) {
-         if (isTyping) {
-             currentLineChildren.push(<span key="cursor" className={styles.cursor} />);
-         }
-         lines.push(
-            <div key={`line-last`} className={styles.line}>
-                {currentLineChildren}
-            </div>
-         );
+    if (currentLine.length > 0) {
+
+      lines.push(
+        <div key="last" className={styles.line}>
+          {currentLine}
+        </div>
+      );
+
     }
+
     return lines;
+
   };
 
   return (
-    <div 
-        className={`${styles.editor} ${isTyping ? styles.hiddingScroll : ''}`} 
-        ref={editorRef}
-    >
+    <div className={styles.editor} ref={editorRef}>
       {renderContent()}
     </div>
   );
 };
 
-export default function ClientEditor() {
-  const [activeFile, setActiveFile] = useState('afacerea.jsx');
-  const [isAppLoad, setIsAppLoad] = useState(true);
-
-  useEffect(() => {
-      const timer = setTimeout(() => {
-          setIsAppLoad(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-  }, []);
-
-  const getTabClass = (fileName) =>
-    activeFile === fileName ? styles.tabActive : styles.tab;
-
-  const getSidebarClass = (fileName) =>
-    activeFile === fileName
-      ? styles.sidebarItemActive
-      : styles.sidebarItem;
-
-  const fileKeys = Object.keys(FILES);
+export default function ClientEditor({ activeFile }) {
 
   return (
-    <>
-
-      <div className={styles.windowBody}>
-        <div className={styles.sidebar}>
-          <div className={styles.sidebarItem}>
-            src
-            <ChevronDown size={14}/>
-          </div>
-
-          {fileKeys.map((file) => (
-            <div
-              key={file}
-              className={getSidebarClass(file)}
-              onClick={() => setActiveFile(file)}
-              style={{ cursor: 'pointer' }}
-            >
-              {FILES[file].name}
-            </div>
-          ))}
-        </div>
-
-        <TypewriterCode 
-            content={FILES[activeFile]?.content} 
-            isAppLoad={isAppLoad} 
-        />
-        
-      </div>
-    </>
+    <TypewriterCode fileKey={activeFile}/>
   );
+
 }
