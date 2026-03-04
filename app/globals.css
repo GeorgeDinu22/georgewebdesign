@@ -199,7 +199,7 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 6px;
+  padding: 4px 10px; 
   width: 96%; 
   border-radius: 7px; 
   position: fixed; 
@@ -319,6 +319,28 @@ header.headerRadius{
     gap: 20px; 
     align-items: center;
 }
+
+.ctaHeader{
+    font-weight: 600;
+    color: white;
+    font-size: clamp(20px,2.5vw,24px);
+    transition: all 0ms ease;
+    cursor: pointer;
+    position: relative;
+    opacity: 1;
+    z-index: 2; 
+    display: none; 
+}
+.glareButtonHeader:hover{
+  transform: translateY(-3px); 
+}
+.glareButtonHeader{ 
+  padding: 4px 10px; 
+  border: none;
+  box-shadow: none;
+  border-radius: 14px;
+  transition: all 0.5s ease;
+}
  
 .floatingLine {
     position: absolute;
@@ -357,12 +379,12 @@ header.headerRadius{
     header{
       height: 68px;
     }
+    .ctaHeader{
+      display: flex;
+    }
 }
 @media(max-width:979px){
     .orizontalNavigation{
-      display: none;
-    }
-    .headerCta{
       display: none;
     }
 }

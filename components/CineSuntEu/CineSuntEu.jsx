@@ -54,7 +54,7 @@ useEffect(() => {
             <div className={styles.containerEU}>
 
                 <p className={styles.animateOnScroll}>
-                    Mă numesc <strong>Dinu George</strong> și mă ocup cu realizarea 
+                    Numele meu este <strong>Dinu George</strong> și mă ocup cu realizarea 
                     platformelor digitale și a site-urilor de prezentare moderne.
                 </p>
 

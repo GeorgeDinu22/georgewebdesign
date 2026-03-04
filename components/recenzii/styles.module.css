@@ -42,7 +42,6 @@
     color: var(--text-secondary);
     text-align: center;
     font-size: clamp(16px,2vw,20px);
-    text-wrap: balance;
     width:90%;
 }
 .bodyRecenzii .containerTitle p span{

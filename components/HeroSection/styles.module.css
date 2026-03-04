@@ -61,7 +61,8 @@
     text-wrap: balance;
     opacity: 0;
     transform: translateY(-24px);
-    animation: Appear 550ms ease-in-out 100ms forwards;
+    will-change: transform, opacity;
+    animation: Appear 750ms ease-in-out forwards;
 }
 @keyframes Appear{
     100%{
@@ -101,6 +102,7 @@
     width: 90%;
     opacity: 0;
     transform: translateY(8px);
+    will-change: transform, opacity;
     animation: Appear 550ms ease-in-out 400ms forwards;
 }
 
@@ -122,10 +124,12 @@ position: relative;
   overflow: hidden;
   z-index: 2;
   margin-top: 24px;
+  height: 280px;
   background: rgb(30, 30, 30);
-    opacity: 0;
-    transform: translateY(24px);
-    animation: Appear 550ms ease-in-out 400ms forwards;
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: transform, opacity;
+  animation: Appear 550ms ease-in-out 750ms forwards;
 }
 @keyframes Appear{
     100%{
@@ -294,7 +298,8 @@ position: relative;
         justify-content: space-evenly;
     }
     .codeWindow{
-        max-width: 750px;
+        max-width: 775px;
+        margin-right: 12px;
     }
     .windowBody{
         min-height: 350px;
@@ -306,7 +311,7 @@ position: relative;
         font-size: 14px;
     }
     .heroSection .contentHero{
-        margin-left: 40px;
+        margin-left: 24px;
         max-width: 550px;
         align-items: start;
     }
@@ -314,7 +319,7 @@ position: relative;
         text-align: left;
         line-height: 1.25;
         width: 100%;
-        transform: translateX(-40px);
+        transform: translate(-80px);
     }
     .heroSection .contentHero .descriereHero{
         text-align: left;

@@ -63,9 +63,9 @@ export default function Footer(){
                     <Phone size={20} color="#FF8A00" strokeWidth={2}/>
                     0733 782 872
                 </Link>
-                <Link className={styles.footerLink} href="mailto:contact@georgewebdesign.ro">
+                <Link className={styles.footerLink} href="mailto:office@georgeweb-design.ro">
                     <Mail size={20} color="#FF8A00" strokeWidth={2}/>
-                    contact@georgewebdesign.ro
+                    office@georgeweb-design.ro
                 </Link>
             </div>
 

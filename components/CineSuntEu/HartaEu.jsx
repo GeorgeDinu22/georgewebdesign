@@ -51,7 +51,7 @@ export default function HartaClient() {
                 touchZoomRotate={false}
                 keyboard={false}
                 zoom={11.35}
-                attributionControl={false}
+                attributionControl={{ compact: true }}
             >
                 {places.map((place) => (
                     <MapMarker

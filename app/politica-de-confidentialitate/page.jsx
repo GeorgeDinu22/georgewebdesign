@@ -35,7 +35,7 @@ export default function PoliticaConfidentialitate() {
             Operatorul datelor este <strong>George Web Design</strong>.
           </p>
           <ul>
-            <li>Email: contact@georgewebdesign.ro</li>
+            <li>Email: office@georgeweb-design.ro</li>
             <li>Telefon: 0733 782 872</li>
           </ul>
         </Section>
@@ -89,7 +89,7 @@ export default function PoliticaConfidentialitate() {
           </ul>
           <p>
             Pentru exercitarea drepturilor, scrie la:
-            <strong> contact@georgewebdesign.ro</strong>
+            <strong> office@georgeweb-design.ro</strong>
           </p>
         </Section>
 
@@ -110,7 +110,7 @@ export default function PoliticaConfidentialitate() {
 
       <div className={styles.bottomCta}>
         <p>Ai întrebări legate de confidențialitate?</p>
-        <a href="mailto:contact@georgewebdesign.ro" className={styles.button}>
+        <a href="mailto:office@georgeweb-design.ro" className={styles.button}>
           Trimite un email
         </a>
       </div>

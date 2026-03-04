@@ -1,173 +1,199 @@
 "use client";
-import { Play, Pause, Volume2, VolumeOff } from 'lucide-react';
-import { useRef, useState, useEffect } from 'react';
-import styles from './styles.module.css';
+
+import { Play, Pause, Volume2, VolumeOff } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import Hls from "hls.js";
+import styles from "./styles.module.css";
 
 export default function CardRecenzie({ recenzie }) {
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
 
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    
-    const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
-    const videoRef = useRef(null);
+useEffect(() => {
+  const video = videoRef.current;
+  if (!video) return;
 
-    const toggleVideo = async () => {
-        if (!videoRef.current) return;
+  const videoSrc = recenzie.src;
 
-        try {
-            if (videoRef.current.paused) {
-                await videoRef.current.play();
-                setIsPlaying(true);
-            } else {
-                videoRef.current.pause();
-                setIsPlaying(false);
-            }
-        } catch (err) {
-            console.log("Play interrupted:", err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  let hls;
 
-    const handleTimeUpdate = () => {
-        if (videoRef.current) {
-            setCurrentTime(videoRef.current.currentTime);
+  if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    video.src = videoSrc;
+  } else if (Hls.isSupported()) {
+    hls = new Hls({
+      enableWorker: true,
+      lowLatencyMode: true,
+    });
 
-            if (duration === 0 && videoRef.current.duration > 0) {
-                setDuration(videoRef.current.duration);
-            }
-        }
-    };
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
 
-    const handleLoadedMetadata = () => {
-        if (videoRef.current) {
-            setDuration(videoRef.current.duration);
-        }
-    };
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+      hls.currentLevel = hls.levels.length - 1; 
+    });
+  }
 
-    const handleSeek = (e) => {
-        const newTime = Number(e.target.value);
-        setCurrentTime(newTime); 
-        if (videoRef.current) {
-            videoRef.current.currentTime = newTime;
-        }
-    };
+  return () => {
+    if (hls) {
+      hls.destroy();
+    }
+  };
+}, [recenzie.src]);
 
-    const progressPercent = (duration && duration > 0) 
-        ? (currentTime / duration) * 100 
-        : 0;
 
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
-
-    useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
-        ([entry]) => {
+      ([entry]) => {
         if (entry.isIntersecting) {
-            setIsVisible(true);
+          setIsVisible(true);
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
         }
-        },
-        { threshold: 0.5 }
+      },
+      { threshold: 0.5 }
     );
 
-    if (ref.current) observer.observe(ref.current);
-
+    if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
-    }, []);
+  }, []);
 
-    return (
-        <div
-            ref={ref}
-            onClick={toggleVideo}
-            className={`${styles.cardVideo} ${isVisible ? styles.show : ""}`}
-        >
-            {isLoading && (
-                <div className={styles.videoLoader}>
-                    <div className={styles.spinner}></div>
-                </div>
-            )}
 
-            <div className={styles.coltStanga}></div>
-            <div className={styles.coltDreapta}></div>
+  const toggleVideo = async () => {
+    if (!videoRef.current) return;
 
-            <div className={`${styles.videoOverlay} ${isPlaying ? styles.videoPlaying : ""}`}>
-                <p className={styles.numeRecenzie}>
-                    {recenzie.nume}
-                </p>
-                <div className={styles.proiecteRecenzie}>
-                    {recenzie.proiecte.map((rec, index) => (
-                        <div key={index} className={styles.itemProiecteRecenzie}>
-                            <div className={styles.dot}></div>
-                            <p>{rec}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+    try {
+      if (videoRef.current.paused) {
+        await videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    } catch (err) {
+      console.log("Play interrupted:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            <video
-                ref={videoRef}
-                src={recenzie.src}
-                playsInline
-                preload="metadata"
-                muted={isMuted}
-                onTimeUpdate={handleTimeUpdate}
-                onLoadedMetadata={handleLoadedMetadata}
-                onLoadStart={() => setIsLoading(true)}
-                onWaiting={() => setIsLoading(true)}
-                onCanPlay={() => setIsLoading(false)}
-                onPlaying={() => setIsLoading(false)}
-                onEnded={() => {
-                    setIsPlaying(false);
-                    setCurrentTime(0);
-                }}
-                onPause={() => setIsLoading(false)}
-            >
-                Browserul tău nu suportă acest video!
-            </video>
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    setCurrentTime(videoRef.current.currentTime);
 
-            <div 
-                className={styles.progresContainer} 
-                onClick={(e) => e.stopPropagation()} 
-            >
-                <div className={styles.playScreen} onClick={toggleVideo}>
-                    {isPlaying ? (
-                        <Pause size={24} fill="white" stroke="none" />
-                    ) : (
-                        <Play size={24} fill="white" stroke="none" />
-                    )}
-                </div>
+    if (duration === 0 && videoRef.current.duration > 0) {
+      setDuration(videoRef.current.duration);
+    }
+  };
 
-                <input
-                    type="range"
-                    min="0"
-                    max={duration || 100} 
-                    step="0.1" 
-                    value={currentTime}
-                    onChange={handleSeek}
-                    aria-label={`Progres video recenzie ${recenzie.nume}`}
-                    className={styles.progressBarInput}
-                    style={{
-                        backgroundSize: `${progressPercent}% 100%`
-                    }}
-                />
+  const handleLoadedMetadata = () => {
+    if (!videoRef.current) return;
+    setDuration(videoRef.current.duration);
+  };
 
-                <div
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsMuted(prev => !prev);
-                    }}
-                    className={styles.buttonSound}
-                >
-                    {isMuted ? (
-                        <VolumeOff size={24} />
-                    ) : (
-                        <Volume2 size={24} />
-                    )}
-                </div>
-            </div>
+  const handleSeek = (e) => {
+    const newTime = Number(e.target.value);
+    setCurrentTime(newTime);
+    if (videoRef.current) {
+      videoRef.current.currentTime = newTime;
+    }
+  };
+
+  const progressPercent =
+    duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  return (
+    <div
+      ref={containerRef}
+      onClick={toggleVideo}
+      className={`${styles.cardVideo} ${isVisible ? styles.show : ""}`}
+    >
+      {isLoading && (
+        <div className={styles.videoLoader}>
+          <div className={styles.spinner}></div>
         </div>
-    );
+      )}
+
+      <div
+        className={`${styles.videoOverlay} ${
+          isPlaying ? styles.videoPlaying : ""
+        }`}
+      >
+        <p className={styles.numeRecenzie}>{recenzie.nume}</p>
+
+        <div className={styles.proiecteRecenzie}>
+          {recenzie.proiecte?.map((rec, index) => (
+            <div key={index} className={styles.itemProiecteRecenzie}>
+              <div className={styles.dot}></div>
+              <p>{rec}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <video
+        ref={videoRef}
+        playsInline
+        poster={recenzie.poster}
+        preload="metadata"
+        muted={isMuted}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onLoadStart={() => setIsLoading(true)}
+        onWaiting={() => setIsLoading(true)}
+        onCanPlay={() => setIsLoading(false)}
+        onPlaying={() => setIsLoading(false)}
+        onEnded={() => {
+          setIsPlaying(false);
+          setCurrentTime(0);
+        }}
+      />
+
+      {/* Controls */}
+      <div
+        className={styles.progresContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className={styles.playScreen} onClick={toggleVideo}>
+          {isPlaying ? (
+            <Pause size={24} fill="white" stroke="none" />
+          ) : (
+            <Play size={24} fill="white" stroke="none" />
+          )}
+        </div>
+
+        <input
+          type="range"
+          min="0"
+          max={duration || 100}
+          step="0.1"
+          value={currentTime}
+          onChange={handleSeek}
+          className={styles.progressBarInput}
+          style={{
+            backgroundSize: `${progressPercent}% 100%`,
+          }}
+        />
+
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMuted((prev) => !prev);
+          }}
+          className={styles.buttonSound}
+        >
+          {isMuted ? <VolumeOff size={24} /> : <Volume2 size={24} />}
+        </div>
+      </div>
+    </div>
+  );
 }

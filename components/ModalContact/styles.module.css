@@ -171,6 +171,24 @@
     align-items: center;
     gap: 16px;
     margin-bottom: 12px;
+    padding-right: 20px;
+}
+.containerContact form::-webkit-scrollbar {
+  width: 10px; 
+  height: 6px;  
+}
+
+.containerContact form::-webkit-scrollbar-track {
+    background: var(--bg-elevated);       
+    border-radius: 2px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+.containerContact form::-webkit-scrollbar-thumb {
+    background: var(--mainColor);  
+    border-radius: 2px;
+    cursor: pointer;
 }
 .containerContact form h5{
     color:white;
@@ -463,6 +481,8 @@
         height: 100%;
         margin-top: 28px;
         padding-bottom: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     .containerContact form h5{
         color:white;

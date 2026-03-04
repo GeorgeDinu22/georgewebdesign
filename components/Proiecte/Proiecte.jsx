@@ -176,10 +176,10 @@ export default function Proiecte() {
                     <motion.div
                         key={i}
                         className={styles.cardProiect}
-                        initial={{ opacity: 0, y: 32 }}
+                        initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.4 }} 
-                        transition={{ duration: 0.5}}
+                        transition={{ duration: 0.55}}
                     >
                         <motion.div className={styles.wrapperImagine} layoutId={`image-wrapper-${p.nume}`}>
                             <Image
@@ -324,7 +324,7 @@ export default function Proiecte() {
                                     )}
 
                                     <div className={styles.sectionModal}>
-                                        <h3>Tehnologii Folosite</h3>
+                                        <h3 className={styles.headingTech}>Tehnologii Folosite</h3>
                                         <div style={{ margin: "12px 0 0 4px" }} className={styles.techStack}>
                                             {selectedProject.tehnologii.map((tech, index) => {
                                                 const Icon = tech.icon;

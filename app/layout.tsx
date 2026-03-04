@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,6 +17,10 @@ export default function RootLayout({
       <body
       >
         {children}
+        <Script defer src="https://cloud.umami.is/script.js"
+        data-website-id="cffe3a05-0489-4419-95a9-33a48ab46468"
+        strategy="afterInteractive"
+        />
       </body>
     </html>
   );

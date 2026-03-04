@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { z } from "zod";
 import { useState, useEffect } from "react";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 const contactSchema = z.object({
 
@@ -40,7 +41,12 @@ const contactSchema = z.object({
       required_error: "Telefonul este obligatoriu",
     })
     .trim()
-    .transform((val) => val.replace(/\s+/g, "")),
+    .refine((val) => {
+      const phone = parsePhoneNumberFromString(val, "RO");
+      return phone?.isValid();
+    }, {
+      message: "Număr de telefon invalid",
+    }),
 
   detaliiContact: z
     .string()
@@ -107,10 +113,10 @@ export default function ModalContact({ show, animation, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setInputErrors({});
 
     if (statusTrimitereMail === "loading") return;
 
-    setInputErrors({});
     setSendError(null);
 
     const result = contactSchema.safeParse(formData);
@@ -119,21 +125,20 @@ export default function ModalContact({ show, animation, onClose }) {
       setInputErrors(result.error.flatten().fieldErrors);
       return;
     }
+    const validatedData = result.data;
 
     setStatusTrimitereMail("loading");
 
     try {
-      // Trimitem formData curat
       const res = await fetch("/api/send-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(validatedData),
       });
 
       const responseData = await res.json();
-      // console.log("RESPONSE ESTE: ", responseData);
 
       if (!res.ok) {
         setSendError(responseData.message || "Eroare de server!");
@@ -141,10 +146,8 @@ export default function ModalContact({ show, animation, onClose }) {
         return;
       }
 
-      // succes
       setStatusTrimitereMail("trimis");
 
-      // reset formular
       setFormData({
         numeContact: "",
         afacereContact: "",
@@ -201,7 +204,7 @@ export default function ModalContact({ show, animation, onClose }) {
 
         <div className={styles.breakLineContact}></div>
 
-        <Link href="mailto:contact@georgewebdesign.ro" className={styles.cardContactMail}>
+        <Link href="mailto:office@georgeweb-design.ro" className={styles.cardContactMail}>
           <Mail size={24} />
             Email
         </Link>

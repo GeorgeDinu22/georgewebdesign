@@ -2,14 +2,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import GlareHover from '../GlareHover'
+import ModalContact from '../ModalContact/ModalContact';
 
 export default function Header() {
     const [droped, SetDroped] = useState(false);
     const [radius, setRadius] = useState(false);
     
-    // 1. Definim stări pentru clasele CSS în loc să le manipulăm manual
-    const [isVisible, setIsVisible] = useState(false); // Pentru animația de start
-    const [isHidden, setIsHidden] = useState(false);   // Pentru scroll
+    const [isVisible, setIsVisible] = useState(false); 
+    const [isHidden, setIsHidden] = useState(false);  
+
+     const [showModalContact, setShowModalContact] = useState(false);
 
     const headerRef = useRef(null);
     const [activeLink, setActiveLink] = useState("/"); 
@@ -75,14 +78,12 @@ export default function Header() {
         };
     }, [activeLink]); 
 
-    // 3. Logică Vizibilitate Inițială cu State
     useEffect(() => {
         setTimeout(() => {
             setIsVisible(true);
         }, 1000);
     }, []);
 
-    // 4. Construim className-ul dinamic bazat pe toate state-urile
     const getHeaderClasses = () => {
         let classes = [];
         if (isVisible) classes.push("headerVisible");
@@ -93,6 +94,12 @@ export default function Header() {
 
     return (
         <>
+        <ModalContact 
+        show={showModalContact}
+        animation={showModalContact}
+        onClose={() => setShowModalContact(false)}
+        />
+
             <header className={getHeaderClasses()} ref={headerRef}>
                 <Link className="logo" href="/" onClick={() => setActiveLink("/")}>
                     <Image
@@ -131,6 +138,7 @@ export default function Header() {
                     <div className={`line ${droped ? "cross" : ""}`}></div>
                     <div className={`line ${droped ? "cross" : ""}`}></div>
                 </div>
+                
 
                 <div className={`dropDown ${droped ? "droped" : ""}`}>
                     {navLinks.map((link) => (
@@ -144,6 +152,23 @@ export default function Header() {
                         </Link>
                     ))}
                 </div>
+
+    <div onClick={() => setShowModalContact(true)} className="ctaHeader">
+            <GlareHover
+            glareColor="#ffffff"
+            glareOpacity={1}
+            glareAngle={-30}
+            glareSize={500}
+            transitionDuration={2250}
+            playOnce
+            width="200"
+            height="200"
+            background="#FF8A00"
+            className="glareButtonHeader"
+        >
+            Solicită o ofertă
+            </GlareHover>
+    </div>
             </header>
         </>
     )
