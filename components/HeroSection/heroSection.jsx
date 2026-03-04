@@ -1,13 +1,12 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
+import CodeWindow from './CodeWindow';
 
 export default function HeroSection(){
     return(
         <div className={styles.heroSection}>
             <div className={styles.gradientContainer} />
             <div className={styles.glowOverlay} />
-
-
 
             <div className={styles.contentHero}>
                 <h1 className={styles.titleHero}>
@@ -19,6 +18,7 @@ export default function HeroSection(){
                 <ButtonContact noRef={true} textBtn={"Vreau Website"}/>
             </div>
 
+            <CodeWindow/>
         </div>
     );
 }

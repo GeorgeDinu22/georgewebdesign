@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
 
 /* TOKENS */
 
 const TOKENS = {
-
   "afacerea.jsx": [
     { t: "ln", v: "1" },
     { t: "kw", v: "export" },
@@ -63,7 +62,6 @@ const TOKENS = {
     { t: "p", v: "}" },
   ],
 
-
   "strategie.js": [
     { t: "ln", v: "1" },
     { t: "kw", v: "const" },
@@ -102,7 +100,6 @@ const TOKENS = {
     { t: "space" },
     { t: "str", v: "10" },
     { t: "p", v: ";" },
-
     { t: "space" },
     { t: "p", v: "// recomandări + loialitate + creștere organică" },
 
@@ -116,7 +113,6 @@ const TOKENS = {
     { t: "ln", v: "5" },
     { t: "p", v: "}" },
   ],
-
 
   "brand.css": [
     { t: "ln", v: "1" },
@@ -156,130 +152,205 @@ const TOKENS = {
     { t: "ln", v: "5" },
     { t: "p", v: "}" },
   ],
-
 };
 
+/* transformă tokenii actuali în caractere individuale, ca în varianta veche */
+
+const expandTokensToChars = (tokens) => {
+  const expanded = [];
+
+  tokens.forEach((token, index) => {
+    if (token.t === "newline") {
+      expanded.push({
+        type: "newline",
+        id: `newline-${index}`,
+      });
+      return;
+    }
+
+    if (token.t === "space") {
+      expanded.push({
+        type: "char",
+        value: "\u00A0",
+        className: null,
+        id: `space-${index}`,
+      });
+      return;
+    }
+
+    if (token.t === "ln") {
+      expanded.push({
+        type: "block",
+        value: token.v,
+        className: styles.ln,
+        id: `ln-${index}`,
+      });
+      return;
+    }
+
+    const classMap = {
+      kw: styles.kw,
+      fn: styles.fn,
+      tag: styles.tag,
+      prop: styles.prop,
+      str: styles.str,
+      p: styles.punc,
+    };
+
+    const className = classMap[token.t] || null;
+    const text = String(token.v ?? "");
+
+    text.split("").forEach((char, charIndex) => {
+      expanded.push({
+        type: "char",
+        value: char === " " ? "\u00A0" : char,
+        className,
+        id: `${token.t}-${index}-${charIndex}`,
+      });
+    });
+  });
+
+  return expanded;
+};
 
 /* TYPEWRITER */
 
 const TypewriterCode = ({ fileKey }) => {
-
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
   const editorRef = useRef(null);
+  const hasPlayedRef = useRef(false);
 
-  const parsedTokens = TOKENS[fileKey] || [];
+  const parsedTokens = useMemo(() => {
+    const baseTokens = TOKENS[fileKey] || [];
+    return expandTokensToChars(baseTokens);
+  }, [fileKey]);
 
   useEffect(() => {
     setCurrentIndex(0);
+    setIsTyping(true);
   }, [fileKey]);
 
 useEffect(() => {
+  if (parsedTokens.length === 0) return;
 
-  if (currentIndex >= parsedTokens.length) return;
-
-  let raf;
+  let animationFrameId;
   let lastTime = performance.now();
 
+  const isFirstPlay = !hasPlayedRef.current;
+  const startDelay = isFirstPlay ? 1250 : 0;
+
+  // aici modifici viteza dacă vrei mai lent / mai rapid
+  const minSpeed = window.innerWidth < 768 ? 12 : 20;
+  let interval = Math.random() * 22 + minSpeed;
+
   const animate = (time) => {
+    const elapsed = time - lastTime;
 
-    const speed = 55; // viteza typing
+    if (elapsed < startDelay) {
+      animationFrameId = requestAnimationFrame(animate);
+      return;
+    }
 
-    if (time - lastTime >= speed) {
+    if (elapsed >= startDelay + interval) {
+      setCurrentIndex((prev) => {
+        let nextIndex = prev + 1;
 
-      setCurrentIndex((prev) => prev + 1);
+        while (
+          nextIndex < parsedTokens.length &&
+          (parsedTokens[nextIndex].type === "newline" ||
+            parsedTokens[nextIndex].type === "block")
+        ) {
+          nextIndex++;
+        }
+
+        if (nextIndex >= parsedTokens.length) {
+          setIsTyping(false);
+        }
+
+        return nextIndex;
+      });
 
       lastTime = time;
+      interval = Math.random() * 22 + minSpeed;
     }
 
-    raf = requestAnimationFrame(animate);
+    if (currentIndex < parsedTokens.length) {
+      animationFrameId = requestAnimationFrame(animate);
+    }
   };
 
-  raf = requestAnimationFrame(animate);
+  animationFrameId = requestAnimationFrame(animate);
+  hasPlayedRef.current = true;
 
-  return () => cancelAnimationFrame(raf);
-
-}, [currentIndex, parsedTokens]);
+  return () => cancelAnimationFrame(animationFrameId);
+}, [parsedTokens, currentIndex]);
 
   useEffect(() => {
-
     if (editorRef.current) {
-      editorRef.current.scrollTop = editorRef.current.scrollHeight;
+      editorRef.current.scrollTo({
+        top: editorRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
-
   }, [currentIndex]);
 
-  const visibleTokens = parsedTokens.slice(0, currentIndex);
+  const visibleTokens = useMemo(
+    () => parsedTokens.slice(0, currentIndex),
+    [parsedTokens, currentIndex]
+  );
 
   const renderContent = () => {
-
     const lines = [];
     let currentLine = [];
 
     visibleTokens.forEach((token, i) => {
-
-      if (token.t === "newline") {
-
-        lines.push(
-          <div key={i} className={styles.line}>
-            {currentLine}
-          </div>
-        );
-
+      if (token.type === "newline") {
+        if (currentLine.length > 0) {
+          lines.push(
+            <div key={`line-${i}`} className={styles.line}>
+              {currentLine}
+            </div>
+          );
+        }
         currentLine = [];
         return;
-
       }
-
-      if (token.t === "space") {
-
-        currentLine.push(<span key={i}>{"\u00A0"}</span>);
-        return;
-
-      }
-
-      const classMap = {
-        ln: styles.ln,
-        kw: styles.kw,
-        fn: styles.fn,
-        tag: styles.tag,
-        prop: styles.prop,
-        str: styles.str,
-        p: styles.punc,
-      };
 
       currentLine.push(
-        <span key={i} className={classMap[token.t]}>
-          {token.v}
+        <span key={token.id} className={token.className}>
+          {token.value}
         </span>
       );
-
     });
 
     if (currentLine.length > 0) {
+      if (isTyping) {
+        currentLine.push(
+          <span key="cursor" className={styles.cursor} />
+        );
+      }
 
       lines.push(
-        <div key="last" className={styles.line}>
+        <div key="last-line" className={styles.line}>
           {currentLine}
         </div>
       );
-
     }
 
     return lines;
-
   };
 
   return (
-    <div className={styles.editor} ref={editorRef}>
+    <div
+      className={`${styles.editor} ${isTyping ? styles.hiddingScroll : ""}`}
+      ref={editorRef}
+    >
       {renderContent()}
     </div>
   );
 };
 
 export default function ClientEditor({ activeFile }) {
-
-  return (
-    <TypewriterCode fileKey={activeFile}/>
-  );
-
+  return <TypewriterCode fileKey={activeFile} />;
 }
