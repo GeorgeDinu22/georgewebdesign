@@ -1,7 +1,11 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import GlareHover from '../GlareHover'
-import ModalContact from '../ModalContact/ModalContact';
+import dynamic from "next/dynamic";
+
+const FormularContact = dynamic(() => import("../ModalContact/ModalContact"), {
+    ssr: false,
+})
 
 export default function ButtonContact({textBtn, noRef}){
 
@@ -27,7 +31,7 @@ export default function ButtonContact({textBtn, noRef}){
 
     return(
         <>
-        <ModalContact 
+        <FormularContact 
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}

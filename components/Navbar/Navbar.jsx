@@ -3,7 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import GlareHover from '../GlareHover'
-import ModalContact from '../ModalContact/ModalContact';
+import dynamic from "next/dynamic";
+
+const FormularContact = dynamic(() => import("../ModalContact/ModalContact"), {
+    ssr: false,
+})
 
 export default function Header() {
     const [droped, SetDroped] = useState(false);
@@ -94,7 +98,7 @@ export default function Header() {
 
     return (
         <>
-        <ModalContact 
+        <FormularContact 
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
