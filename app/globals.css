@@ -375,10 +375,10 @@ header.headerRadius{
     cursor: pointer;
     position: relative;
     opacity: 0;
-    transform: translateY(24px);   
+    transform: translateY(16px);    
     animation: Appear 650ms ease-in-out 950ms forwards; 
     z-index: 2;
-}
+} 
 .buttonContact.showButton{
     opacity: 1;
         transform: translateY(0);
@@ -393,8 +393,9 @@ header.headerRadius{
   transform: translateY(-4px) scale(1.025);
 }
 .glareButton{
+  box-shadow: 0 0 10px black; 
   padding: 6px 28px;
-  border: none;
+  border: none; 
   box-shadow: none;
   border-radius: 14px;
   transition: all 0.5s ease;

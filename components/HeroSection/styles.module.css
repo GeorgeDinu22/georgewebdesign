@@ -46,6 +46,45 @@
     z-index: 2;
 }
     */
+
+.gradientContainer {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100%; /* Am scăzut la 100% ca să nu forțăm scroll orizontal */
+    height: 80%;
+    /* Secretul: folosim mai multe stop-uri de culoare în loc de blur */
+    background: 
+        radial-gradient(circle at 50% 100%, #ffcc66 0%, rgba(255, 204, 102, 0.4) 25%, transparent 50%),
+        radial-gradient(circle at 20% 90%, #ff5e00 0%, rgba(255, 94, 0, 0.3) 30%, transparent 60%),
+        radial-gradient(circle at 80% 95%, #ff8c00 0%, rgba(255, 140, 0, 0.3) 30%, transparent 60%),
+        radial-gradient(circle at 50% 80%, #9e3d00 0%, rgba(158, 61, 0, 0.2) 35%, transparent 70%);
+    
+    /* Reducem blur-ul la minim sau îl eliminăm. 10px e inofensiv. */
+    filter: blur(15px); 
+    opacity: 0.8;
+    z-index: 1;
+    /* Forțăm randarea pe placa video */
+    will-change: filter;
+    transform: translateZ(0);
+}
+
+.glowOverlay {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 40%;
+    /* Gradientul liniar e mult mai "ușor" decât cel radial */
+    background: linear-gradient(to top, 
+        #08040a 0%,         
+        rgba(255, 94, 0, 0.2) 40%, 
+        transparent 100%
+    );
+    /* Am scos blur-ul de aici, gradientul e destul de lin singur */
+    opacity: 0.8;
+    z-index: 2;
+    pointer-events: none;
+}
 .heroSection .contentHero{
     display: flex;
     flex-direction: column;
