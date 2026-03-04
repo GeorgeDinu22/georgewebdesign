@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './styles.module.css';
+import HartaWrapper from "./HartaWrapper";
 
 
 export default function CineSuntEu(){
@@ -49,6 +50,7 @@ export default function CineSuntEu(){
         </div>
         </div>
 
+        <HartaWrapper/>
     </div>
     )
 }
