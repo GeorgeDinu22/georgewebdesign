@@ -89,6 +89,12 @@
 .wrapperImagine .imagineProiect{
     transition: transform 250ms ease-in-out;
 }
+.imagineProiect{
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
+    height: 300px;
+}
 .wrapperImagine:hover .containerHover{
     opacity:1;
 }
@@ -155,12 +161,6 @@
     transform: scale(1.05) translateY(-4px);
 }
 
-.imagineProiect{
-    width: 100%;
-    object-fit: cover;
-    object-position: 50% 0%;
-    height: 300px;
-}
 .contentCard{
     display: grid;
     grid-template-columns: 1fr auto;

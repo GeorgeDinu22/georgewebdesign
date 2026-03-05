@@ -33,8 +33,9 @@ export default function CineSuntEu(){
                 </p>
 
                 <p className="animate">
-                    Diferența reală și rezultatele apar atunci când tehnologia este 
-                    combinată cu gândire strategică, atenția la detalii și o abordare complet de la zero pentru viziunea ta.
+                    Diferența reală apare atunci când un site este construit de la zero 
+                    pentru afacerea și nevoile tale, nu copiat dintr-un template sau 
+                    generat rapid cu AI dintr-un prompt de câteva rânduri.
                 </p>
             </div>
         </div>  
@@ -45,7 +46,8 @@ export default function CineSuntEu(){
             src="/CineSuntEuV3.jpeg"
             width={700}
             height={700}
-            alt=''
+            alt='Profile Image'
+            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 600px"
             />
         </div>
         </div>

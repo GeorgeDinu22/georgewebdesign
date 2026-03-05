@@ -1,7 +1,11 @@
 "use client";
 import styles from './styles.module.css';
-import CardRecenzie from './CardRecenzie';
 import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const CardRec = dynamic(() => import('./CardRecenzie'),{
+    ssr:false
+})
 
 export default function Recenzii(){
 
@@ -61,7 +65,7 @@ export default function Recenzii(){
             setContainerVisible(true);
         }
         },
-        {   rootMargin:"200px",
+        {   rootMargin:"250px",
             threshold: 0.1
          }
     );
@@ -84,7 +88,7 @@ export default function Recenzii(){
             {containerVisible && (
             <div className={styles.containerRecenzii}>
                 {recenzii.map((recenzie, index) => (
-                    <CardRecenzie 
+                    <CardRec 
                         key={index} 
                         recenzie={recenzie}
                     />

@@ -27,8 +27,8 @@ export default function HartaWrapper() {
         observer.disconnect(); 
       }
     }, {
-      rootMargin: "50px", 
-      threshold: [0, 0.6] 
+      rootMargin: "200px", 
+      threshold: [0, 0.75] 
     });
 
     observer.observe(currentElement);

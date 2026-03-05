@@ -185,10 +185,10 @@ export default function Proiecte() {
                             <Image
                                 className={styles.imagineProiect}
                                 src={p.imagine}
-                                width={1000}
-                                height={1050}
+                                width={800}
+                                height={400}
                                 alt={p.nume}
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                sizes="(max-width: 850px) 94vw, (max-width: 1100px) 45vw, 30vw"
                             />
                             <div className={styles.containerHover}>
                                 <div className={styles.continutHover}>
