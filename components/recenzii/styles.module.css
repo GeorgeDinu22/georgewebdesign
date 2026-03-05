@@ -32,7 +32,8 @@
     text-align: center;
     text-wrap: balance;
     width: 97.5%;
-    font-weight: 750;
+    font-weight: 800;
+    font-family: var(--font-plus-jakarta);
 }
 .bodyRecenzii .containerTitle h2 strong{
     color: var(--mainColor);
@@ -43,6 +44,8 @@
     text-align: center;
     font-size: clamp(16px,2vw,20px);
     width:90%;
+    font-weight: 500;
+    font-family: var(--font-inter);
 }
 .bodyRecenzii .containerTitle p span{
     color: var(--mainColor);
@@ -129,6 +132,7 @@
     font-weight: 700;
     margin-bottom: 0px;
     transition:all 250ms ease-in-out;
+    font-weight: 700;
 }
 .videoOverlay.videoPlaying .numeRecenzie{
     transform: translateY(16px);

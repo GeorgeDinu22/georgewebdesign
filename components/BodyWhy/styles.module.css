@@ -10,6 +10,7 @@
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
+    font-family: var(--font-inter);
 }
 
 .bodyWhy .containerTitle{
@@ -23,10 +24,11 @@
 }
 .bodyWhy .containerTitle h2{
     color: white;
-    font-weight: 750;
+    font-weight: 800;
     text-align: center;
     font-size: clamp(26px,2.5vw,34px); 
     width: 100%;
+    font-family: var(--font-plus-jakarta);
 }
 .bodyWhy .containerTitle h2 span{
     position: relative;

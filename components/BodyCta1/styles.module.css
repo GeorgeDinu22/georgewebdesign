@@ -1,4 +1,4 @@
-.bodyCta1{
+.bodyCta1 {
     width: 100%;
     position: relative;
     display: flex;
@@ -6,9 +6,10 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 32px;
+    font-family: var(--font-inter);
 }
 
-.bodyCta1 .containerTitle{
+.bodyCta1 .containerTitle {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,19 +19,23 @@
     width: 90%;
     transition: all 0.8s ease;
 }
-.bodyCta1 .containerTitle h2{
+
+.bodyCta1 .containerTitle h2 {
     color: white;
     font-weight: 750;
     text-align: left;
-    font-size: clamp(28px,3vw,36px);
+    font-size: clamp(28px, 3vw, 36px);
     padding-right: 40px; 
     width: 100%;
+    font-family: var(--font-plus-jakarta);
 }
-.bodyCta1 .containerTitle h2 strong{
+
+.bodyCta1 .containerTitle h2 strong {
     position: relative;
     font-weight: 800;
 }
-.bodyCta1 .containerTitle h2 strong::before{
+
+.bodyCta1 .containerTitle h2 strong::before {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -41,7 +46,8 @@
     border-radius: 14px;
     background-color: var(--mainColor);
 }
-.bodyCta1 .containerCta1{
+
+.bodyCta1 .containerCta1 {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -49,7 +55,8 @@
     gap: 24px;
     position: relative;
 }
-.bodyCta1 .containerCta1 .paragrafCta1{
+
+.bodyCta1 .containerCta1 .paragrafCta1 {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -57,95 +64,106 @@
     width: 100%;
 }
 
-.bodyCta1 .containerCta1 .paragrafCta1 .highlighted{
+.bodyCta1 .containerCta1 .paragrafCta1 .highlighted {
     font-size: 20px;
     font-weight: 650;
     width: 100%;
     line-height: 1.25;
     margin-bottom: 6px;
 }
-.bodyCta1 .containerCta1 .paragrafCta1 .highlighted span{
+
+.bodyCta1 .containerCta1 .paragrafCta1 .highlighted span {
     color: var(--mainColor);
 }
-.textWhy span{
+
+.textWhy span {
     text-decoration: 2px underline var(--mainColor);
     font-weight: 520;
 }
-.focus{
+
+.focus {
     font-weight: 650;
 }
-.colorText{
+
+.colorText {
     background-color: var(--mainColor);
     padding: 2px 4px;
     border-radius: 3.5px;
     font-weight: 650;
 }
-.descriereCta{
-  text-wrap: balance;
+
+.descriereCta {
+    text-wrap: balance;
 }
 
-.textWhy2 span{
-  font-weight: 650;
+.textWhy2 span {
+    font-weight: 650;
 }
 
-
-.IconText{
+.IconText {
     display: inline;
 }
 
-@media (min-width: 1024px){
+/* DESKTOP LAYOUT */
+@media (min-width: 1024px) {
+    .bodyCta1 {
+        margin: 32px 0;
+    }
 
-  .bodyCta1{
-    margin: 32px 0;
-  }
+    .bodyCta1 .containerTitle {
+        max-width: 1100px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 60px;
+    }
 
-  .bodyCta1 .containerTitle{
-    max-width: 1100px;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 60px;
-  }
+    .bodyCta1 .containerTitle h2 {
+        line-height: 1.15;
+        text-align: center;
+        padding-right: 0;
+    }
 
-  .bodyCta1 .containerTitle h2{
-    line-height: 1.15;
-    text-align: center;
-    padding-right: 0;
-  }
+    .bodyCta1 .containerTitle h2 strong::before {
+        height: 4px;
+        bottom: -6px;
+    }
 
-  .bodyCta1 .containerTitle h2 strong::before{
-    height: 4px;
-    bottom: -6px;
-  }
+    .bodyCta1 .containerCta1 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 10px;
+        gap: 24px; 
+        align-items: start;
+        max-width: 1250px;
+    }
 
-  .bodyCta1 .containerCta1{
-    max-width: 1100px;
-    gap: 32px;
-  }
+    .bodyCta1 .containerCta1 .paragrafCta1 {
+        width: 100%;
+        margin-bottom: 0; 
+        max-width: none;
+        
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 138, 0, 0.15);
+        border-radius: 18px;
+        padding: 32px 36px;
+        transition: all 0.55s ease, grid-row-end 0.3s ease; 
+    }
 
-  .bodyCta1 .containerCta1 .paragrafCta1{
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,138,0,0.15);
-    border-radius: 18px;
-    padding: 32px 36px;
-    transition: all 0.35s ease;
-  }
+    .bodyCta1 .containerCta1 .paragrafCta1:hover {
+        border-color: rgba(255, 138, 0, 0.4);
+        background: rgba(255, 255, 255, 0.04);
+        transform: translateY(-4px);
+    }
 
-  .bodyCta1 .containerCta1 .paragrafCta1:hover{
-    border-color: rgba(255,138,0,0.4);
-    background: rgba(255,255,255,0.04);
-    transform: translateY(-4px);
-  }
+    .bodyCta1 .containerCta1 .paragrafCta1 .highlighted {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
 
-  .bodyCta1 .containerCta1 .paragrafCta1 .highlighted{
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
-
-  .bodyCta1 .containerCta1 .paragrafCta1 p{
-    font-size: 18px;
-    line-height: 1.8;
-    opacity: 0.85;
-    width: 75%;
-  }
-
+    .bodyCta1 .containerCta1 .paragrafCta1 p {
+        font-size: 18px;
+        line-height: 1.8;
+        opacity: 0.85;
+        width: 100%;
+    }
 }

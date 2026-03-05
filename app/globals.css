@@ -10,9 +10,11 @@
 }
 
 :root{
+
   --mainColor:    #FF8A00;  
   --accent-hover:   #FF9F2E;  
   --card-accent-nude: rgb(255, 207, 159);
+  
 
   --border-color:   #2A2A2A;
   --divider-color:  #242424;
@@ -189,6 +191,11 @@ body{
   background-color: black;
 }
 
+ 
+
+h1{ 
+  font-family: var(--font-plus-jakarta);  
+}
 header{
   background: rgba(15, 15, 15, 0.95); 
   backdrop-filter: blur(14px) saturate(140%);
@@ -211,6 +218,7 @@ header{
   color: white;     
   height: 60px;     
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  font-family: var(--font-inter);
 } 
 header.headerVisible {
   opacity: 1;
@@ -321,7 +329,7 @@ header.headerRadius{
 }
 
 .ctaHeader{
-    font-weight: 600;
+    font-weight: 800;   
     color: white;
     font-size: clamp(20px,2.5vw,24px);
     transition: all 0ms ease;
@@ -330,6 +338,7 @@ header.headerRadius{
     opacity: 1;
     z-index: 2; 
     display: none; 
+    font-family: var(--font-plus-jakarta);
 }
 .glareButtonHeader:hover{
   transform: translateY(-3px); 
@@ -368,7 +377,7 @@ header.headerRadius{
 /* BUTTON CONTACT */
 
 .buttonContact{
-    font-weight: 600;
+    font-weight: 800;
     color: white;
     font-size: clamp(22px,2.5vw,26px);
     transition: all 0ms ease;
@@ -378,6 +387,7 @@ header.headerRadius{
     transform: translateY(16px);    
     animation: Appear 650ms ease-in-out 950ms forwards; 
     z-index: 2;
+    font-family: var(--font-plus-jakarta); 
 } 
 .buttonContact.showButton{
     opacity: 1;
@@ -434,6 +444,7 @@ header.headerRadius{
     padding-top: 16px; 
     z-index: 2; 
     position: relative;
+    font-family: var(--font-inter);
 }
 .footerHeader{
     display: flex;
@@ -465,6 +476,7 @@ header.headerRadius{
     font-size: clamp(22px,2.5vw,26px);
     font-weight: 650;
     transform: color 250ms ease-in-out;
+    font-family: var(--font-plus-jakarta);
 }
 .footerLink{
     width: max-content;

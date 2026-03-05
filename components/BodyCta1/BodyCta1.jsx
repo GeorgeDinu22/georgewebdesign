@@ -1,16 +1,18 @@
 import { AtSign } from 'lucide-react';
 import styles from './styles.module.css';
+import Script from 'next/script';
 
 export default function BodyCta1() {
-
     return (
         <div className={styles.bodyCta1}>
-            <div  className={`${styles.containerTitle} animate`}>
+            {/* Am scos masonryGrid de aici, era pus din greșeală pe Titlu */}
+            <div className={`${styles.containerTitle} animate`}>
                 <h2>Încă mai crezi că poți vinde  <strong>fără un site?</strong></h2>
             </div>
 
-            <div className={styles.containerCta1}>
-                <div className={`${styles.paragrafCta1} animate`}>
+            {/* Am adăugat masonryGrid aici, pe containerul care ține cardurile */}
+            <div className={`${styles.containerCta1} masonryGrid`}>
+                <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>Realitatea online-ului de azi</p>
                     <p className={styles.descriereCta}>
                         În zilele noastre, totul se mișcă repede.
@@ -20,7 +22,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} animate`}>
+                <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>
                         De ce social media nu e <span>suficient</span>
                     </p>
@@ -34,7 +36,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} animate`}>
+                <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>
                         Despre site-urile făcute în <span>5 minute</span>
                     </p>
@@ -47,7 +49,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} animate`}>
+                <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>Conteaza pentru <span>reputatia ta!</span></p>
                     <p className={styles.descriereCta}>
                         Imaginează-ți că ești unul dintre potențialii tăi clienți și încerci să decizi dacă să oferi o șansă unui business.
@@ -58,7 +60,7 @@ export default function BodyCta1() {
                     </p>
                 </div>
 
-                <div className={`${styles.paragrafCta1} animate`}>
+                <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>
                         Lucrăm <span>împreună</span> ca să fie clar ce faci și de ce contează
                     </p>
@@ -69,6 +71,11 @@ export default function BodyCta1() {
                     </p>
                 </div>
             </div>
+            
+            <Script 
+                src="/masonry.js"
+                strategy="lazyOnload" 
+            />
         </div>
     );
 }
