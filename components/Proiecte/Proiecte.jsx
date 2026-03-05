@@ -149,7 +149,7 @@ export default function Proiecte() {
     }, [selectedProject]);
 
     return (
-        <div id="proiecte" className={styles.bodyProiecte}>
+        <div className={styles.bodyProiecte}>
             <div className={`${styles.fundalGrid} ${styles.mask}`}></div>
     <div className={styles.containerTitlu}>
             <motion.h2

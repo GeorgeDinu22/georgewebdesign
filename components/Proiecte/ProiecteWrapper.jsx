@@ -37,7 +37,7 @@ export default function ProiecteWrapper() {
   }, [hasIntersected]);
 
   return (
-    <div ref={containerRef} style={{ minHeight: "100vh" }}>
+    <div id="proiecte" ref={containerRef} style={{ minHeight: "100vh" }}>
       {hasIntersected ? (
         <Proiecte />
       ) : (
