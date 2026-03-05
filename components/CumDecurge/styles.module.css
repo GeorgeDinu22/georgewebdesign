@@ -29,7 +29,7 @@
 
 .bodyCumDecurge .containerTitle h2 {
     color: white;
-    font-size: clamp(26px,2.5vw,34px); 
+    font-size: clamp(25px,2.5vw,34px); 
     font-weight: 800;
     font-family: var(--font-plus-jakarta);
 }
@@ -44,7 +44,7 @@
     bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120%;
+    width: 110%;
     height: 2.75px;
     background: linear-gradient(to right, transparent, var(--mainColor), transparent);
 }

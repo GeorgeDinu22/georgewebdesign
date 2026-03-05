@@ -440,11 +440,11 @@ header.headerRadius{
     box-shadow: 0 0 12.5px var(--mainColor);
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding-top: 16px; 
+    gap: 24px; 
+    padding-top: 16px;  
     z-index: 2; 
     position: relative;
-    font-family: var(--font-inter);
+    font-family: var(--font-inter); 
 }
 .footerHeader{
     display: flex;
@@ -502,7 +502,7 @@ header.headerRadius{
     height: 2px;
 }
 .autor{
-    font-size: clamp(14px,1.5vw,18px);
+    font-size: clamp(12px,1.5vw,18px);
     color: white;
     display: flex;
     justify-content: center;

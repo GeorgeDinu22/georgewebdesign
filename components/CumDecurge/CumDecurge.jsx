@@ -37,7 +37,7 @@ const pasi = [
             <div  className={`${styles.containerTitle} animate`}>
                 <h2>Cum Decurge <span>Colaborarea?</span></h2>
                 <p>
-                    Îți prezint pas cu pas procesul meu de lucru, astfel încât să știi exact la ce să te aștepți. Transparența și comunicarea sunt esențiale pentru rezultate excelente.
+                    Îți prezint pas cu pas procesul meu de lucru, astfel încât să știi exact la ce să te aștepți.
                 </p>
             </div>
 
