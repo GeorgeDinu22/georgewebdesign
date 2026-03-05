@@ -1,146 +1,352 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
+
+/* TOKENS */
 
 const TOKENS = {
   "afacerea.jsx": [
-    { t: "ln", v: "1" }, { t: "kw", v: "export" }, { t: "space" }, { t: "kw", v: "default" }, { t: "space" }, { t: "kw", v: "function" }, { t: "space" }, { t: "fn", v: "AfacereaTa" }, { t: "p", v: "()" }, { t: "space" }, { t: "p", v: "{" },
+    { t: "ln", v: "1" },
+    { t: "kw", v: "export" },
+    { t: "space" },
+    { t: "kw", v: "default" },
+    { t: "space" },
+    { t: "kw", v: "function" },
+    { t: "space" },
+    { t: "fn", v: "AfacereaTa" },
+    { t: "p", v: "()" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
     { t: "newline" },
-    { t: "ln", v: "2" }, { t: "p", v: "//" }, { t: "space" }, { t: "str", v: "Prima impresie decide dacă vinzi sau pierzi" },
+
+    { t: "ln", v: "2" },
+    { t: "p", v: "//" },
+    { t: "space" },
+    { t: "str", v: "Prima impresie decide dacă vinzi sau pierzi" },
+
     { t: "newline" },
-    { t: "ln", v: "3" }, { t: "kw", v: "return" }, { t: "space" }, { t: "p", v: "(" },
+
+    { t: "ln", v: "3" },
+    { t: "kw", v: "return" },
+    { t: "space" },
+    { t: "p", v: "(" },
+
     { t: "newline" },
-    { t: "ln", v: "4" }, { t: "p", v: "<" }, { t: "tag", v: "Hero" }, { t: "space" }, { t: "prop", v: "mesaj" }, { t: "p", v: "=" }, { t: "str", v: '"Website-uri care transformă trafic în clienți"' },
+
+    { t: "ln", v: "4" },
+    { t: "p", v: "<" },
+    { t: "tag", v: "Hero" },
+    { t: "space" },
+    { t: "prop", v: "mesaj" },
+    { t: "p", v: "=" },
+    { t: "str", v: '"Website-uri care transformă trafic în clienți"' },
+
     { t: "newline" },
-    { t: "ln", v: "5" }, { t: "prop", v: "oferta" }, { t: "p", v: "=" }, { t: "str", v: '"Design strategic + performanță  reală = vânzări constante"' }, { t: "p", v: "/>" },
+
+    { t: "ln", v: "5" },
+    { t: "prop", v: "oferta" },
+    { t: "p", v: "=" },
+    { t: "str", v: '"Design strategic + performanță  reală = vânzări constante"' },
+    { t: "p", v: "/>" },
+
     { t: "newline" },
-    { t: "ln", v: "6" }, { t: "p", v: ");" },
+
+    { t: "ln", v: "6" },
+    { t: "p", v: ");" },
+
     { t: "newline" },
-    { t: "ln", v: "7" }, { t: "p", v: "}" },
+
+    { t: "ln", v: "7" },
+    { t: "p", v: "}" },
   ],
+
   "strategie.js": [
-    { t: "ln", v: "1" }, { t: "kw", v: "const" }, { t: "space" }, { t: "fn", v: "cresteVanzari" }, { t: "space" }, { t: "p", v: "=" }, { t: "space" }, { t: "p", v: "(" }, { t: "prop", v: "client" }, { t: "p", v: ")" }, { t: "space" }, { t: "kw", v: "=>" }, { t: "space" }, { t: "p", v: "{" },
+    { t: "ln", v: "1" },
+    { t: "kw", v: "const" },
+    { t: "space" },
+    { t: "fn", v: "cresteVanzari" },
+    { t: "space" },
+    { t: "p", v: "=" },
+    { t: "space" },
+    { t: "p", v: "(" },
+    { t: "prop", v: "client" },
+    { t: "p", v: ")" },
+    { t: "space" },
+    { t: "kw", v: "=>" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
     { t: "newline" },
-    { t: "ln", v: "2" }, { t: "kw", v: "if" }, { t: "space" }, { t: "p", v: "(" }, { t: "prop", v: "client" }, { t: "p", v: ".esteIncantat)" }, { t: "space" }, { t: "p", v: "{" },
+
+    { t: "ln", v: "2" },
+    { t: "kw", v: "if" },
+    { t: "space" },
+    { t: "p", v: "(" },
+    { t: "prop", v: "client" },
+    { t: "p", v: ".esteIncantat)" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
     { t: "newline" },
-    { t: "ln", v: "3" }, { t: "kw", v: "return" }, { t: "space" }, { t: "prop", v: "profit" }, { t: "space" }, { t: "p", v: "*" }, { t: "space" }, { t: "str", v: "10" }, { t: "p", v: ";" },
+
+    { t: "ln", v: "3" },
+    { t: "kw", v: "return" },
+    { t: "space" },
+    { t: "prop", v: "profit" },
+    { t: "space" },
+    { t: "p", v: "*" },
+    { t: "space" },
+    { t: "str", v: "10" },
+    { t: "p", v: ";" },
+    { t: "space" },
+    { t: "p", v: "// recomandări + loialitate + creștere organică" },
+
     { t: "newline" },
-    { t: "ln", v: "4" }, { t: "p", v: "}" },
+
+    { t: "ln", v: "4" },
+    { t: "p", v: "}" },
+
     { t: "newline" },
-    { t: "ln", v: "5" }, { t: "p", v: "}" },
+
+    { t: "ln", v: "5" },
+    { t: "p", v: "}" },
   ],
+
   "brand.css": [
-    { t: "ln", v: "1" }, { t: "tag", v: ".identitate-vizuala" }, { t: "space" }, { t: "p", v: "{" },
+    { t: "ln", v: "1" },
+    { t: "tag", v: ".identitate-vizuala" },
+    { t: "space" },
+    { t: "p", v: "{" },
+
     { t: "newline" },
-    { t: "ln", v: "2" }, { t: "prop", v: "incredere" }, { t: "p", v: ":" }, { t: "space" }, { t: "str", v: "construită prin rezultate" }, { t: "p", v: ";" },
+
+    { t: "ln", v: "2" },
+    { t: "prop", v: "incredere" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "construită prin rezultate" },
+    { t: "p", v: ";" },
+
     { t: "newline" },
-    { t: "ln", v: "3" }, { t: "prop", v: "calitate" }, { t: "p", v: ":" }, { t: "space" }, { t: "str", v: "atenție obsesivă la detalii" }, { t: "p", v: ";" },
+
+    { t: "ln", v: "3" },
+    { t: "prop", v: "calitate" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "atenție obsesivă la detalii" },
+    { t: "p", v: ";" },
+
     { t: "newline" },
-    { t: "ln", v: "4" }, { t: "prop", v: "impact" }, { t: "p", v: ":" }, { t: "space" }, { t: "str", v: "memorabil din prima secundă" }, { t: "p", v: ";" },
+
+    { t: "ln", v: "4" },
+    { t: "prop", v: "impact" },
+    { t: "p", v: ":" },
+    { t: "space" },
+    { t: "str", v: "memorabil din prima secundă" },
+    { t: "p", v: ";" },
+
     { t: "newline" },
-    { t: "ln", v: "5" }, { t: "p", v: "}" },
+
+    { t: "ln", v: "5" },
+    { t: "p", v: "}" },
   ],
 };
 
-const TypewriterCode = ({ fileKey }) => {
-  const [visibleChars, setVisibleChars] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
-  const editorRef = useRef(null);
-  
-  const tokens = TOKENS[fileKey] || [];
+/* transformă tokenii actuali în caractere individuale, ca în varianta veche */
 
-  // Optimizare: Calculăm lungimea totală o singură dată pe fișier
-  const totalChars = useMemo(() => {
-    return tokens.reduce((acc, token) => {
-      if (token.t === "newline" || token.t === "space") return acc + 1;
-      return acc + (token.v ? String(token.v).length : 0);
-    }, 0);
-  }, [fileKey]);
+const expandTokensToChars = (tokens) => {
+  const expanded = [];
 
-  useEffect(() => {
-    setVisibleChars(0);
-    setIsTyping(true);
-  }, [fileKey]);
-
-  useEffect(() => {
-    if (visibleChars >= totalChars) {
-      setIsTyping(false);
+  tokens.forEach((token, index) => {
+    if (token.t === "newline") {
+      expanded.push({
+        type: "newline",
+        id: `newline-${index}`,
+      });
       return;
     }
 
-    // Variabilă pentru viteză: Mobile-ul are nevoie de mai multă "milă" la CPU
-    const speed = window.innerWidth < 768 ? 15 : 25;
-    const timeout = setTimeout(() => {
-      // Functional update pentru a evita re-crearea effect-ului inutil
-      setVisibleChars(prev => prev + 1);
-    }, speed);
-
-    return () => clearTimeout(timeout);
-  }, [visibleChars, totalChars]);
-
-  // Scroll smooth doar când se adaugă o linie nouă (performanță mai bună decât la fiecare caracter)
-  useEffect(() => {
-    if (editorRef.current) {
-        editorRef.current.scrollTop = editorRef.current.scrollHeight;
+    if (token.t === "space") {
+      expanded.push({
+        type: "char",
+        value: "\u00A0",
+        className: null,
+        id: `space-${index}`,
+      });
+      return;
     }
-  }, [visibleChars]);
 
-  const renderedContent = useMemo(() => {
-    const lines = [];
-    let currentLine = [];
-    let charCounter = 0;
+    if (token.t === "ln") {
+      expanded.push({
+        type: "block",
+        value: token.v,
+        className: styles.ln,
+        id: `ln-${index}`,
+      });
+      return;
+    }
 
     const classMap = {
-      ln: styles.ln, kw: styles.kw, fn: styles.fn,
-      tag: styles.tag, prop: styles.prop, str: styles.str,
-      punc: styles.punc, p: styles.punc
+      kw: styles.kw,
+      fn: styles.fn,
+      tag: styles.tag,
+      prop: styles.prop,
+      str: styles.str,
+      p: styles.punc,
     };
 
-    for (let i = 0; i < tokens.length; i++) {
-      const token = tokens[i];
-      if (charCounter >= visibleChars) break;
+    const className = classMap[token.t] || null;
+    const text = String(token.v ?? "");
 
-      if (token.t === "newline") {
-        lines.push(<div key={`l-${i}`} className={styles.line}>{currentLine}</div>);
-        currentLine = [];
-        charCounter++;
-        continue;
-      }
+    text.split("").forEach((char, charIndex) => {
+      expanded.push({
+        type: "char",
+        value: char === " " ? "\u00A0" : char,
+        className,
+        id: `${token.t}-${index}-${charIndex}`,
+      });
+    });
+  });
 
-      if (token.t === "space") {
-        currentLine.push(<span key={`s-${i}`}>{"\u00A0"}</span>);
-        charCounter++;
-        continue;
-      }
+  return expanded;
+};
 
-      const text = String(token.v);
-      const remaining = visibleChars - charCounter;
-      
-      if (remaining > 0) {
-        currentLine.push(
-          <span key={`t-${i}`} className={classMap[token.t] || styles.punc}>
-            {text.substring(0, remaining)}
-          </span>
-        );
-      }
-      charCounter += text.length;
+/* TYPEWRITER */
+
+const TypewriterCode = ({ fileKey }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const editorRef = useRef(null);
+  const hasPlayedRef = useRef(false);
+
+  const parsedTokens = useMemo(() => {
+    const baseTokens = TOKENS[fileKey] || [];
+    return expandTokensToChars(baseTokens);
+  }, [fileKey]);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+    setIsTyping(true);
+  }, [fileKey]);
+
+useEffect(() => {
+  if (parsedTokens.length === 0) return;
+
+  let animationFrameId;
+  let lastTime = performance.now();
+
+  const isFirstPlay = !hasPlayedRef.current;
+  const startDelay = isFirstPlay ? 1250 : 0;
+
+  // aici modifici viteza dacă vrei mai lent / mai rapid
+  const minSpeed = window.innerWidth < 768 ? 12 : 20;
+  let interval = Math.random() * 22 + minSpeed;
+
+  const animate = (time) => {
+    const elapsed = time - lastTime;
+
+    if (elapsed < startDelay) {
+      animationFrameId = requestAnimationFrame(animate);
+      return;
     }
 
+    if (elapsed >= startDelay + interval) {
+      setCurrentIndex((prev) => {
+        let nextIndex = prev + 1;
+
+        while (
+          nextIndex < parsedTokens.length &&
+          (parsedTokens[nextIndex].type === "newline" ||
+            parsedTokens[nextIndex].type === "block")
+        ) {
+          nextIndex++;
+        }
+
+        if (nextIndex >= parsedTokens.length) {
+          setIsTyping(false);
+        }
+
+        return nextIndex;
+      });
+
+      lastTime = time;
+      interval = Math.random() * 22 + minSpeed;
+    }
+
+    if (currentIndex < parsedTokens.length) {
+      animationFrameId = requestAnimationFrame(animate);
+    }
+  };
+
+  animationFrameId = requestAnimationFrame(animate);
+  hasPlayedRef.current = true;
+
+  return () => cancelAnimationFrame(animationFrameId);
+}, [parsedTokens, currentIndex]);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.scrollTo({
+        top: editorRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [currentIndex]);
+
+  const visibleTokens = useMemo(
+    () => parsedTokens.slice(0, currentIndex),
+    [parsedTokens, currentIndex]
+  );
+
+  const renderContent = () => {
+    const lines = [];
+    let currentLine = [];
+
+    visibleTokens.forEach((token, i) => {
+      if (token.type === "newline") {
+        if (currentLine.length > 0) {
+          lines.push(
+            <div key={`line-${i}`} className={styles.line}>
+              {currentLine}
+            </div>
+          );
+        }
+        currentLine = [];
+        return;
+      }
+
+      currentLine.push(
+        <span key={token.id} className={token.className}>
+          {token.value}
+        </span>
+      );
+    });
+
     if (currentLine.length > 0) {
+      if (isTyping) {
+        currentLine.push(
+          <span key="cursor" className={styles.cursor} />
+        );
+      }
+
       lines.push(
-        <div key="last" className={styles.line}>
+        <div key="last-line" className={styles.line}>
           {currentLine}
-          {isTyping && <span className={styles.cursor} />}
         </div>
       );
     }
+
     return lines;
-  }, [visibleChars, tokens, isTyping]);
+  };
 
   return (
-    <div className={styles.editor} ref={editorRef}>
-      {renderedContent}
+    <div
+      className={`${styles.editor} ${isTyping ? styles.hiddingScroll : ""}`}
+      ref={editorRef}
+    >
+      {renderContent()}
     </div>
   );
 };

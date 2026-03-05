@@ -1,22 +1,47 @@
 "use client"
-
 import dynamic from "next/dynamic";
+import styles from './styles.module.css';
+import { useEffect, useRef, useState } from "react";
 
 const HartaClient = dynamic(() => import("./HartaEu"), {
   ssr: false,
-  loading: () => (
-    <div style={{
-      height: "375px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "#000"
-    }}>
-      <p style={{ color: "#696969" }}>Se încarcă harta...</p>
-    </div>
-  )
+  loading: () => <div className={styles.skeletonHarta}>Se încarcă harta...</div>
 });
 
 export default function HartaWrapper() {
-  return <HartaClient />;
+  const [isMounted, setIsMounted] = useState(false); 
+  const [isVisible, setIsVisible] = useState(false); 
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const currentElement = mapRef.current;
+    if (!currentElement) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !isMounted) {
+        setIsMounted(true);
+      }
+
+      if (entry.intersectionRatio > 0.4) {
+        setIsVisible(true);
+        observer.disconnect(); 
+      }
+    }, {
+      rootMargin: "50px", 
+      threshold: [0, 0.6] 
+    });
+
+    observer.observe(currentElement);
+
+    return () => observer.disconnect();
+  }, [isMounted]);
+
+  return (
+    <div 
+      ref={mapRef}  
+      className={`${styles.containerHarta} ${isVisible ? styles.hartaActiva : ""}`}
+    >
+      {isMounted ? <HartaClient /> : null}
+    </div>
+  );
 }

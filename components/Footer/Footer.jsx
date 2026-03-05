@@ -60,7 +60,7 @@ export default function Footer(){
                 <h5>Contact</h5>
                 <Link className="footerLink" href="tel:+40733782872">
                     <Phone size={20} color="#FF8A00" strokeWidth={2}/>
-                    0733 782 872
+                    +40 733 782 872
                 </Link>
                 <Link className="footerLink" href="mailto:office@georgeweb-design.ro">
                     <Mail size={20} color="#FF8A00" strokeWidth={2}/>

@@ -33,7 +33,7 @@ export default function CineSuntEu(){
                 </p>
 
                 <p className="animate">
-                    Diferența reală și rezultatele apare atunci când tehnologia este 
+                    Diferența reală și rezultatele apar atunci când tehnologia este 
                     combinată cu gândire strategică, atenția la detalii și o abordare complet de la zero pentru viziunea ta.
                 </p>
             </div>

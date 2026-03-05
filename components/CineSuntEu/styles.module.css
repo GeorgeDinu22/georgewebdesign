@@ -106,11 +106,11 @@
     position: relative;
     pointer-events: none;
     opacity: 0;
-    transition: all 0.8s ease;
-    transform: translateY(24px);
+    transition: all 0.5s ease;
+    transform: translateY(32px);
 }
 
-.containerHarta.show {
+.containerHarta.hartaActiva{
   opacity: 1;
   transform: translateY(0);
 }

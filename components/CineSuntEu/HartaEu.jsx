@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/map";
 import styles from './styles.module.css';
 import { MapPin } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 
 export default function HartaClient() {
     const places = [
@@ -17,27 +16,8 @@ export default function HartaClient() {
         lat: 44.4303,
       }
     ];
-
-        const [isVisible, setIsVisible] = useState(false);
-        const ref = useRef(null);
-    
-        useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-            if (entry.isIntersecting) {
-                setIsVisible(true);
-            }
-            },
-            { threshold: 0.35 }
-        );
-    
-        if (ref.current) observer.observe(ref.current);
-    
-        return () => observer.disconnect();
-        }, []);
-
     return (
-        <div ref={ref}  className={`${styles.containerHarta} ${isVisible ? styles.show : ""}`}>
+        <>
             <div className={styles.mapLegend}>
                 <div className={styles.hallowDot}></div>
                 <p>Disponibil</p>
@@ -70,6 +50,6 @@ export default function HartaClient() {
                     </MapMarker>
                 ))}
             </Map>
-        </div>
+        </>
     );
 }
