@@ -14,7 +14,7 @@
     transform: translateY(24px);
     transition: all 0.8s ease;
     font-family: var(--font-inter);
-    margin-bottom:24px;
+    margin-bottom:32px;
 }
 .bodyCta2.show {
   opacity: 1;
