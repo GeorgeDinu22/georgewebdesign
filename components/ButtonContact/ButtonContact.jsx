@@ -1,57 +1,65 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
-import GlareHover from '../GlareHover'
+import GlareHover from "../GlareHover";
 import dynamic from "next/dynamic";
+import styles from "./stylesBtnContact.module.css";
 
 const FormularContact = dynamic(() => import("../ModalContact/ModalContact"), {
-    ssr: false,
-})
+  ssr: false,
+});
 
-export default function ButtonContact({textBtn, noRef}){
+export default function ButtonContact({ textBtn, noRef }) {
+  const [showModalContact, setShowModalContact] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-    const [showModalContact, setShowModalContact] = useState(false);
+  const ref = useRef(null);
 
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
-
-    useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
-        ([entry]) => {
+      ([entry]) => {
         if (entry.isIntersecting) {
-            setIsVisible(true);
+          setIsVisible(true);
         }
-        },
-        { threshold: 0.5 }
+      },
+      { threshold: 0.5 }
     );
 
     if (ref.current) observer.observe(ref.current);
 
     return () => observer.disconnect();
-    }, []);
+  }, []);
 
-    return(
-        <>
-        <FormularContact 
+  return (
+    <>
+      <FormularContact
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
-        />
-        <div ref={!noRef ? ref : null} onClick={() => setShowModalContact(true)} className={`buttonContact  ${isVisible ? "showButton" : ""}`}>
+      />
+
+      <div
+        ref={!noRef ? ref : null}
+        onClick={() => setShowModalContact(true)}
+        className={`${styles.buttonContact} ${
+          isVisible ? styles.showButton : ""
+        }`}
+      >
         <GlareHover
-        glareColor="#ffffff"
-        glareOpacity={1}
-        glareAngle={-30}
-        glareSize={500}
-        transitionDuration={2250}
-        playOnce
-        width="200"
-        height="200"
-        background="#FF8A00"
-        className="glareButton"
-    >
-        {textBtn}
+          glareColor="#ffffff"
+          glareOpacity={1}
+          glareAngle={-30}
+          glareSize={500}
+          transitionDuration={2250}
+          playOnce
+          width="200"
+          height="200"
+          background="#FF8A00"
+          className={styles.glareButton}
+        >
+          {textBtn}
         </GlareHover>
-    </div>
-        </>
-    )
+      </div>
+    </>
+  );
 }

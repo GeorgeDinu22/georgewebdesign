@@ -1,0 +1,124 @@
+
+/* FOOTER */ 
+.footer{
+    width: 100%;
+    padding: 14px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    box-shadow: 0 0 12.5px var(--mainColor);
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    padding-top: 16px;  
+    z-index: 2; 
+    position: relative;
+    font-family: var(--font-inter); 
+}
+.footerHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.footerSocialMedia{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    display: none;
+}
+.cardSocial{
+    background-color: var(--mainColor);
+    padding: 6px;
+    border-radius: 7px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footerContact{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: white;
+}
+.footerContact h5{
+    font-size: clamp(22px,2.5vw,26px);
+    font-weight: 650;
+    transform: color 250ms ease-in-out;
+    font-family: var(--font-plus-jakarta);
+}
+.footerLink{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: clamp(16px,1.75vw,18px);
+    margin-left: 6px;
+}
+.footerLegal{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.footerLegal img{
+    border-radius: 7px;
+    width: 225px;
+    background-color: white;
+}
+.footerBreakLine{
+    width: 100%;
+    border-bottom: 1px solid rgb(54, 54, 54);
+    height: 2px;
+}
+.autor{
+    font-size: clamp(12px,1.5vw,18px);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 550;
+}
+
+@media(min-width:950px){
+    .footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        row-gap: 0px;
+        align-items: center;
+        padding-left: 24px;
+    }
+    .footerLogo{
+        width: 175px;
+    }
+    .cardSocial{
+        height: 44px;
+        width: 44px;
+    }
+    .footerHeader{
+        grid-column: 1/5;
+        margin-bottom: 20px;
+    }
+    .footerLegalLinks{
+        grid-column: 2/3;
+        grid-row: 2;
+    }
+    .footerContact:nth-of-type(3){
+        grid-column: 1/2;
+    }
+    .footerLegal{
+        grid-column: 3/5;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .footerLegal img{
+        width: 250px;
+    }
+    .footerBreakLine{
+        grid-column: 1/5;
+        margin: 24px 0;
+    }
+    .autor{
+        grid-column: 1/5;
+    }
+}
+
+

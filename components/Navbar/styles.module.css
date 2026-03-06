@@ -1,0 +1,203 @@
+.header{
+  background: rgba(15, 15, 15, 0.95); 
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.45); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px; 
+  width: 96%; 
+  border-radius: 7px; 
+  position: fixed; 
+  top: 8px;
+  left: 50%;
+  opacity: 0; 
+  transform: translate(-50%,-32px); 
+  z-index: 99;    
+  color: white;     
+  height: 60px;     
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  font-family: var(--font-inter);
+} 
+.header.headerVisible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.header.headerHidden {
+  opacity: 0;
+  transform: translate(-50%, -100px);
+  pointer-events: none;
+}
+
+.header.headerRadius{ 
+  border-bottom-left-radius: 0;  
+  border-bottom-right-radius: 0;  
+}
+
+.logo{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 900;    
+    width: 125px;        
+    margin-top: 6px;   
+}
+.footer .logo{
+  width: 135px;     
+}
+ 
+
+.box {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    gap: 6px;
+    margin-right: 4px;
+    z-index: 999;
+    filter: none;
+}
+
+.line{
+    background-color: white;
+    height: 3px;
+    border-radius: 50px;
+    width: 100%;
+    transition: all 0.4s ease-in-out;
+    transform-origin: center;
+}
+
+.line:nth-child(1).cross {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.line:nth-child(2).cross {
+    opacity: 0;
+}
+
+.line:nth-child(3).cross {
+    transform: translateY(-9px) rotate(-45deg);
+} 
+
+.dropDown{
+  position: absolute;
+  top: 100%;      
+  left: 50%;    
+  width: calc(100% + 2px); 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  transform: translateX(-50%); 
+  justify-content: center;
+  gap: 8px;
+  background: rgba(15, 15, 15, 0.95); 
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  height: 0; 
+  overflow: hidden;
+  border-bottom: none;     
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;  
+  transition: height 450ms ease-in-out; 
+} 
+.dropDown.droped{
+    height: 225px; 
+    pointer-events:all;  
+    border: 1px solid rgba(255, 255, 255, 0.08);  
+    border-top: none;  
+}
+.linkHeader{
+  font-size: 18px;
+  font-weight: 650;
+  padding: 4px; 
+  width: 50%;
+  text-align: center; 
+  transition: all 550ms ease-in-out;
+}
+.linkHeader:hover{
+  color: var(--mainColor);
+  font-weight: 700;
+}
+
+.orizontalNavigation {
+    position: relative;
+    display: flex;
+    gap: 20px; 
+    align-items: center;
+}
+
+.ctaHeader{
+    font-weight: 800;   
+    color: white;
+    font-size: clamp(20px,2.5vw,24px);
+    transition: all 0ms ease;
+    cursor: pointer;
+    position: relative;
+    opacity: 1;
+    z-index: 2; 
+    display: none; 
+    font-family: var(--font-plus-jakarta);
+}
+.glareButtonHeader:hover{
+  transform: translateY(-3px); 
+}
+.glareButtonHeader{ 
+  padding: 4px 10px; 
+  border: none;
+  box-shadow: none;
+  border-radius: 7px;
+  transition: all 0.5s ease;
+}
+ 
+.floatingLine {
+    position: absolute;
+    bottom: 0;
+    height: 3px; 
+    background-color: var(--mainColor); 
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; 
+    z-index: 10;
+}
+.linkHeaderHor{
+  font-size: clamp(20px,2vw,22px);
+  font-weight: 650;
+  padding: 4px;
+  width: 50%;
+  text-align: center;
+  width: max-content;
+  transition: all 250ms ease-in-out;
+}
+.linkHeaderHor:hover{
+  color: var(--mainColor); 
+}
+
+@media(max-width:700px){
+  .breakTextDesktop{ 
+    display: none;
+  }
+}
+
+@media(min-width:980px){
+    .dropDown{
+      display: none;
+    }
+    .box{
+      display: none;
+    }
+    .header{
+      height: 68px;
+    }
+    .ctaHeader{
+      display: flex;
+    }
+}
+@media(max-width:979px){
+    .orizontalNavigation{
+      display: none;
+    }
+}

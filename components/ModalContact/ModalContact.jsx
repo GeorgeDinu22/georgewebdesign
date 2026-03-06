@@ -257,7 +257,8 @@ export default function ModalContact({ show, animation, onClose }) {
 
           <div className={`${styles.formWrapper} ${inputErrors.telefonContact ? styles.shakeError : ""}`}>
             <input
-              type="phone"
+              type="tel"
+              inputMode="tel"
               name="telefonContact"
               id="telefonContact"
               placeholder=" "
