@@ -47,6 +47,7 @@ export default function CineSuntEu(){
             width={700}
             height={700}
             alt='Profile Image'
+            loading="lazy"
             sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 600px"
             />
         </div>
