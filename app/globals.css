@@ -197,6 +197,17 @@ h1{
   font-family: var(--font-plus-jakarta);  
 }
 
+/* Global Appear Styles */
+.animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 
 

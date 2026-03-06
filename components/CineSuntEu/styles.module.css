@@ -80,15 +80,12 @@
 }
 
 
-.wrapperImageEu {
-    transition: opacity 1.2s ease, transform 1.2s ease;
-}
 .wrapperImageEu{
     width: 90%;
     margin-top: 12px;
     opacity: 0;
     transform: translateY(24px);
-    transition: all 0.8s ease;
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 .wrapperImageEu.show {
   opacity: 1;
