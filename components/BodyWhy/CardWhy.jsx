@@ -24,7 +24,7 @@ export default function CardWhy({item, index}){
                 {index == 0 && (
                     <Image
                     className={styles.backgroundCard}
-                    src={"/cardBackground.png"}
+                    src={"/cardBackground.webp"}
                     alt=''
                     width={400}
                     height={400}

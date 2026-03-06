@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
         const proiecte = [
         {
             nume: "statemihai.ro",
-            imagine: "/proiecte/statemihai.ro_ImageV2.png",
+            imagine: "/proiecte/statemihai.ro_ImageV2.webp",
             url: "https://www.statemihai.ro",
             dataLansare: "04-02-2026",
             descriere:
@@ -28,15 +28,14 @@ import styles from "./styles.module.css";
             { nume: "Stripe", icon: FaStripe, color: "#635BFF" },
             ],
             galerie: [
-            "/galerieProiecte/statemihai-1.png",
-            "/galerieProiecte/statemihai-1.png",
-            "/galerieProiecte/statemihai-2.png",
+            "/galerieProiecte/statemihai-1.webp",
+            "/galerieProiecte/statemihai-2.webp",
             ],
         },
 
         {
             nume: "mihaistate-abonare.ro",
-            imagine: "/proiecte/mihaistate-abonare.ro_Image.png",
+            imagine: "/proiecte/mihaistate-abonare.ro_Image.webp",
             url: "https://www.mihaistate-abonare.ro",
             dataLansare: "06-11-2025",
             descriere:
@@ -54,14 +53,14 @@ import styles from "./styles.module.css";
             { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
             galerie: [
-            "/galerieProiecte/mihaistate-abonare-1.png",
-            "/galerieProiecte/mihaistate-abonare-2.png",
+            "/galerieProiecte/mihaistate-abonare-1.webp",
+            "/galerieProiecte/mihaistate-abonare-2.webp",
             ],
         },
 
         {
             nume: "mombubyinfinity.ro",
-            imagine: "/proiecte/mombu.png",
+            imagine: "/proiecte/mombu.webp",
             url: "https://www.mombubyinfinity.ro",
             dataLansare: "08-10-2025",
             descriere:
@@ -77,15 +76,15 @@ import styles from "./styles.module.css";
             { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
             galerie: [
-            "/galerieProiecte/mombu-3.png",
-            "/galerieProiecte/mombu-2.png",
-            "/galerieProiecte/mombu-4.png",
+            "/galerieProiecte/mombu-3.webp",
+            "/galerieProiecte/mombu-2.webp",
+            "/galerieProiecte/mombu-4.webp",
             ],
         },
 
         {
             nume: "joydetailing.ro",
-            imagine: "/proiecte/joydetailing.ro_ImageV2.png",
+            imagine: "/proiecte/joydetailing.ro_ImageV2.webp",
             url: "https://www.joydetailing.ro",
             dataLansare: "25-08-2025",
             descriere:
@@ -101,15 +100,15 @@ import styles from "./styles.module.css";
             { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
             galerie: [
-            "/galerieProiecte/joy-1.png",
-            "/galerieProiecte/joy-2.png",
-            "/galerieProiecte/joy-3.png",
+            "/galerieProiecte/joy-1.webp",
+            "/galerieProiecte/joy-2.webp",
+            "/galerieProiecte/joy-3.webp",
             ],
         },
 
         {
             nume: "infinitylounge.ro",
-            imagine: "/proiecte/infinitylounge.ro_ImageV2.png",
+            imagine: "/proiecte/infinitylounge.ro_ImageV2.webp",
             url: "https://infinity-lounge.ro",
             dataLansare: "10-03-2025",
             descriere:
@@ -123,9 +122,9 @@ import styles from "./styles.module.css";
             { nume: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             ],
             galerie: [
-            "/galerieProiecte/infinitylounge-1.png",
-            "/galerieProiecte/infinitylounge-3.png",
-            "/galerieProiecte/infinitylounge-4.png",
+            "/galerieProiecte/infinitylounge-1.webp",
+            "/galerieProiecte/infinitylounge-3.webp",
+            "/galerieProiecte/infinitylounge-4.webp",
             ],
         },
         ];

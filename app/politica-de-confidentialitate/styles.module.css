@@ -18,7 +18,7 @@
 .badge{
   display: inline-block;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 7px;
   background: var(--mainColor);
   color: black;
   font-size: 12px;
@@ -76,6 +76,22 @@
   line-height: 1.7;
 }
 
+.backButton {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  border-radius: 7px;
+  background: #303030;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.backButton:hover {
+  background: #3c3c3c;
+}
+
 .bottomCta{
   margin-top: 24px;
   padding: 24px;
@@ -95,12 +111,11 @@
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: var(--accent-glow);
   transition: all 0.2s ease;
 }
 
 .button:hover{
-  background: var(--accent-hover);
+  filter: brightness(1.1);
 }
 
 @media(max-width:768px){

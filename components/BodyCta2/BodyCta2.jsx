@@ -28,7 +28,7 @@ export default function BodyCta2(){
         }
       },
       { 
-        rootMargin: "200px",
+        rootMargin: "300px",
         threshold: 0.2
       }
     );
@@ -41,45 +41,45 @@ export default function BodyCta2(){
   }, []);
 
       const images = [
-    "/proiecte/statemihai.ro_ImageV2.png",
-    "/galerieProiecte/statemihai-1.png",
-    "/galerieProiecte/statemihai-2.png",
+    "/proiecte/statemihai.ro_ImageV2.webp",
+    "/galerieProiecte/statemihai-1.webp",
+    "/galerieProiecte/statemihai-2.webp",
 
-    "/proiecte/mihaistate-abonare.ro_Image.png",
-    "/galerieProiecte/mihaistate-abonare-2.png",
+    "/proiecte/mihaistate-abonare.ro_Image.webp",
+    "/galerieProiecte/mihaistate-abonare-2.webp",
 
-    "/proiecte/mombu.png",
-    "/galerieProiecte/mombu-3.png",
-    "/galerieProiecte/mombu-2.png",
-    "/galerieProiecte/mombu-4.png",
+    "/proiecte/mombu.webp",
+    "/galerieProiecte/mombu-3.webp",
+    "/galerieProiecte/mombu-2.webp",
+    "/galerieProiecte/mombu-4.webp",
 
-    "/proiecte/joydetailing.ro_ImageV2.png",
-    "/galerieProiecte/joy-1.png",
-    "/galerieProiecte/joy-2.png",
-    "/galerieProiecte/joy-3.png",
+    "/proiecte/joydetailing.ro_ImageV2.webp",
+    "/galerieProiecte/joy-1.webp",
+    "/galerieProiecte/joy-2.webp",
+    "/galerieProiecte/joy-3.webp",
 
-    "/proiecte/infinitylounge.ro_ImageV2.png",
-    "/galerieProiecte/infinitylounge-1.png",
-    "/galerieProiecte/infinitylounge-3.png",
-    "/galerieProiecte/infinitylounge-4.png",
-    "/proiecte/mihaistate-abonare.ro_Image.png",
-    "/galerieProiecte/mihaistate-abonare-2.png",
+    "/proiecte/infinitylounge.ro_ImageV2.webp",
+    "/galerieProiecte/infinitylounge-1.webp",
+    "/galerieProiecte/infinitylounge-3.webp",
+    "/galerieProiecte/infinitylounge-4.webp",
+    "/proiecte/mihaistate-abonare.ro_Image.webp",
+    "/galerieProiecte/mihaistate-abonare-2.webp",
     
 
-    "/proiecte/mombu.png",
-    "/galerieProiecte/mombu-3.png",
-    "/galerieProiecte/mombu-2.png",
-    "/galerieProiecte/mombu-4.png",
+    "/proiecte/mombu.webp",
+    "/galerieProiecte/mombu-3.webp",
+    "/galerieProiecte/mombu-2.webp",
+    "/galerieProiecte/mombu-4.webp",
 
-    "/proiecte/joydetailing.ro_ImageV2.png",
-    "/galerieProiecte/joy-1.png",
-    "/galerieProiecte/joy-2.png",
-    "/galerieProiecte/joy-3.png",
+    "/proiecte/joydetailing.ro_ImageV2.webp",
+    "/galerieProiecte/joy-1.webp",
+    "/galerieProiecte/joy-2.webp",
+    "/galerieProiecte/joy-3.webp",
 
-    "/proiecte/infinitylounge.ro_ImageV2.png",
-    "/galerieProiecte/infinitylounge-1.png",
-    "/galerieProiecte/infinitylounge-3.png",
-    "/galerieProiecte/infinitylounge-4.png"
+    "/proiecte/infinitylounge.ro_ImageV2.webp",
+    "/galerieProiecte/infinitylounge-1.webp",
+    "/galerieProiecte/infinitylounge-3.webp",
+    "/galerieProiecte/infinitylounge-4.webp"
 ];
 
   return(

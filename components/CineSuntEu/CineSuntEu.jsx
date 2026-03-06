@@ -43,7 +43,7 @@ export default function CineSuntEu(){
     <div className={styles.rightPart}>
         <div className={`${styles.wrapperImageEu} animate`}>
             <Image
-            src="/CineSuntEuV3.jpeg"
+            src="/CineSuntEuV3.webp"
             width={700}
             height={700}
             alt='Profile Image'

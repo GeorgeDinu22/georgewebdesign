@@ -361,7 +361,7 @@
 }
 
 .modalHeader h2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 800;
     margin: 0;
     background: linear-gradient(to right, #fff, #ccc);
@@ -374,8 +374,8 @@
     padding: 0 12px;
 }
 .sectionModal h3{
-    font-size: 20px;
-    font-weight: 750;
+    font-size: 18px;
+    font-weight: 650;
     margin-bottom: 4px;
 }
 

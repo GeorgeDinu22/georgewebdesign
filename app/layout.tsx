@@ -85,14 +85,14 @@ export const metadata: Metadata = {
 
 
 const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin', 'latin-ext'], // LATIN-EXT este obligatoriu pentru română (ș, ț, ă)
-  weight: ['400', '500', '600', '700', '800'], // Alege greutățile de care ai nevoie
-  variable: '--font-plus-jakarta', // Numele variabilei CSS
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta', 
 });
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter', // Variabila pentru paragrafe
+  variable: '--font-inter', 
 });
 
 export default function RootLayout({

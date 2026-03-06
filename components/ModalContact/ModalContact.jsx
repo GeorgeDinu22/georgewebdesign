@@ -239,7 +239,7 @@ export default function ModalContact({ show, animation, onClose }) {
               value={formData.afacereContact}
               onChange={(e) => setFormData({ ...formData, afacereContact: e.target.value })}
             />
-            <label htmlFor="afacerelContact">Nume Afacere</label>
+            <label htmlFor="afacerelContact">Denumire Afacere</label>
           </div>
 
           <div className={`${styles.formWrapper} ${inputErrors.emailContact ? styles.shakeError : ""}`}>
