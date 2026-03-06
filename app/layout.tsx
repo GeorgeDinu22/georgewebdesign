@@ -86,13 +86,15 @@ export const metadata: Metadata = {
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['500', '700', '800'],
   variable: '--font-plus-jakarta', 
+  display: 'swap'
 });
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter', 
+  display: 'swap'
 });
 
 export default function RootLayout({
@@ -105,7 +107,7 @@ export default function RootLayout({
       <body className={`${plusJakartaSans.variable} ${inter.variable} antialiased`}
       >
         {children}
-        <Script defer src="https://cloud.umami.is/script.js"
+        <Script src="https://cloud.umami.is/script.js"
         data-website-id="cffe3a05-0489-4419-95a9-33a48ab46468"
         strategy="afterInteractive"
         />
