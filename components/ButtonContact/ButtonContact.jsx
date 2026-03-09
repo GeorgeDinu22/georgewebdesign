@@ -13,6 +13,8 @@ export default function ButtonContact({ textBtn, noRef }) {
   const [showModalContact, setShowModalContact] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  const [clicked, setClicked] = useState(false);
+
   const ref = useRef(null);
 
   useEffect(() => {
@@ -32,15 +34,22 @@ export default function ButtonContact({ textBtn, noRef }) {
 
   return (
     <>
+     {
+      clicked && (
       <FormularContact
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
       />
+      )
+    }
 
       <div
         ref={!noRef ? ref : null}
-        onClick={() => setShowModalContact(true)}
+        onClick={() => {
+           setShowModalContact(true);
+           setClicked(true)
+        }}
         className={`${styles.buttonContact} ${
           isVisible ? styles.showButton : ""
         }`}

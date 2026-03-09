@@ -6,8 +6,6 @@ import Image from 'next/image';
 export default function HeroSection(){
     return(
         <div className={styles.heroSection}>
-            <div className={styles.gradientContainer} />
-            <div className={styles.glowOverlay} />
             <Image
             className={styles.heroImage}
             width={2600}

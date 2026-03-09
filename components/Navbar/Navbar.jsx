@@ -18,6 +18,8 @@ export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
+  const [clicked, setClicked] = useState(false);
+
   const [showModalContact, setShowModalContact] = useState(false);
 
   const headerRef = useRef(null);
@@ -105,11 +107,15 @@ export default function Header() {
 
   return (
     <>
-      <FormularContact
+    {
+      clicked && (
+        <FormularContact
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
       />
+      )
+    }
 
       <header className={headerClasses} ref={headerRef}>
         <Link
@@ -181,7 +187,10 @@ export default function Header() {
         </div>
 
         <div
-          onClick={() => setShowModalContact(true)}
+          onClick={() =>{
+            setShowModalContact(true);
+            setClicked(true);
+          }}
           className={styles.ctaHeader}
         >
           <GlareHover
