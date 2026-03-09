@@ -8,9 +8,7 @@ import BodyCta1 from '../components/BodyCta1/BodyCta1';
 import CumDecurge from '../components/CumDecurge/CumDecurge';
 import BodyWhy from '../components/BodyWhy/BodyWhy';
 import BodyCta2 from '../components/BodyCta2/BodyCta2';
-import dynamic from 'next/dynamic';
-
-const Footer = dynamic(() => import('../components/Footer/Footer'));
+import Footer from '../components/Footer/Footer';
 
 export default function Page(){
   return(
