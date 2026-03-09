@@ -14,6 +14,7 @@ export default function HeroSection(){
             height={2400}
             src="/HeroBackground.webp"
             alt='Hero Section Background'
+            priority
             />
 
             <div className={styles.contentHero}>
