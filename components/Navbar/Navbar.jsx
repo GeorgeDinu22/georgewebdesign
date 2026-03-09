@@ -49,26 +49,31 @@ export default function Header() {
     }
   };
 
-  useEffect(() => {
-    let Scroll_Initial = window.scrollY;
+useEffect(() => {
+  let ticking = false;
+  let Scroll_Initial = window.scrollY;
 
-    const handleScroll = () => {
-      let current_Scroll = window.scrollY;
+  const handleScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        let current_Scroll = window.scrollY;
+        if (current_Scroll > Scroll_Initial + 4 && current_Scroll > 20) {
+          setIsHidden(true);
+          SetDroped(false);
+        } else if (current_Scroll < Scroll_Initial - 4 || current_Scroll <= 20) {
+          setIsHidden(false);
+          setRadius(false);
+        }
+        Scroll_Initial = current_Scroll;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
 
-      if (current_Scroll > Scroll_Initial + 4 && current_Scroll > 20) {
-        setIsHidden(true);
-        SetDroped(false);
-      } else if (current_Scroll < Scroll_Initial - 4 || current_Scroll <= 20) {
-        setIsHidden(false);
-        setRadius(false);
-      }
-
-      Scroll_Initial = current_Scroll;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   useEffect(() => {
     const updateLinePosition = () => {

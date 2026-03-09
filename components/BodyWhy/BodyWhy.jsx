@@ -1,8 +1,6 @@
 import styles from './styles.module.css';
 import CardWhy from './CardWhy';
 
-export default function BodyWhy(){
-    
     const avantaje = [
   {
     titlu: "Cod scris de la zero",
@@ -30,6 +28,8 @@ export default function BodyWhy(){
     icon: "LayoutDashboard"
   }
 ];
+
+export default function BodyWhy(){
 
     return(
         <>

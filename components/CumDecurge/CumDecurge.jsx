@@ -1,8 +1,6 @@
 import CardParcurs from './CardParcurs';
 import styles from './styles.module.css';
 
-export default function CumDecurge(){
-
 const pasi = [
     {
         id: 1,
@@ -30,6 +28,8 @@ const pasi = [
         descriere: "Colaborarea continuă și după lansare. Ofer suport, mentenanță și optimizări constante pentru ca proiectul tău să evolueze și să genereze rezultate pe termen lung."
     }
 ];
+
+export default function CumDecurge(){
 
     return(
         <>
