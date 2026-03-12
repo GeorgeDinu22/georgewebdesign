@@ -49,7 +49,7 @@ export default function BodyCta2(){
     "/galerieProiecte/mihaistate-abonare-2.webp",
 
     "/proiecte/mombu.webp",
-    "/galerieProiecte/mombu-3.webp",
+    "/galerieProiecte/joy-2.webp",
     "/galerieProiecte/mombu-2.webp",
     "/galerieProiecte/mombu-4.webp",
 

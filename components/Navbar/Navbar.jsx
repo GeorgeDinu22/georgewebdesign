@@ -62,7 +62,6 @@ useEffect(() => {
           SetDroped(false);
         } else if (current_Scroll < Scroll_Initial - 4 || current_Scroll <= 20) {
           setIsHidden(false);
-          setRadius(false);
         }
         Scroll_Initial = current_Scroll;
         ticking = false;

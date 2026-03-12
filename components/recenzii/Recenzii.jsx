@@ -81,8 +81,7 @@ export default function Recenzii(){
             <div ref={ref} className={`${styles.containerTitle} ${isVisible ? styles.show : ""}`}>
                <h2>Părerea Clienților <strong>Contează</strong></h2>
                 <p>
-                Am lucrat cu oameni din domenii diferite, fiecare cu provocări specifice și nevoi complexe,
-                dar cu un scop comun: creșterea vizibilității lor în <span>online.</span>
+               Am lucrat cu oameni din domenii diferite, fiecare cu provocări și nevoi specifice, dar cu un scop comun: creșterea vizibilității lor în <span>online.</span>
                 </p>
             </div>
             {containerVisible && (

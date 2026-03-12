@@ -53,15 +53,20 @@
     gap: 4px;
     font-size: clamp(16px,1.75vw,18px);
     margin-left: 6px;
+    transition: opacity 100ms ease-in-out;
+}
+.footerLink:hover{
+   color: rgb(215, 215, 215);
 }
 .footerLegal{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: max-content;
 }
 .footerLegal img{
     border-radius: 7px;
-    width: 225px;
+    width: 200px;
     background-color: white;
 }
 .footerBreakLine{
@@ -73,9 +78,12 @@
     font-size: clamp(12px,1.5vw,18px);
     color: white;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     font-weight: 550;
+    gap: 10px;
+    text-align: center;
 }
 
 @media(min-width:950px){
@@ -106,8 +114,10 @@
     }
     .footerLegal{
         grid-column: 3/5;
+        width: 100%;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
     }
     .footerLegal img{
         width: 250px;
@@ -118,6 +128,7 @@
     }
     .autor{
         grid-column: 1/5;
+        flex-direction: row;
     }
 }
 

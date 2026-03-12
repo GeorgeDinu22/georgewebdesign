@@ -30,7 +30,7 @@ export default function HartaClient() {
                 doubleClickZoom={false}
                 touchZoomRotate={false}
                 keyboard={false}
-                zoom={11.35}
+                zoom={11.05}
                 attributionControl={{ compact: true }}
             >
                 {places.map((place) => (

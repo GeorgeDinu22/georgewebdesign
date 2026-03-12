@@ -13,18 +13,17 @@ export default function ProiecteWrapper() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // Dacă am intersectat deja, nu mai observăm
     if (hasIntersected) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setHasIntersected(true);
-          observer.disconnect(); // Oprim observarea după prima intersecție
+          observer.disconnect(); 
         }
       },
       {
-        rootMargin: "150px", // Începe încărcarea cu 200px înainte ca utilizatorul să ajungă la secțiune
+        rootMargin: "150px",
         threshold: 0.25
       }
     );

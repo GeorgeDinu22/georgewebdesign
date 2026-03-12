@@ -8,6 +8,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { z } from "zod";
 import { useState, useEffect } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { useWebHaptics } from "web-haptics/react";
 
 const contactSchema = z.object({
 
@@ -67,6 +68,8 @@ const contactSchema = z.object({
 
 export default function ModalContact({ show, animation, onClose }) {
 
+  const {trigger} = useWebHaptics();
+
   const [inputErrors, setInputErrors] = useState({});
   const [statusTrimitereMail, setStatusTrimitereMail] = useState("none");
   const [containerAnimation, setContainerAnimation] = useState(false);
@@ -122,7 +125,14 @@ export default function ModalContact({ show, animation, onClose }) {
     const result = contactSchema.safeParse(formData);
 
     if (!result.success) {
-      setInputErrors(result.error.flatten().fieldErrors);
+      setInputErrors({});
+  
+      setTimeout(() => {
+        setInputErrors(result.error.flatten().fieldErrors);
+      }, 10);
+
+      trigger("warning");
+
       return;
     }
     const validatedData = result.data;
@@ -143,10 +153,12 @@ export default function ModalContact({ show, animation, onClose }) {
       if (!res.ok) {
         setSendError(responseData.message || "Eroare de server!");
         setStatusTrimitereMail("none");
+        trigger("error");
         return;
       }
 
       setStatusTrimitereMail("trimis");
+      trigger("success");
 
       setFormData({
         numeContact: "",
@@ -159,6 +171,7 @@ export default function ModalContact({ show, animation, onClose }) {
 
 
     } catch (error) {
+      trigger("error");
       console.error(error);
       setStatusTrimitereMail("none");
       setSendError("Eroare de conexiune. Încearcă din nou.");

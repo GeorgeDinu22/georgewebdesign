@@ -16,11 +16,13 @@ import styles from "./styles.module.css";
             dataLansare: "04-02-2026",
             descriere:
             "Platformă eCommerce pentru coaching fitness remote, cu plăți integrate, emailuri tranzacționale automate și panou complet de administrare.",
-            documentatie: `Platformă digitală de tip eCommerce dedicată coaching-ului fitness remote.
-
-        Include sistem de plăți integrate prin Stripe, gestionarea abonamentelor recurente și automatizare completă a emailurilor tranzacționale (confirmare plată, retry payment, notificări expirare abonament).
-
-        Dispune de panou de administrare pentru gestionarea comenzilor, produselor și statisticilor.`,
+            documentatie: 
+            `Platformă digitală de tip eCommerce dedicată coaching-ului fitness remote.
+            Include sistem de plăți integrate prin Stripe, gestionarea abonamentelor recurente și automatizare completă a emailurilor tranzacționale (confirmare plată, notificări și retry pentru plăți eșuate).
+            Platforma dispune de un panou de administrare intuitiv pentru gestionarea comenzilor, pachetelor și statisticilor.
+            Administratorul poate organiza și reordona pachetele de servicii printr-o interfață drag-and-drop, facilitând administrarea rapidă a ofertelor.
+            De asemenea, sistemul permite crearea și editarea pachetelor într-o interfață vizuală care oferă previzualizarea imediată a modificărilor, astfel încât schimbările să poată fi verificate în timp real înainte de publicare.
+        `,
             tehnologii: [
             { nume: "Next JS", icon: SiNextdotjs, color: "#ffffff" },
             { nume: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
@@ -30,6 +32,7 @@ import styles from "./styles.module.css";
             galerie: [
             "/galerieProiecte/statemihai-1.webp",
             "/galerieProiecte/statemihai-2.webp",
+            "/galerieProiecte/statemihai-3.webp",
             ],
         },
 
@@ -42,9 +45,8 @@ import styles from "./styles.module.css";
             "Landing page pentru newsletter cu sistem de abonare și panou de administrare pentru gestionarea campaniilor.",
             documentatie: `Platformă de newsletter construită în jurul unui landing page optimizat pentru conversie.
 
-        Include sistem de colectare și segmentare a abonaților, precum și panou de administrare cu statistici despre livrabilitate, rata de deschidere (open rate) și gestionarea listelor de email.
+        Include sistem de colectare și segmentare a abonaților, precum și panou de administrare cu statistici despre livrabilitate, rata de deschidere și gestionarea  campaniilor de email.`,
 
-        Permite administrarea campaniilor și analiza performanței acestora într-un mod simplu și eficient.`,
             tehnologii: [
             { nume: "PHP", icon: FaPhp, color: "#777BB4" },
             { nume: "MY SQL", icon: SiMysql, color: "#4479A1" },
@@ -113,9 +115,9 @@ import styles from "./styles.module.css";
             dataLansare: "10-03-2025",
             descriere:
             "Site de prezentare pentru lounge, cu meniu inclus și prezentare detaliată a locației.",
-            documentatie: `Website de prezentare pentru lounge, construit pentru a transmite atmosfera și identitatea locației.
+            documentatie: `Website de prezentare pentru un lounge, construit pentru a prezenta atmosfera și vibe-ul locației.
 
-        Include meniu digital integrat, prezentarea spațiului și informații esențiale pentru clienți.`,
+            Include meniu integrat și informații esențiale pentru clienți.`,
             tehnologii: [
             { nume: "HTML", icon: SiHtml5, color: "#E34F26" },
             { nume: "CSS", icon: SiCss3, color: "#1572B6" },
@@ -166,7 +168,9 @@ export default function Proiecte() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             >
-                Fiecare proiect este diferit, iar soluțiile trebuie să fie la fel. De la strategie și structură până la design și performanță, fiecare detaliu este optimizat pentru rezultate reale.
+                Fiecare proiect este diferit, iar soluțiile trebuie să fie la fel. De la strategie 
+                și structură până la design și performanță, totul est
+                e optimizat pentru rezultate reale.
             </motion.p>
     </div>
             
@@ -185,7 +189,7 @@ export default function Proiecte() {
                                 className={styles.imagineProiect}
                                 src={p.imagine}
                                 width={800}
-                                height={400}
+                                height={800}
                                 alt={p.nume}
                                 sizes="(max-width: 850px) 94vw, (max-width: 1100px) 45vw, 30vw"
                             />
@@ -266,7 +270,7 @@ export default function Proiecte() {
                                         height={1050}
                                         className={styles.modalImage}
                                         style={{ objectFit: "cover" }}
-                                        sizes="100vw"
+                                        sizes="(max-width: 850px) 100vw, (min-width: 860px) 800px"
                                     />
                                 </motion.div>
 

@@ -188,11 +188,7 @@
     }
 
     .cardParcurs:nth-child(even) {
-        margin-top: 60px;
-    }
-
-    .cardParcurs:nth-child(odd) {
-        margin-top: -60px;
+        margin-top:16px;
     }
 
     .cardParcurs:first-child {

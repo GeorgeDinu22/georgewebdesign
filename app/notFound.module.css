@@ -1,0 +1,39 @@
+.container {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.text {
+  max-width: 520px;
+  line-height: 1.6;
+  font-size: 18px;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.button {
+  background: #FF8A00;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: #ff9f2e;
+  transform: translateY(-2px);
+}

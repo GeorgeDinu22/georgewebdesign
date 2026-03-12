@@ -20,7 +20,7 @@ export default function HeroSection(){
                     Website-uri cu <span>impact</span> pe vânzări și<strong> Vizibilitate</strong> în Online
                 </h1>
                 <p className={styles.descriereHero}>
-                    Site-uri de prezentare și aplicații web, dezvoltate de la zero, unde accentul este pus pe tine și pe afacerea ta.
+                    Site-uri de prezentare și aplicații web, dezvoltate de la zero, cu accentul pe tine și pe afacerea ta.
                 </p>
                 <ButtonContact noRef={true} textBtn={"Vreau Website"}/>
             </div>

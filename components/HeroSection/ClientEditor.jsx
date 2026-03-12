@@ -87,14 +87,15 @@ const TypewriterCode = ({ fileKey }) => {
     setIsTyping(true);
   }, [fileKey]);
 
-  // 3. Bucla de animație super-performantă
   useEffect(() => {
     if (processedData.totalChars === 0) return;
 
     let animationFrameId;
     let lastTime = performance.now();
     const isFirstPlay = !hasPlayedRef.current;
-    const startDelay = isFirstPlay ? 1250 : 0;
+    const startDelay = isFirstPlay ? 1400 : 0;
+    
+    let delayCompleted = !isFirstPlay; 
     
     const minSpeed = window.innerWidth < 768 ? 12 : 20;
     let interval = Math.random() * 22 + minSpeed;
@@ -102,9 +103,16 @@ const TypewriterCode = ({ fileKey }) => {
     const animate = (time) => {
       const elapsed = time - lastTime;
 
-      if (elapsed < startDelay && isFirstPlay) {
-        animationFrameId = requestAnimationFrame(animate);
-        return;
+      if (!delayCompleted) {
+        if (elapsed < startDelay) {
+          animationFrameId = requestAnimationFrame(animate);
+          return;
+        } else {
+          delayCompleted = true;
+          lastTime = time;
+          animationFrameId = requestAnimationFrame(animate);
+          return;
+        }
       }
 
       if (elapsed >= interval) {
@@ -146,17 +154,15 @@ const TypewriterCode = ({ fileKey }) => {
     return processedData.lines.map((line) => {
       if (line.tokens.length > 0 && line.tokens[0].start > visibleChars) return null;
 
-      let isCursorOnThisLine = false;
+      let isCursorOnThisLine = visibleChars === line.endChar;
 
       const renderedTokens = line.tokens.map((tok) => {
         if (tok.start > visibleChars) return null;
 
-        // Dacă token-ul a fost deja terminat de "tastat"
         if (tok.end <= visibleChars) {
           return <span key={tok.id} className={tok.className}>{tok.text}</span>;
         }
 
-        // Dacă token-ul este "în curs de tastare" tăiem strict partea necesară
         const visibleLength = visibleChars - tok.start;
         isCursorOnThisLine = true; 
         return (

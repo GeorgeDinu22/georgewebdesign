@@ -128,6 +128,9 @@ useEffect(() => {
         </div>
       )}
 
+      <div className={styles.coltStanga}></div>
+      <div className={styles.coltDreapta}></div>
+
       <div
         className={`${styles.videoOverlay} ${
           isPlaying ? styles.videoPlaying : ""

@@ -5,12 +5,10 @@ import Script from 'next/script';
 export default function BodyCta1() {
     return (
         <div className={styles.bodyCta1}>
-            {/* Am scos masonryGrid de aici, era pus din greșeală pe Titlu */}
             <div className={`${styles.containerTitle} animate`}>
                 <h2>Încă mai crezi că poți vinde  <strong>fără un site?</strong></h2>
             </div>
 
-            {/* Am adăugat masonryGrid aici, pe containerul care ține cardurile */}
             <div className={`${styles.containerCta1} masonryGrid`}>
                 <div className={`${styles.paragrafCta1} animate masonryItem`}>
                     <p className={styles.highlighted}>Realitatea online-ului de azi</p>
@@ -28,9 +26,11 @@ export default function BodyCta1() {
                     </p>
                     <p className={styles.descriereCta}>
                         Postările și reel-urile se pierd rapid. Rămâi doar o amintire în istoricul lor de vizualizări.
-                        <br /><br />
+                    </p>
+                    <p className={styles.descriereCta}>
                         Chiar dacă ai norocul să fie interesați de serviciile tale, singurul loc unde i-ai putea trimite este către "mesaj în privat".
-                        <br /><br />
+                    </p>
+                    <p className={styles.descriereCta}>
                         Un profil social nu îți aparține cu adevărat. Nu controlezi platforma, regulile sau vizibilitatea.
                         Un website, în schimb, este <span className={styles.colorText}>spațiul tău</span>, unde mesajul, oferta și imaginea sunt exact așa cum vrei tu să fie.
                     </p>
@@ -42,7 +42,8 @@ export default function BodyCta1() {
                     </p>
                     <p className={`${styles.descriereCta} ${styles.textWhy2}`}>
                         AI-ul nu-ți face nici treaba, nici site-ul de unul singur.
-                        <br /><br />
+                    </p>
+                    <p className={`${styles.descriereCta} ${styles.textWhy2}`}>
                         Dacă crezi că un site făcut în 5 minute te va scoate în evidență, e bine să știi un lucru simplu:
                         în același timp, alți zeci de oameni își construiesc <span>exact același site,</span> cu același design,
                         aceleași texte și aceleași impresii care durează doar până când utilizatorul închide pagina.
@@ -54,9 +55,14 @@ export default function BodyCta1() {
                     <p className={styles.descriereCta}>
                         Imaginează-ți că ești unul dintre potențialii tăi clienți și încerci să decizi dacă să oferi o șansă unui business.
                         Cauți informații, dar în afară de un cont de social media nu găsești nimic concret. Nu apare nicăieri, iar singura modalitate de contact este un mesaj pe Facebook sau Instagram.
-                        <br /><br />
+                    </p>
+                    <p className={styles.descriereCta}>
                         <span className={styles.focus}>Ai avea încredere? </span>
-                        Acum gândește din nou, dar de data aceasta ai un website modern, secțiune interactivă a serviciilor pe care le oferi, plată securizată integrată, formular de contact și adresă de email <AtSign size={20} strokeWidth={2.25} color='#FF8A00' className={styles.IconText} />domeniul_tău.
+                        Acum gândește din nou, dar de data aceasta ai un website modern, secțiune interactivă a serviciilor pe care le oferi, plată securizată integrată, formular de contact și adresă de email {" "}
+                        <span className={styles.textBlock}>
+                        <AtSign size={20} strokeWidth={2.25} color="#FF8A00" />
+                        domeniul_tău
+                        </span>
                     </p>
                 </div>
 
