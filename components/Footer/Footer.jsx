@@ -22,7 +22,7 @@ export default function Footer() {
           <Link
             className={styles.cardSocial}
             id="tiktok"
-            href="https://www.tiktok.com/@state.mihai33?_t=ZN-8yFNoqJ0FHC&_r=1"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -40,7 +40,7 @@ export default function Footer() {
           <Link
             className={styles.cardSocial}
             id="instagram"
-            href="https://www.instagram.com/state.mihai/"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
           >

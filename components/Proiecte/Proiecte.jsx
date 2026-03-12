@@ -18,8 +18,11 @@ import styles from "./styles.module.css";
             "Platformă eCommerce pentru coaching fitness remote, cu plăți integrate, emailuri tranzacționale automate și panou complet de administrare.",
             documentatie: 
             `Platformă digitală de tip eCommerce dedicată coaching-ului fitness remote.
+
             Include sistem de plăți integrate prin Stripe, gestionarea abonamentelor recurente și automatizare completă a emailurilor tranzacționale (confirmare plată, notificări și retry pentru plăți eșuate).
+            
             Platforma dispune de un panou de administrare intuitiv pentru gestionarea comenzilor, pachetelor și statisticilor.
+            
             Administratorul poate organiza și reordona pachetele de servicii printr-o interfață drag-and-drop, facilitând administrarea rapidă a ofertelor.
             De asemenea, sistemul permite crearea și editarea pachetelor într-o interfață vizuală care oferă previzualizarea imediată a modificărilor, astfel încât schimbările să poată fi verificate în timp real înainte de publicare.
         `,
