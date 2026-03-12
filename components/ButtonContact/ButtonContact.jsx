@@ -4,18 +4,29 @@ import { useState, useRef, useEffect } from "react";
 import GlareHover from "../GlareHover";
 import dynamic from "next/dynamic";
 import styles from "./stylesBtnContact.module.css";
+import { createPortal } from "react-dom";
 
-const FormularContact = dynamic(() => import("../ModalContact/ModalContact"), {
-  ssr: false,
-});
+
+const FormularContact = dynamic(
+  () => import("../ModalContact/ModalContact"),
+  {
+    ssr: false,
+    loading: () => 
+      createPortal(
+        <div className={styles.modalLoading}>
+          <div className={styles.loader}></div>
+        </div>,
+        document.body
+      )
+  }
+);
 
 export default function ButtonContact({ textBtn, noRef }) {
   const [showModalContact, setShowModalContact] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  const [clicked, setClicked] = useState(false);
-
   const ref = useRef(null);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,25 +45,21 @@ export default function ButtonContact({ textBtn, noRef }) {
 
   return (
     <>
-     {
-      clicked && (
+    {showModalContact && (
       <FormularContact
         show={showModalContact}
         animation={showModalContact}
         onClose={() => setShowModalContact(false)}
       />
-      )
-    }
+    )}
 
       <div
         ref={!noRef ? ref : null}
-        onClick={() => {
-           setShowModalContact(true);
-           setClicked(true)
-        }}
+        onClick={() => setShowModalContact(true)}
         className={`${styles.buttonContact} ${
           isVisible ? styles.showButton : ""
-        }`}
+        }
+        `}
       >
         <GlareHover
           glareColor="#ffffff"

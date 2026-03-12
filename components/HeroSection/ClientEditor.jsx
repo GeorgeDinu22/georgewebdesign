@@ -93,7 +93,7 @@ const TypewriterCode = ({ fileKey }) => {
     let animationFrameId;
     let lastTime = performance.now();
     const isFirstPlay = !hasPlayedRef.current;
-    const startDelay = isFirstPlay ? 1400 : 0;
+    const startDelay = isFirstPlay ? 1250 : 0;
     
     let delayCompleted = !isFirstPlay; 
     

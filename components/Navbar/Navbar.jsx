@@ -6,10 +6,21 @@ import { useState, useEffect, useRef } from "react";
 import GlareHover from "../GlareHover";
 import dynamic from "next/dynamic";
 import styles from "./styles.module.css";
+import { createPortal } from "react-dom";
 
-const FormularContact = dynamic(() => import("../ModalContact/ModalContact"), {
-  ssr: false,
-});
+const FormularContact = dynamic(
+  () => import("../ModalContact/ModalContact"),
+  {
+    ssr: false,
+    loading: () => 
+      createPortal(
+        <div className={styles.modalLoading}>
+          <div className={styles.loader}></div>
+        </div>,
+        document.body
+      )
+  }
+);
 
 export default function Header() {
   const [droped, SetDroped] = useState(false);
