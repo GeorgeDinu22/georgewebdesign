@@ -1,19 +1,10 @@
 import styles from './styles.module.css'; 
 import ButtonContact from '../ButtonContact/ButtonContact';
 import CodeWindow from './CodeWindow';
-import Image from 'next/image';
 
 export default function HeroSection(){
     return(
         <div className={styles.heroSection}>
-            <Image
-            className={styles.heroImage}
-            width={2600}
-            height={2400}
-            src="/HeroBackground.webp"
-            alt='Hero Section Background'
-            priority
-            />
 
             <div className={styles.contentHero}>
                 <h1 className={styles.titleHero}>
