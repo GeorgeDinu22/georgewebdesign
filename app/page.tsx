@@ -7,11 +7,11 @@ import BodyCta1 from '../components/BodyCta1/BodyCta1';
 import ProiecteWrapper from "../components/Proiecte/ProiecteWrapper";
 import CineSuntEu from '../components/CineSuntEu/CineSuntEu';
 import Recenzii from '../components/recenzii/Recenzii';
+import CumDecurge from '../components/CumDecurge/CumDecurge';
 import BodyWhy from '../components/BodyWhy/BodyWhy';
+import BodyCta2 from '../components/BodyCta2/BodyCta2';
 import Footer from '../components/Footer/Footer';
 
-const CumDecurge = dynamic(() => import('../components/CumDecurge/CumDecurge'));
-const BodyCta2 = dynamic(() => import('../components/BodyCta2/BodyCta2'));
 
 export default function Page(){
   return(
