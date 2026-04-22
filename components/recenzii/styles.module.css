@@ -69,7 +69,7 @@
     position: relative;
     border-radius: 14px;
     cursor: pointer;
-    height: 650px;
+    height: 575px;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.8s ease;
@@ -80,7 +80,7 @@
 }
 .cardVideo video{
     width: 100%;
-    height: 650px;
+    height: 575px;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
     border-radius: 14px;

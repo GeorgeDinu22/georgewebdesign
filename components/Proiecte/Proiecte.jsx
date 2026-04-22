@@ -187,7 +187,10 @@ export default function Proiecte() {
                         viewport={{ once: true, amount: 0.4 }} 
                         transition={{ duration: 0.55}}
                     >
-                        <motion.div className={styles.wrapperImagine} layoutId={`image-wrapper-${p.nume}`}>
+                        <motion.div className={styles.wrapperImagine}  onMouseEnter={() => {
+                                                                const img = new window.Image();
+                                                                img.src = p.imagine;
+                                                            }} layoutId={`image-wrapper-${p.nume}`}>
                             <Image
                                 className={styles.imagineProiect}
                                 src={p.imagine}

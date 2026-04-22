@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 
 const Proiecte = dynamic(() => import("./Proiecte"), {
-    loading: () => <div style={{ height: "100vh" }}></div>,
+    loading: () => <div style={{ height: "125vh" }}></div>,
     ssr: false,
 });
 

@@ -12,7 +12,7 @@
     z-index: 99;
 }
 .containerContact{
-    width: 90%;
+    width: 94%;
     height: 95%;
     background-color: var(--bg-main);
     border-radius: 14px;
@@ -171,7 +171,6 @@
     align-items: center;
     gap: 16px;
     margin-bottom: 12px;
-    padding-right: 20px;
 }
 .containerContact form::-webkit-scrollbar {
   width: 10px; 

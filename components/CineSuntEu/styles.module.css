@@ -59,9 +59,9 @@
 .containerEU p{
     font-size: clamp(18px,2vw,24px);
     width: 100%; 
-    color: var(--text-secondary);
-    line-height: 1.6;
-    font-weight: 500;
+    color: white;
+    line-height: 1.5;
+    font-weight: 400;
 }
 .containerEU.show {
   opacity: 1;

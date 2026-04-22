@@ -35,7 +35,7 @@ export default function CumDecurge(){
         <>
         <div className={styles.bodyCumDecurge}>
             <div  className={`${styles.containerTitle} animate`}>
-                <h2>Cum Decurge <span>Colaborarea?</span></h2>
+                <h2>Cum Decurge <span> Colaborarea?</span></h2>
                 <p>
                     Îți prezint pas cu pas procesul meu de lucru, astfel încât să știi exact la ce să te aștepți.
                 </p>

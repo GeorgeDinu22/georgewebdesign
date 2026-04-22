@@ -19,7 +19,7 @@
     font-family: var(--font-inter);
 }
 
-.bodyCumDecurge .containerTitle {
+.containerTitle {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -27,18 +27,20 @@
     gap: 12px;
 }
 
-.bodyCumDecurge .containerTitle h2 {
+.containerTitle h2 {
     color: white;
-    font-size: clamp(25px,2.5vw,34px); 
+    font-size: clamp(23.5px,2.5vw,34px); 
     font-weight: 800;
+    text-align: center;
     font-family: var(--font-plus-jakarta);
 }
 
-.bodyCumDecurge .containerTitle h2 span {
+.containerTitle h2 span {
     position: relative;
+    display: inline-block;
 }
 
-.bodyCumDecurge .containerTitle h2 span::before {
+.containerTitle h2 span::before {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -46,14 +48,15 @@
     transform: translateX(-50%);
     width: 110%;
     height: 2.75px;
+    z-index: 1;
     background: linear-gradient(to right, transparent, var(--mainColor), transparent);
 }
 
 .bodyCumDecurge .containerTitle p{
     color: var(--text-secondary);
     text-align: center;
+    width: 95%;
     font-size: clamp(16px,2vw,20px);
-    text-wrap: balance;
 }
 
 .contentParcurs {
