@@ -129,10 +129,9 @@ export default function ModalContact({ show, animation, onClose }) {
   
       setTimeout(() => {
         setInputErrors(result.error.flatten().fieldErrors);
-      }, 10);
+      }, 12);
 
       trigger("warning");
-
       return;
     }
     const validatedData = result.data;
